@@ -88,15 +88,13 @@ public class MasterMindController extends Controller {
             boolean ok = false;
             while (!ok) {
                 System.out.print(p.getName() + " > ");
-                try {
-                    String line = consoleIn.readLine();
-                    if (line.length() == 4) {
-                        ok = analyseAndPlay2(line);
-                    }
-                    if (!ok) {
-                        System.out.println("incorrect instruction. retry !");
-                    }
-                } catch (IOException e) {
+                //String line = consoleIn.readLine();
+                String line = input.next();
+                if (line.length() == 4) {
+                    ok = analyseAndPlay2(line);
+                }
+                if (!ok) {
+                    System.out.println("incorrect instruction. retry !");
                 }
             }
         }
