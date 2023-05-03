@@ -7,4 +7,4 @@ Afin de garantir que les objectifs et délivrables attendus soient respectés, l
 
 A ce sujet, chaque projet devra permettre de jouer soit à 2 joueurs humains ou ordinateurs, soit avec 1 humain et 1 ordinateur. De plus, quand un joueur est l'ordinateur, il devra pouvoir appliquer au minimum 2 stratégies différentes pour prendre ses décisions de jeu. Plus de détails sont indiqués dans la section cahier des charges.
 
-[!Mastermind](![image](https://user-images.githubusercontent.com/114138178/235857664-04b06e80-c5f8-4440-9cdc-5968be7a4467.png)
+![image](https://user-images.githubusercontent.com/114138178/235857664-04b06e80-c5f8-4440-9cdc-5968be7a4467.png)
