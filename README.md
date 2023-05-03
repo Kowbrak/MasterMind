@@ -1,5 +1,6 @@
 # MasterMind_SAE126
-#1°/ Objectifs du projet
+# Manuel LEITAO, Lucas LAURET, Quentin SAUNER, Lucas FULCRAND, Johan LANCON
+# 1°/ Objectifs du projet
 
 Le projet "développement IHM" a pour but de construire une application de type jeu de plateau en utilisant le langage Java et la bibliothèque graphique JavaFx. D'un point de vue pédagogique, ce projet permet de mettre en pratique les connaissances abordées pendant les cours, avec notamment le paradigme d'architecture MVC (Modèle - Vue - Contrôleur), la programmation objet, le test unitaire, mathématiques ... Ce projet étant transversal à la formation, les attendus mettent également en jeu des matières telles que l'expression, l'anglais et l'économie-droit.
 
