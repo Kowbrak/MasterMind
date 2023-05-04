@@ -46,6 +46,7 @@ public class MasterMindConsole {
         MasterMindController control = new MasterMindController(model,MasterMindView);
         control.setFirstStageName("MasterMind");
         try {
+
             control.startGame();
             control.stageLoop();
         }
