@@ -10,7 +10,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <orderEntry type="module-library">
+=======
+    <orderEntry type="module-library" scope="TEST">
+>>>>>>> Stashed changes
 =======
     <orderEntry type="module-library" scope="TEST">
 >>>>>>> Stashed changes
@@ -30,8 +34,12 @@
       </library>
     </orderEntry>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <orderEntry type="library" name="mockito.core1" level="application" />
     <orderEntry type="library" name="hamcrest" level="application" />
+=======
+    <orderEntry type="library" name="mockito.core" level="application" />
+>>>>>>> Stashed changes
 =======
     <orderEntry type="library" name="mockito.core" level="application" />
 >>>>>>> Stashed changes
