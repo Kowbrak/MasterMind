@@ -100,43 +100,6 @@ public class MasterMindController extends Controller {
         }
     }
 
-    private void generateCombs() {
-
-    }
-
-    private boolean analyseAndPlay(String line) {
-        MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
-        //get the pawn value from the first char
-        int pawnIndex = (int) (line.charAt(0) - '1');
-        if ((pawnIndex < 0) || (pawnIndex > 3)) return false;
-        // get the ccords in the board
-        int col = (int) (line.charAt(1) - 'A');
-        int row = (int) (line.charAt(2) - '1');
-        // check coords validity
-        if ((row < 0) || (row > 2)) return false;
-        if ((col < 0) || (col > 2)) return false;
-        // check if the pawn is still in its pot
-        GridElement pot = null;
-        if (model.getIdPlayer() == 0) {
-            pot = gameStage.getWhitePot();
-        } else {
-            pot = gameStage.getRedPot();
-        }
-        if (pot.isEmptyAt(pawnIndex, 0)) return false;
-        GameElement pawn = pot.getElement(pawnIndex, 0);
-        // compute valid cells for the chosen pawn
-        gameStage.getBoard().setValidCells(pawnIndex + 1);
-        if (!gameStage.getBoard().canReachCell(row, col)) return false;
-
-        ActionList actions = new ActionList(true);
-        GameAction move = new MoveAction(model, pawn, "mastermindboard", row, col);
-        // add the action to the action list.
-        actions.addSingleAction(move);
-        ActionPlayer play = new ActionPlayer(model, this, actions);
-        play.start();
-        return true;
-    }
-
     private boolean analyseAndPlay2(String line) {
         MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
         //VERIF

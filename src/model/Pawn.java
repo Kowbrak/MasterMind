@@ -27,7 +27,7 @@ public class Pawn extends GameElement {
     }
 
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     public int getColor() {
