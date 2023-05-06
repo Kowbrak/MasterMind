@@ -160,26 +160,158 @@ public class MasterMindController extends Controller {
     }
 
     public void analysePlayComputer2() {
+        if (this.generateCombs) {
+            int k = 4; // Number of color balls in the combination
+            int n = 8; // Number of different colors
+            int[] combi = combiStringToInt(Combination);
+            int coul = 1; // Couleur test�, on commence avec la 1ier couleur : 1
+
+            int[] combiTente = new int[k]; // Tableau contenant la combinaison
+            // tent� par l'ia
+            int[] combiTrouve = new int[k]; // Tableau contenant les couleurs
+            // trouv�es,
+            int nbBienPlace = 0;
+            int nbMalPlace = 0;
+            int nbTrouve = 0; // Nombre de boules de couleurs dont ont a trouv� la
+            // position
+            int nbTentative = 0;
+            int pos = 0;
+
+            /*
+             * Boucle g�n�rant les tentatives jusqu'� la r�solution du MM
+             */
+
+            // tant que le nb de bien plac� est inf�rieur aux nb de cases (ie: tant
+            // que le MM n'est pas r�solu) faire
+            while (nbBienPlace(combi, combiTente, k) < k /* && coul <= n */) {
+
+                // On cr�e la nouvelle combinaison � tent�, qui determine la
+                // presence ou non d'une couleur. Tout en tenant compte des
+                // positions des
+                // boules de couleurs deja trouv�es
+                for (int i = 0; i < k; i++) {
+                    if (combiTrouve[i] == 0)
+                        combiTente[i] = coul;
+                    else
+                        combiTente[i] = combiTrouve[i];
+                }
+
+                if(countCombs < 12){
+                    for(int i = 0; i < combiTente.length; i++){
+                        combs[countCombs][i] = combiTente[i];
+                    }
+                    countCombs++;
+                }
+
+                nbTentative++;
+
+                // On d�termine le nombre de bien plac�s et mal plac�s
+                nbBienPlace = nbBienPlace(combi, combiTente, k);
+                nbMalPlace = nbCommuns(combi, combiTente, k)
+                        - nbBienPlace(combi, combiTente, k);
+                int nbBoules = nbBienPlace - nbTrouve;
+
+                // Si la couleur tester est pr�sente (ie. nbBienPlace-nbTrouve >= 1)
+                // faire
+                if (nbBoules >= 1 && coul <= (n + 1)) {
+
+                    for (int x = 1; x <= nbBoules; x++) {
+                        // On met nbMalPlace � un nombre diff�rent de 0
+                        nbMalPlace = 1;
+
+                        // indice de la position test� pour trouver l'emplacement de
+                        // la couleur coul. On ne test pas une position dont on
+                        // connais deja la
+                        // position. Donc on cr�e une boucle qui cherche une
+                        // position possible.
+                        pos = 0;
+
+                        // tant que nbMalPlace != 0 faire
+                        while (nbMalPlace > 0) {
+                            while ((pos < k) && combiTrouve[pos] != 0)
+                                pos++;
+                            // On cr�e la nouvelle combinaison � tent�, qui cherche
+                            // la position exacte de la boule de couleur
+                            // en cour. Tout en tenant compte des positions des
+                            // boules de couleurs deja trouv�es
+                            for (int i = 0; i < k; i++) {
+                                if (combiTrouve[i] == 0) // Si la case courante,
+                                // n'est pas une case dont on connais la couleur
+                                // (ie. combiTrouve==0)
+                                {
+                                    if (i != pos) // Si la case n'est pas la case
+                                        // test�, on met la boule de
+                                        // couleur sup�rieur
+                                        combiTente[i] = coul + 1;
+                                    else
+                                        combiTente[i] = coul;
+
+                                } else
+                                    combiTente[i] = combiTrouve[i];
+                            }
+
+                            if(countCombs < 12){
+                                for(int i = 0; i < combiTente.length; i++){
+                                    combs[countCombs][i] = combiTente[i];
+                                }
+                                countCombs++;
+                            }
+
+                            // Test de la nouvelle tentative
+                            // Calcul du nombre de boule mal plac� (en souhaitant
+                            // qu'il y en ai 0)
+                            nbTentative++;
+                            nbBienPlace =nbBienPlace(combi, combiTente, k);
+                            nbMalPlace = nbCommuns(combi, combiTente, k)
+                                    - nbBienPlace;
+
+                            // on se pr�pare � tester la position suivante
+                            pos++;
+
+                        }
+
+                        // A la sortie de la boucle, on a la position de la boule de
+                        // couleur -> pos - 1
+                        // On ajoute donc cette boule � la combinaison contenant les
+                        // boules Trouv�es
+                        combiTrouve[pos - 1] = coul;
+
+                        // on incr�mente le nombre de boule trouv�es
+                        nbTrouve++;
+                    }
+                }
+                coul++;
+            }
+            countCombs = 0;
+        }
+        String line = "";
+        this.generateCombs = false;
+        //showTab1D(combi);
+        showTab2D(combs);
+
+        int tmp = 0;
+        for(int i = 0; i< 4 ; i++){
+            for(int j = 0; j < 8; j++){
+                if(combs[countCombs][i] == Integer.parseInt(detail[1][j])){
+                    tmp = j;
+                    break;
+                }
+            }
+            line += detail[0][tmp];
+        }
+        countCombs++;
+        System.out.println("Line : "+line);
+
         MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
         System.out.println("COMPUTER PLAYS");
-        MasterMind2Decider decider = new MasterMind2Decider(model, this, this.detail, this.step, this.couleurCourante, this.combFinal, this.pawnInCombFinal);
+        MasterMindDecider decider = new MasterMindDecider(model, this, line);
         ActionPlayer play = new ActionPlayer(model, this, decider, null);
         play.start();
-        String line = decider.getComb();
-        this.pawnInCombFinal = decider.getPawnInCombFinal();
-        this.combFinal = decider.getCombFinal();
-        this.detail = decider.getDetail();
         gameStage.setNumberPawnDown(line, Combination);
         if (gameStage.verifWin() == 4) {
             stopStage();
             model.setEnd(1);
         }
-        if (decider.isChangeCouleurCourant()) {
-            this.couleurCourante++;
-        }
-        this.step++;
-        stopStage();
-        model.setEnd(2);
     }
 
     public int nbBienPlace(int[] tab1, int[] tab2, int k) {
