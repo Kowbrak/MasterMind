@@ -314,7 +314,7 @@ public class MasterMindController extends Controller {
         }
     }
 
-    public int nbBienPlace(int[] tab1, int[] tab2, int k) {
+    public static int nbBienPlace(int[] tab1, int[] tab2, int k) {
         int nb_bien_place = 0;
         for (int i = 0; i < k; i++) {
             if (tab1[i] == tab2[i]) {
@@ -336,7 +336,7 @@ public class MasterMindController extends Controller {
         return combiInt;
     }
 
-    public int nbCommuns(int[] tab1, int[] tab2, int k) {
+    public static int nbCommuns(int[] tab1, int[] tab2, int k) {
         int[] t1 = new int[k];
         int[] t2 = new int[k];
         for (int i = 0; i < k; i++) {
