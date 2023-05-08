@@ -93,7 +93,7 @@ public class MasterMindStageModel extends GameStageModel {
         addGrid(boardPawn);
     }
 
-    private void setupCallbacks() {
+    void setupCallbacks() {
         onPutInGrid((element, gridDest, rowDest, colDest) -> {
             // just check when pawns are put in 3x3 board
             if (gridDest != board) return;
