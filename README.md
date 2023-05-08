@@ -8,6 +8,6 @@ In order to guarantee that the objectives and expected deliverables are respecte
 
 In this regard, each project must allow play either with 2 human or computer players, or with 1 human and 1 computer. Moreover, when a player is the computer, he must be able to apply at least 2 different strategies to make his game decisions. More details are indicated in the specifications section.
 
-<p>
+<p align="center">
   <img src="https://user-images.githubusercontent.com/114138178/235857664-04b06e80-c5f8-4440-9cdc-5968be7a4467.png" />
 </p>
