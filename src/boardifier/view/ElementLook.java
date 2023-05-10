@@ -5,7 +5,7 @@ import boardifier.model.GameElement;
 public abstract class ElementLook {
 
     protected GameElement element;
-    protected String[][] shape; // a buffer of String that is used to store the visual aspect of the element
+    public String[][] shape; // a buffer of String that is used to store the visual aspect of the element
     protected int width; // the width of the view port
     protected int height; // the height of the viewport
     /**
