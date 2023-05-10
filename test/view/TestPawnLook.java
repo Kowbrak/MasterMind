@@ -15,12 +15,12 @@ public class TestPawnLook {
     private Pawn mockPawn;
 
     public void PawnLookTest() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     void testPawnLookBlack() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
 
         when(mockPawn.getColor()).thenReturn(Pawn.PAWN_BLACK);
         PawnLook pawnLook = new PawnLook(mockPawn);
@@ -65,7 +65,7 @@ public class TestPawnLook {
 
     @Test
     void testPawnLookGreen() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
 
         when(mockPawn.getColor()).thenReturn(Pawn.PAWN_GREEN);
         PawnLook pawnLook = new PawnLook(mockPawn);
