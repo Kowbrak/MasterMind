@@ -14,6 +14,7 @@ public class TestPawn {
 
             @BeforeEach
             public void setUp() {
+
                 this.pawn = new Pawn(1,1, mock(GameStageModel.class));
             }
 
