@@ -1,5 +1,6 @@
 package view;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -58,4 +59,3 @@ public class TestMasterMindView {
         // Add more verifications as needed for other interactions
     }
 }
-

@@ -41,7 +41,3 @@ public class TestMasterMindDecider {
         Assertions.assertEquals(new ActionList(true), result);
     }
 }
-
-
-
-

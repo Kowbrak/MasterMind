@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import boardifier.control.Controller;
 import boardifier.model.Model;
 import boardifier.model.action.ActionList;
