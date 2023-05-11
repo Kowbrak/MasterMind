@@ -6,9 +6,7 @@ import boardifier.view.GameStageView;
 import boardifier.view.GridLook;
 import boardifier.view.View;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class Controller {
     protected Model model;
@@ -18,8 +16,7 @@ public abstract class Controller {
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
     protected Scanner input = new Scanner(System.in);
-
-
+    private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
@@ -31,10 +28,10 @@ public abstract class Controller {
         this.firstStageName = firstStageName;
     }
 
-    public void startGame() throws GameException {
+    public void startGame(boolean boucle) throws GameException {
         if (firstStageName.isEmpty()) throw new GameException("The name of the first stage have not been set. Abort");
         System.out.println("START THE GAME");
-        startStage(firstStageName);
+        startStage(firstStageName, boucle);
     }
 
     /**
@@ -48,11 +45,15 @@ public abstract class Controller {
      * @param stageName The name of the stage, as registered in the StageFactory.
      * @throws GameException
      */
-    protected void startStage(String stageName) throws GameException {
+    protected void startStage(String stageName, boolean boucle) throws GameException {
         if (model.isStageStarted()) {
             stopStage();
         }
-        setCombinaison();
+        if(boucle){
+            setCombinaisonBoucle();
+        }else{
+            setCombinaison();
+        }
         model.reset();
         //System.out.println("START STAGE "+stageName);
         // create the model of the stage by using the StageFactory
@@ -86,6 +87,39 @@ public abstract class Controller {
             }
         }while(!valide);
         System.out.println("Good combination");
+    }
+
+    public void setCombinaisonBoucle(){
+        this.Combination = setCombRand();
+        System.out.println("Good combination");
+    }
+
+    public String setCombRand() {
+        String line = "";
+        int nb;
+        for (int i = 0; i < 4; i++) {
+            nb = loto.nextInt(8);
+            if (nb == 0) {
+                line += "N";
+            } else if (nb == 1) {
+                line += "R";
+            } else if (nb == 2) {
+                line += "B";
+            } else if (nb == 3) {
+                line += "J";
+            } else if (nb == 4) {
+                line += "V";
+            } else if (nb == 5) {
+                line += "W";
+            } else if (nb == 6) {
+                line += "C";
+            } else {
+                line += "P";
+            }
+
+        }
+        //line = "PPPP";
+        return line;
     }
 
     public boolean goodValEnter(String line, boolean mode) {
