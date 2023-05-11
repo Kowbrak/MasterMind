@@ -47,7 +47,7 @@ public class MasterMindConsole {
         control.setFirstStageName("MasterMind");
         try {
 
-            control.startGame();
+            control.startGame(false);
             control.stageLoop();
         }
         catch(GameException e) {
