@@ -19,14 +19,14 @@ public class TestMasterMindView {
     @Mock
     private MasterMindStageModel mockModel;
     @Mock
-    private GameStageModel mockGameStageModel;
+    private GameStageModel GameStageModel;
 
     private MasterMindView masterMindView;
 
     @BeforeEach
     void setup() {
         MockitoAnnotations.initMocks(this);
-        this.masterMindView = new MasterMindView("Test", mockGameStageModel);
+        this.masterMindView = new MasterMindView("MasterMind", mock(GameStageModel.class));
     }
 
     @Test

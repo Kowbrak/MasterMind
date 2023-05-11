@@ -1,5 +1,7 @@
 package boardifier.model;
 
+import model.Pawn;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,5 +214,4 @@ public abstract class GameStageModel {
         }
         return list;
     }
-
 }

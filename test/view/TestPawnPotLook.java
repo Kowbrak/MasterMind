@@ -1,6 +1,7 @@
 package view;
 
 import boardifier.model.GridElement;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -27,29 +28,29 @@ public class TestPawnPotLook {
         String[][] shape = pawnPotLook.getShape();
 
         // Vérification des coins
-        assertEquals("\u250F", shape[0][0]); // Coin supérieur gauche
-        assertEquals("\u2513", shape[0][cellWidth]); // Coin supérieur droit
-        assertEquals("\u2517", shape[cellHeight][0]); // Coin inférieur gauche
-        assertEquals("\u251B", shape[cellHeight][cellWidth]); // Coin inférieur droit
+        Assertions.assertEquals("\u250F", shape[0][0]); // Coin supérieur gauche
+        Assertions.assertEquals("\u2513", shape[0][cellWidth]); // Coin supérieur droit
+        Assertions.assertEquals("\u2517", shape[cellHeight][0]); // Coin inférieur gauche
+        Assertions.assertEquals("\u251B", shape[cellHeight][cellWidth]); // Coin inférieur droit
 
         // Vérification des lignes horizontales
         for (int i = 0; i < cellHeight; i++) {
             for (int j = 1; j < cellWidth; j++) {
-                assertEquals("\u2501", shape[i][j]); // Ligne horizontale supérieure
-                assertEquals("\u2501", shape[cellHeight + i][j]); // Ligne horizontale inférieure
+                Assertions.assertEquals("\u2501", shape[i][j]); // Ligne horizontale supérieure
+                Assertions.assertEquals("\u2501", shape[cellHeight + i][j]); // Ligne horizontale inférieure
             }
         }
 
         // Vérification des lignes verticales
         for (int i = 0; i < cellHeight; i++) {
-            assertEquals("\u2503", shape[i][0]); // Ligne verticale gauche
-            assertEquals("\u2503", shape[i][cellWidth]); // Ligne verticale droite
+            Assertions.assertEquals("\u2503", shape[i][0]); // Ligne verticale gauche
+            Assertions.assertEquals("\u2503", shape[i][cellWidth]); // Ligne verticale droite
         }
 
         // Vérification des intersections
         for (int i = 1; i < cellHeight; i++) {
-            assertEquals("\u2523", shape[i * cellHeight][0]); // Intersection verticale gauche
-            assertEquals("\u252B", shape[i * cellHeight][cellWidth]); // Intersection verticale droite
+            Assertions.assertEquals("\u2523", shape[i * cellHeight][0]); // Intersection verticale gauche
+            Assertions.assertEquals("\u252B", shape[i * cellHeight][cellWidth]); // Intersection verticale droite
         }
     }
 }

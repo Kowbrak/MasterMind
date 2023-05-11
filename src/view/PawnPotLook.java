@@ -40,4 +40,7 @@ public class PawnPotLook extends GridLook {
             shape[i * cellHeight][cellWidth] = "\u252B";
         }
     }
+
+    public String[][] getShape() { return shape;
+    }
 }
