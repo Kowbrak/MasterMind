@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Random;
 
-public class MasterMindController extends Controller {
+public class MasterMindControllerLoop extends Controller {
 
     BufferedReader consoleIn;
     boolean firstPlayer;
@@ -31,17 +31,17 @@ public class MasterMindController extends Controller {
             {'R', 'B', 'J', 'V', 'W', 'N', 'C', 'P'},
             {'1', '2', '3', '4', '5', '6', '7', '8'},
             {'0', '0', '0', '0', '0', '0', '0', '0'}};
-    private int currentColor = 1;
+    private int currentcolor = 1;
     private int step = 1;
     private char[] combFinal = {'0', '0', '0', '0'};
     private String pawnInCombFinal = "";
-    private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
+    private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
     private int[][] combs;
     private int countCombs;
     private boolean generateCombs;
 
-    public MasterMindController(Model model, View view) {
+    public MasterMindControllerLoop(Model model, View view) {
         super(model, view);
         firstPlayer = true;
         this.combs = new int[12][4];
@@ -117,9 +117,9 @@ public class MasterMindController extends Controller {
 
         // ACTIONS
         ActionList actions = new ActionList(false);
-        // Actions that mount the pieces of 1 line
+        //  Actions that move the board's pawns up by 1 row
         gameStage.moveLineUp(board, actions);
-        // Actions put the "pawsBoard" on the "board"
+        //  Actions that place the "pawsBoard" on the board
         GridElement pawnBoard = gameStage.getBoardPotPawn();
         for (int i = 0; i < 4; i++) {
             GameElement pawn = pawnBoard.getElement(pawnToPlace, 0);
@@ -128,13 +128,13 @@ public class MasterMindController extends Controller {
             actions.addSingleAction(move);
             pawnToPlace++;
         }
-        // Actions that raise 1 notch the scores of the white and red pawns
+        // Actions that move up the scores of white and red pawns by 1 step
         gameStage.upPawnRedWhite();
 
         ActionPlayer play = new ActionPlayer(model, this, actions);
         play.start();
 
-        // Actions that give the score for the bottom red and white pawns
+        // Actions that calculate the score for the pawns on the bottom row (red and white)
         gameStage.setNumberPawnDown(line, Combination);
 
         if (gameStage.verifWin() == 4) {
@@ -156,117 +156,124 @@ public class MasterMindController extends Controller {
             stopStage();
             model.setEnd(1);
         }
+        System.out.println(super.getPawnToPlace()/4);
     }
 
     public void analysePlayComputer2() {
-        if (this.generateCombs) {
+        if (this.generateCombs) {/*
+            countCombs = 0;
+            for(int i = 0; i < 12; i++) {
+                for(int j = 0; j < 4; j++) {
+                    this.combs[i][j] = 0;
+                }
+            }*/
             int k = 4; // Number of color balls in the combination
             int n = 8; // Number of different colors
             int[] combi = combiStringToInt(Combination);
-            int coul = 1; // Color test�, we start with the first color : 1
+            int coul = 1; //  Test color, we start with the 1st color: 1
 
-            int[] combiAttempt = new int[k]; // Table containing the combination
-            // IA attempt
-            int[] combiFound = new int[k]; // Table containing the colours
-            // found,
+            int[] combiTried = new int[k]; // Array containing the combination tried by the AI
+            int[] combiFind = new int[k]; // Array containing the colors found
             int nbWellPlaced = 0;
             int nbMisplaced = 0;
-            int nbFound = 0; // Number of colored balls whose position has been found
+            int nbFind = 0; // Number of colored balls whose position we have found
             int nbAttempt = 0;
             int pos = 0;
 
+
             /*
-             * Loop generating attempts until Mastermind resolution
+             * Loop generating attempts until the MM is solved
              */
 
-            // as long as the number of goods placed is less than the number of boxes
-            // (as long as the MM is not resolved) do
-            while (nbGoodPlaced(combi, combiAttempt, k) < k /* && coul <= n */) {
+            // while the number of well-placed balls is less than the number of
+            // slots (i.e., while the MM is not solved) do
+            while (nbWellPlaced(combi, combiTried, k) < k /* && coul <= n */) {
 
-                // We create the new combination to try, which determines the presence
-                // or not of a color. While taking into account the positions of the color
-                // balls already found
+                // We create the new combination to try, which determines the
+                // presence or absence of a color. While taking into account the
+                // positions of the colored balls already found
                 for (int i = 0; i < k; i++) {
-                    if (combiFound[i] == 0)
-                        combiAttempt[i] = coul;
+                    if (combiFind[i] == 0)
+                        combiTried[i] = coul;
                     else
-                        combiAttempt[i] = combiFound[i];
+                        combiTried[i] = combiFind[i];
                 }
 
                 if(countCombs < 12){
-                    for(int i = 0; i < combiAttempt.length; i++){
-                        combs[countCombs][i] = combiAttempt[i];
+                    for(int i = 0; i < combiTried.length; i++){
+                        combs[countCombs][i] = combiTried[i];
                     }
                     countCombs++;
                 }
 
                 nbAttempt++;
 
-                // Determine the number of well-placed and misplaced balls
-                nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
-                nbMisplaced = nbCommuns(combi, combiAttempt, k)
-                        - nbGoodPlaced(combi, combiAttempt, k);
-                int nbBalls = nbWellPlaced - nbFound;
+                // We determine the number of well-placed and misplaced balls
+                nbWellPlaced = nbWellPlaced(combi, combiTried, k);
+                nbMisplaced = nbCommon(combi, combiTried, k)
+                        - nbWellPlaced(combi, combiTried, k);
+                int nbBalls = nbWellPlaced - nbFind;
 
-                // If the tested color is present (i.e. nbWellPlaced-nbFound >= 1), then do:
+                // If the color being tested is present (i.e. nbWellPlaced-nbFind >= 1) do
                 if (nbBalls >= 1 && coul <= (n + 1)) {
 
                     for (int x = 1; x <= nbBalls; x++) {
-                        // Set nbMisplaced to a different number than 0
+                        // We set nbMisplaced to a different number than 0
                         nbMisplaced = 1;
 
-                        // Index of the tested position to find the location of the color coul.
-                        // We don't test a position that we already know the location of.
-                        // So we create a loop that searches for a possible position.
+                        // index of the position being tested to find the location
+                        // of the coul color ball. We don't test a position whose
+                        // color we already know. So we create a loop that looks for
+                        // a possible position.
                         pos = 0;
 
-                        // While nbMisplaced != 0, do:
+                        // while nbMisplaced != 0 do
                         while (nbMisplaced > 0) {
-                            while ((pos < k) && combiFound[pos] != 0)
+                            while ((pos < k) && combiFind[pos] != 0)
                                 pos++;
-                            // Create the new combination to try, which seeks the exact position
-                            // of the current color ball, while taking into account the positions
-                            // of the colors balls already found.
+                            // We create the new combination to try, which looks for
+                            // the exact position of the current color ball. While taking
+                            // into account the positions of the colored balls already found
                             for (int i = 0; i < k; i++) {
-                                if (combiFound[i] == 0) // If the current slot is not a slot that we know
-                                // the color of (i.e. combiFound==0)
+                                if (combiFind[i] == 0) // If the current slot
+                                // is not a slot whose color we already know (i.e., combiFind==0)
                                 {
-                                    if (i != pos) // If the slot is not the tested slot, then put
-                                        // the next color ball
-                                        combiAttempt[i] = coul + 1;
+                                    if (i != pos) // If the slot is not the slot being tested,
+                                        // we put the next color ball
+                                        combiTried[i] = coul + 1;
                                     else
-                                        combiAttempt[i] = coul;
+                                        combiTried[i] = coul;
 
                                 } else
-                                    combiAttempt[i] = combiFound[i];
+                                    combiTried[i] = combiFind[i];
                             }
 
                             if(countCombs < 12){
-                                for(int i = 0; i < combiAttempt.length; i++){
-                                    combs[countCombs][i] = combiAttempt[i];
+                                for(int i = 0; i < combiTried.length; i++){
+                                    combs[countCombs][i] = combiTried[i];
                                 }
                                 countCombs++;
                             }
 
-                            // Test the new attempt
-                            // Calculate the number of balls misplaced (assuming there are 0)
+                            // Testing the new attempt
+                            // Calculation of the number of balls misplaced (hoping there are 0)
                             nbAttempt++;
-                            nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
-                            nbMisplaced = nbCommuns(combi, combiAttempt, k) - nbWellPlaced;
+                            nbWellPlaced = nbWellPlaced(combi, combiTried, k);
+                            nbMisplaced = nbCommon(combi, combiTried, k)
+                                    - nbWellPlaced;
 
-                            // Prepare to test the next position
+                            // preparing to test the next position
                             pos++;
 
                         }
 
                         // At the end of the loop, we have the position of the color ball -> pos - 1
-                        // So we add this ball to the combination of balls found.
-                        combiFound[pos - 1] = coul;
+                        //// So we add this ball to the combination containing the Found balls
+                        combiFind[pos - 1] = coul;
 
-                        // Increment the number of balls found.
-                        nbFound++;
+                        // incrementing the number of found balls
+                        nbFind++;
                     }
-
                 }
                 coul++;
             }
@@ -299,10 +306,11 @@ public class MasterMindController extends Controller {
         if (gameStage.verifWin() == 4) {
             stopStage();
             model.setEnd(1);
+            this.generateCombs = true;
         }
     }
 
-    public static int nbGoodPlaced(int[] tab1, int[] tab2, int k) {
+    public static int nbWellPlaced(int[] tab1, int[] tab2, int k) {
         int nb_well_placed = 0;
         for (int i = 0; i < k; i++) {
             if (tab1[i] == tab2[i]) {
@@ -324,7 +332,7 @@ public class MasterMindController extends Controller {
         return combiInt;
     }
 
-    public static int nbCommuns(int[] tab1, int[] tab2, int k) {
+    public static int nbCommon(int[] tab1, int[] tab2, int k) {
         int[] t1 = new int[k];
         int[] t2 = new int[k];
         for (int i = 0; i < k; i++) {
@@ -352,7 +360,13 @@ public class MasterMindController extends Controller {
     }
 
     public void analysePlayComputer3() {
-        if (this.generateCombs) {
+        if (this.generateCombs) {/*
+            countCombs = 0;
+            for(int i = 0; i < 12; i++) {
+                for(int j = 0; j < 4; j++) {
+                    this.combs[i][j] = 0;
+                }
+            }*/
             int k = 4; // Number of color balls in the combination
             int n = 8; // Number of different colors
             int[] combi = combiStringToInt(Combination);
@@ -368,20 +382,19 @@ public class MasterMindController extends Controller {
             int nbAttempt = 0;
             int pos = 0;
 
-            int NextCol = 1; // Contains the next color to fill the combination with
-            // when searching for the position of the current color
+            int Nextcol = 1; //  Contains the next color to be used to fill the combination
+            //  when looking for the position of the current color
 
             int nbNextBalls = 0;
 
-            // while the number of well-placed balls is less than the number of slots (i.e., while
-            // the MM is not yet solved) use *** the variable nbGoodPlace ***
-            while (nbGoodPlaced(combi, combiTest, k) < k && coul <= n) {
+            // While the number of well-placed balls is less than the number of slots (i.e. while
+            // the MM is not solved) ***use the variable nbGoodPlace***
+            while (nbWellPlaced(combi, combiTest, k) < k && coul <= n) {
 
-                coul = NextCol;
-                // We create the new combination to try, which determines the
-                // presence or absence of a color. Taking into account the
-                // positions of the
-                // previously found color balls
+                coul = Nextcol;
+                // We create the new combination to be tried, which determines the
+                // presence or absence of a color. Taking into account the positions of
+                // the balls of colors already found.
                 for (int i = 0; i < k; i++) {
                     if (combiFind[i] == 0)
                         combiTest[i] = coul;
@@ -396,32 +409,31 @@ public class MasterMindController extends Controller {
                     countCombs++;
                 }
 
-
-                // We verify that the combination being tried is not the one already tried recently
+                // We check that the combination to be tried is not the one that was tried last time
 
 
                 // We determine the number of well-placed and misplaced balls
-                nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
-                nbBadPlace = nbCommuns(combi, combiTest, k)
-                        - nbGoodPlaced(combi, combiTest, k);
+                nbGoodPlace = nbWellPlaced(combi, combiTest, k);
+                nbBadPlace = nbCommon(combi, combiTest, k)
+                        - nbWellPlaced(combi, combiTest, k);
 
                 // increment the number of attempted combinations
                 nbAttempt++;
 
-                // display the tried combination and the given indications
-                //System.out.print("color search : ");
-                //printTab(combiTest);
-                //System.out.println(" --> "+nbGoodPlace+" well placed, "+nbBadPlace+" misplaced.");
+                // display the combination being tried and the indications given
+                //System.out.print("cherche couleur : ");
+                //afficheTab(combiTest);
+                //System.out.println(" --> "+nbGoodPlace+" biens plac�es, "+nbBadPlace+" mal plac�es.");
                 /*
                  * Analysis of the indications given by nbGoodPlace and nbBadPlace
                  */
 
-                // 1 - If the number of well-placed balls = k, no need to continue, we have finished the resolution
+                // 1 - If the number of well-placed balls = k, no need to continue, we have solved the puzzle.
                 if (nbGoodPlace == k)
                     break;
 
 
-                // Determining the number of balls of the current color
+                // Determination of the number of balls of the current color
                 int nbBalls = nbGoodPlace - nbFind;
 
 
@@ -431,42 +443,37 @@ public class MasterMindController extends Controller {
 
                     do {
 
-                        if (nbNextBalls > 0) // if the color search has been short-circuited
+                        if (nbNextBalls > 0) // if we have already iterated the search for a color
                         {
-                            //System.out.println("Short-circuited search");
-                            coul = NextCol;
+                            //System.out.println("Short circuit");
+                            coul = Nextcol;
                             nbBalls = nbNextBalls;
                         }
                         nbNextBalls = 0; // initialize the number of balls of the next color
 
-                        NextCol = coul + 1;
+                        Nextcol = coul + 1;
 
                         for (int x = 1; x <= nbBalls; x++) { // search for the position of each color
-                            // Set nbBadPlace to a value different from 0
+                            // We set nbBadPlace to a number other than 0
                             nbBadPlace = 1;
 
-                            // index of the position being tested to find the location of the
-                            // current color ball. We do not test a position whose color we
-                            // already know. Therefore, we create a loop that looks for a
-                            // possible position.
+                            // index of the tested position to find the location of the color coul. We do not test a position whose color we already know. So we create a loop that looks for a possible position.
                             pos = 0;
 
-                            // while nbBadPlace != 0, do the following
+                            // while nbBadPlace != 0 do
                             while (nbBadPlace > 0) {
 
-                                // look for a position to test that has not already been found
+                                // search for a position to test that has not already been found
                                 while ((pos < k) && combiFind[pos] != 0)
                                     pos++;
 
-                                // create the new combination to be tested, which looks for
-                                // the exact position of the current color ball, while taking into account the positions of the
-                                // already found color balls
+                                // We create the new combination to try, which looks for the exact position of the ball of the current color. While taking into account the positions of the balls of colors already found
                                 for (int i = 0; i < k; i++) {
 
-                                    if (combiFind[i] == 0) // if the current position is not a position whose color we know (i.e. combiFind==0)
+                                    if (combiFind[i] == 0) // If the current cell is not a cell whose color is already known (i.e., combiFind==0)
                                     {
-                                        if (i != pos) // if the position is not the position being tested, we add the next color ball
-                                            combiTest[i] = NextCol;
+                                        if (i != pos) // If the cell is not the tested cell, we put the ball of the superior color
+                                            combiTest[i] = Nextcol;
                                         else
                                             combiTest[i] = coul;
 
@@ -481,44 +488,43 @@ public class MasterMindController extends Controller {
                                     countCombs++;
                                 }
 
+                                // Test the new attempt
+                                // Calculate the number of balls wrongly placed (assuming there are 0)
+                                nbGoodPlace = nbWellPlaced(combi, combiTest, k);
+                                int nbCommons = nbCommon(combi, combiTest, k);
+                                nbBadPlace = nbCommons - nbGoodPlace;
 
-                                // Testing the new attempt
-                                // Calculation of the number of balls incorrectly
-                                // placed (assuming there are 0)
-                                nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
-                                int nbCommuns = nbCommuns(combi, combiTest, k);
-                                nbBadPlace = nbCommuns - nbGoodPlace;
-
-                                //  Display of the attempt ***
-                                //displayTab(combiTest);
-                                //System.out.println(" --> "+nbGoodPlace+" correctly placed, "+nbBadPlace+" incorrectly placed.");
+                                // Display the attempt ***
+                                //afficheTab(combiTest);
+                                //System.out.println(" --> "+nbGoodPlace+" well placed, "+nbBadPlace+" misplaced.");
                                 nbAttempt++;
 
                                 /*
-                                 * Analyse des indications donn�es
+                                 * Analysis of the given indications
                                  */
-                                int nbNextCol = (nbCommuns - nbFind - 1);
-                                //System.out.println("NextCol : "+ NextCol+ " nbNextCol : "+nbNextCol);
+                                int nbNextCol = (nbCommons - nbFind - 1);
+                                //System.out.println("Nextcol : "+ Nextcol+ " nbNextCol : "+nbNextCol);
                                 if (nbNextCol <= 0) {
-                                    NextCol++;
-                                    //	System.out.println(NextCol);
+                                    Nextcol++;
+                                    //System.out.println(Nextcol);
                                 } else
                                     nbNextBalls = nbNextCol;
 
                                 pos++;
                             }
 
-                            // At the end of the loop, we have the position of the color ball -> pos - 1
-                            // We then add this ball to the combination containing the found balls
+
+                            // At the end of the loop, we have the position of the ball of the current color -> pos - 1
+                            // We add this ball to the combination containing the balls found
                             combiFind[pos - 1] = coul;
-                            // We increment the number of found balls
+                            //  We increment the number of balls found
                             nbFind++;
                         }
 
                     }
-                    while (nbNextBalls > 0 && nbGoodPlace != k); // As long as the following color is present
+                    while (nbNextBalls > 0 && nbGoodPlace != k); //  While the next color is present and there are still positions that are not well placed
                 } else
-                    NextCol++;
+                    Nextcol++;
 
             }
             countCombs = 0;
@@ -551,6 +557,11 @@ public class MasterMindController extends Controller {
             stopStage();
             model.setEnd(1);
         }
+        System.out.println(super.getPawnToPlace()/4-1);
+    }
+
+    public int getPawnput(){
+        return super.getPawnToPlace()/4;
     }
 
     public void showTab2D(int[][] tab) {
@@ -570,7 +581,7 @@ public class MasterMindController extends Controller {
         String line = "";
         int nb;
         for (int i = 0; i < 4; i++) {
-            nb = lotto.nextInt(8);
+            nb = loto.nextInt(8);
             if (nb == 0) {
                 line += "N";
             } else if (nb == 1) {

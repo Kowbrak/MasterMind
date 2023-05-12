@@ -20,11 +20,11 @@ public class MasterMind2Decider extends Decider {
     private char[] combFinal;
     private String pawnInCombFinal;
     private String lastComb;
-    public MasterMind2Decider(Model model, Controller control,String[][] d, int e, int couleurCourante, char[] pawnGoodPlace, String pawnInCombFinal) {
+    public MasterMind2Decider(Model model, Controller control,String[][] d, int e, int currentColor, char[] pawnGoodPlace, String pawnInCombFinal) {
         super(model, control);
         this.detail = d;
         this.step = e;
-        this.CurrentColor = couleurCourante;
+        this.CurrentColor = currentColor;
         this.line = "";
         this.changeCurrentColor = false;
         this.combFinal = pawnGoodPlace;
@@ -70,16 +70,16 @@ public class MasterMind2Decider extends Decider {
                 this.lastComb += this.detail[0][pawn2.getColor()-1];
                 this.lastComb += this.detail[0][pawn3.getColor()-1];
                 this.lastComb += this.detail[0][pawn4.getColor()-1];
-                int pionsBlancs = whitePawn.getNumber();
-                int pionsRouges = redPawn.getNumber();
-                int pionsBlancRouge = pionsBlancs + pionsRouges;
-                /**System.out.println("\nDerniere combinaison : "+this.lastComb);
-                System.out.println("pions Blanc : "+pionsBlancs);
-                System.out.println("pions Rouge : "+pionsRouges);
-                System.out.println("pions Blanc et Rouge total : "+pionsBlancRouge);**/
+                int pawnsWhite = whitePawn.getNumber();
+                int pawnsReds = redPawn.getNumber();
+                int pawnsWhiteRed = pawnsWhite + pawnsReds;
+                /**System.out.println("\nLast combination : "+this.lastComb);
+                System.out.println("pawns White : "+pawnsWhite);
+                System.out.println("pawns Red : "+pawnsReds);
+                System.out.println("pawns White and Red total : "+pawnsWhiteRed);**/
 
-                if(pionsBlancRouge == 1){
-                    if(pionsBlancs ==1){
+                if(pawnsWhiteRed == 1){
+                    if(pawnsWhite ==1){
                         int tmp = posPawn();
                     }else{
                         int tmp = posPawn();
@@ -97,13 +97,13 @@ public class MasterMind2Decider extends Decider {
 
             }
         }
-        /**System.out.println("Combinaison fibal : "+afficheTab1DChar(this.combFinal));
-        System.out.println("lettre dans la combinaison :"+pawnInCombFinal);
+        /**System.out.println("Final combination : "+showTab1DChar(this.combFinal));
+        System.out.println("letter in the combination :"+pawnInCombFinal);
         System.out.println("Line a tester : "+this.line);**/
         return super.action(this.line);
     }
 
-    public String afficheTab1DChar(char[] tab){
+    public String showTab1DChar(char[] tab){
         String tmp = "";
         for(int i = 0; i<tab.length; i++){
             tmp += tab[i];
@@ -145,7 +145,7 @@ public class MasterMind2Decider extends Decider {
         return this.detail;
     }
 
-    public boolean isChangeCouleurCourant(){
+    public boolean isChangeCurrentColor(){
         return this.changeCurrentColor;
     }
 
