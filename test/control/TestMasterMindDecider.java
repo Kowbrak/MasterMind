@@ -23,6 +23,7 @@ public class TestMasterMindDecider {
 
     private MasterMindDecider decider;
 
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);

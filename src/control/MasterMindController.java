@@ -41,6 +41,12 @@ public class MasterMindController extends Controller {
     private int countCombs;
     private boolean generateCombs;
 
+    /**
+     * Constructor of the class MasterMindController
+     *
+     * @param model, the model of the game
+     * @param view,  the view of the game
+     */
     public MasterMindController(Model model, View view) {
         super(model, view);
         firstPlayer = true;
@@ -99,6 +105,11 @@ public class MasterMindController extends Controller {
         }
     }
 
+    /**
+     * Defines what to do when the game is over
+     * @param line
+     * @return
+     */
     private boolean analyseAndPlay2(String line) {
         MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
         //VERIF
@@ -144,6 +155,9 @@ public class MasterMindController extends Controller {
         return true;
     }
 
+    /**
+     * Analyse the line entered by the player and play it
+     */
     public void analysePlayComputer() {
         MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
         System.out.println("COMPUTER PLAYS");
@@ -204,7 +218,7 @@ public class MasterMindController extends Controller {
 
                 // Determine the number of well-placed and misplaced balls
                 nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
-                nbMisplaced = nbCommuns(combi, combiAttempt, k)
+                nbMisplaced = nbCommons(combi, combiAttempt, k)
                         - nbGoodPlaced(combi, combiAttempt, k);
                 int nbBalls = nbWellPlaced - nbFound;
 
@@ -252,7 +266,7 @@ public class MasterMindController extends Controller {
                             // Calculate the number of balls misplaced (assuming there are 0)
                             nbAttempt++;
                             nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
-                            nbMisplaced = nbCommuns(combi, combiAttempt, k) - nbWellPlaced;
+                            nbMisplaced = nbCommons(combi, combiAttempt, k) - nbWellPlaced;
 
                             // Prepare to test the next position
                             pos++;
@@ -302,6 +316,14 @@ public class MasterMindController extends Controller {
         }
     }
 
+    /**
+     * Method that returns the number of well-placed token
+     *
+     * @param tab1
+     * @param tab2
+     * @param k
+     * @return
+     */
     public static int nbGoodPlaced(int[] tab1, int[] tab2, int k) {
         int nb_well_placed = 0;
         for (int i = 0; i < k; i++) {
@@ -324,7 +346,7 @@ public class MasterMindController extends Controller {
         return combiInt;
     }
 
-    public static int nbCommuns(int[] tab1, int[] tab2, int k) {
+    public static int nbCommons(int[] tab1, int[] tab2, int k) {
         int[] t1 = new int[k];
         int[] t2 = new int[k];
         for (int i = 0; i < k; i++) {
@@ -402,7 +424,7 @@ public class MasterMindController extends Controller {
 
                 // We determine the number of well-placed and misplaced balls
                 nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
-                nbBadPlace = nbCommuns(combi, combiTest, k)
+                nbBadPlace = nbCommons(combi, combiTest, k)
                         - nbGoodPlaced(combi, combiTest, k);
 
                 // increment the number of attempted combinations
@@ -486,7 +508,7 @@ public class MasterMindController extends Controller {
                                 // Calculation of the number of balls incorrectly
                                 // placed (assuming there are 0)
                                 nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
-                                int nbCommuns = nbCommuns(combi, combiTest, k);
+                                int nbCommuns = nbCommons(combi, combiTest, k);
                                 nbBadPlace = nbCommuns - nbGoodPlace;
 
                                 //  Display of the attempt ***

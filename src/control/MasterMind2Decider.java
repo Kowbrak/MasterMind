@@ -20,6 +20,17 @@ public class MasterMind2Decider extends Decider {
     private char[] combFinal;
     private String pawnInCombFinal;
     private String lastComb;
+
+    /**
+     * Constructor of the class MasterMind2Decider
+     * @param model, the model of the game
+     * @param control, the controller of the game
+     * @param d, the detail of the game
+     * @param e, the step of the game
+     * @param currentColor, the current color of the game
+     * @param pawnGoodPlace, the pawn in the good place
+     * @param pawnInCombFinal, the pawn in the final combination
+     * */
     public MasterMind2Decider(Model model, Controller control,String[][] d, int e, int currentColor, char[] pawnGoodPlace, String pawnInCombFinal) {
         super(model, control);
         this.detail = d;
@@ -31,6 +42,11 @@ public class MasterMind2Decider extends Decider {
         this.pawnInCombFinal = pawnInCombFinal;
         this.lastComb = "";
     }
+
+    /**
+     * Method to decide the action to do
+     * @return
+     */
     @Override
     public ActionList decide(){
         MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
@@ -103,6 +119,14 @@ public class MasterMind2Decider extends Decider {
         return super.action(this.line);
     }
 
+    /**
+     * Method to show a 1D tab
+     * @param tab, the tab to show
+     * @return the tab in string
+     *
+     * @param tab
+     * @return
+     */
     public String showTab1DChar(char[] tab){
         String tmp = "";
         for(int i = 0; i<tab.length; i++){
@@ -111,6 +135,11 @@ public class MasterMind2Decider extends Decider {
         return tmp;
     }
 
+    /**
+     * Method to show a 1D tab
+     * @return the tab in string
+     * @return
+     */
     public int posPawn() {
         int tmp = 20;
         for (int i = 0; i < this.lastComb.length(); i++) {
@@ -127,6 +156,10 @@ public class MasterMind2Decider extends Decider {
         return tmp;
     }
 
+    /**
+     * Method to show a 2D tab
+     * @param tab, the tab to show
+     */
     public void showTab2D(String[][] tab){
         for(int i = 0; i<tab.length; i++){
             for(int j = 0; j<tab[i].length; j++){

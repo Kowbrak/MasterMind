@@ -41,6 +41,11 @@ public class MasterMindControllerLoop extends Controller {
     private int countCombs;
     private boolean generateCombs;
 
+    /**
+     * Constructor of the class MasterMindControllerLoop
+     * @param model
+     * @param view
+     */
     public MasterMindControllerLoop(Model model, View view) {
         super(model, view);
         firstPlayer = true;

@@ -14,6 +14,10 @@ public class MasterMindBoard extends GridElement {
         resetReachableCells(false);
     }
 
+    /**
+     * Method to reset the reachable cells
+     * @param number
+     */
     public void setValidCells(int number) {
         resetReachableCells(false);
         List<Point> valid = computeValidCells(number);
@@ -23,6 +27,12 @@ public class MasterMindBoard extends GridElement {
             }
         }
     }
+
+    /**
+     * Method to compute the valid cells
+     * @param number
+     * @return
+     */
     public List<Point> computeValidCells(int number) {
         List<Point> lst = new ArrayList<>();
         Pawn p = null;

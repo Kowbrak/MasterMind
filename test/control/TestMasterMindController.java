@@ -16,35 +16,35 @@ public class TestMasterMindController {
         int k = 2;
 
         // Call the method under test
-        int result = MasterMindController.nbBienPlace(tab1, tab2, k);
+        int result = MasterMindController.nbGoodPlaced(tab1, tab2, k);
 
         // Verify the expected result
         assertEquals(2, result, "Expected 2 numbers to be correctly placed");
     }
 
     @Test
-    public void testNbBienPlaceWithEmptyArrays() {
+    public void testNbGoodPlacedWithEmptyArrays() {
         // Set up the test inputs
         int[] tab1 = {};
         int[] tab2 = {};
         int k = 0;
 
         // Call the method under test
-        int result = MasterMindController.nbBienPlace(tab1, tab2, k);
+        int result = MasterMindController.nbGoodPlaced(tab1, tab2, k);
 
         // Verify the expected result
         assertEquals(0, result, "Expected 0 numbers to be correctly placed");
     }
 
     @Test
-    public void testNbBienPlaceWithNullArrays() {
+    public void testNbGoodPlacedWithNullArrays() {
         // Set up the test inputs
         int[] tab1 = null;
         int[] tab2 = null;
         int k = 0;
 
         // Call the method under test
-        int result = MasterMindController.nbBienPlace(tab1, tab2, k);
+        int result = MasterMindController.nbGoodPlaced(tab1, tab2, k);
 
         // Verify the expected result
         assertEquals(0, result, "Expected 0 numbers to be correctly placed");
@@ -135,7 +135,7 @@ public class TestMasterMindController {
     private int k = 4;
 
     @Test
-    public void testNbCommuns() {
+    public void testNbCommons() {
 
         when(tab1[0]).thenReturn(1);
         when(tab1[1]).thenReturn(2);
@@ -147,7 +147,7 @@ public class TestMasterMindController {
         when(tab2[2]).thenReturn(2);
         when(tab2[3]).thenReturn(1);
 
-        int nbCommuns = MasterMindController.nbCommuns(tab1, tab2, k);
-        assertEquals(4, nbCommuns);
+        int nbCommons = MasterMindController.nbCommons(tab1, tab2, k);
+        assertEquals(4, nbCommons);
     }
 }
