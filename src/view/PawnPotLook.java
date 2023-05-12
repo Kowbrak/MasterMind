@@ -13,7 +13,7 @@ public class PawnPotLook extends GridLook {
         // draw cells
         GridElement gridElement = (GridElement) element;
         int nbRows = gridElement.getNbRows();
-        // start by drawing the border of each cell, which will be change after
+        // start by drawing the border of each cell, which will be changed after
         for (int i = 0; i < nbRows; i++) {
             //top-left corner
             shape[i * cellHeight][0] = "\u250F";
@@ -28,7 +28,7 @@ public class PawnPotLook extends GridLook {
                 shape[i * cellHeight][k] = "\u2501";
                 shape[(i + 1) * cellHeight][k] = "\u2501";
             }
-            // draw left & righ vertical lines
+            // draw left & right vertical lines
             for (int k = 1; k < cellHeight; k++) {
                 shape[i * cellHeight + k][0] = "\u2503";
                 shape[i * cellHeight + k][cellWidth] = "\u2503";
