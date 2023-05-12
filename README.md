@@ -1,6 +1,10 @@
 # MasterMind_SAE126
 
-# Manuel LEITAO, Lucas LAURET, Quentin SAUNER, Lucas FULCRAND, Johan LANCON
+### [Manuel LEITAO] : <span style="color:green"> Code AI </span>
+### [Lucas LAURET] : <span style="color:blue"> Test + JavaDoc + ReadMe </span>
+### [Quentin SAUNER] : <span style="color:red"> English report + translations </span>
+### [Lucas FULCRAND] : <span style="color:purple"> Test </span>
+### [Johan LANCON] : <span style="color:orange"> How to publish a game ? </span>
 
 # Goal of the project
 
