@@ -12,7 +12,7 @@ public class GridLook extends ElementLook {
     protected boolean showCoords;
 
     public GridLook(int cellWidth, int cellHeight, GridElement gridElement, int depth, boolean showCoords) {
-        // there is a +2 to be able to put the rigth/bottom border and the lettering of the cells
+        // there is a +2 to be able to put the right/bottom border and the lettering of the cells
         super(gridElement);
         this.depth = depth;
         this.showCoords = showCoords;
@@ -26,14 +26,14 @@ public class GridLook extends ElementLook {
     }
 
     /**
-     * createShape() provides a default look for the grid. It can be overriden in subclasses.
+     * createShape() provides a default look for the grid. It can be override in subclasses.
      */
     protected void createShape() {
         // draw cells
         GridElement gridElement = (GridElement) element;
         int nbRows = gridElement.getNbRows();
         int nbCols = gridElement.getNbCols();
-        // start by drawing the border of each cell, which will be change after
+        // start by drawing the border of each cell, which will be changed after
         for(int i=0;i<nbRows;i++) {
             for(int j=0;j<nbCols;j++) {
                 //top-left corner
@@ -49,7 +49,7 @@ public class GridLook extends ElementLook {
                     shape[i*cellHeight][j*cellWidth+k] = "\u2550";
                     shape[(i+1)*cellHeight][j*cellWidth+k] = "\u2550";
                 }
-                // draw left & righ vertical lines
+                // draw left & right vertical lines
                 for(int k=1;k<cellHeight;k++) {
                     shape[i*cellHeight+k][j*cellWidth] = "\u2551";
                     shape[i*cellHeight+k][(j+1)*cellWidth] = "\u2551";
