@@ -35,14 +35,15 @@ decisions. More details are indicated in the specifications section.
 <p align="center">
     <img style="border:3px solid black" src="https://user-images.githubusercontent.com/114138178/235857664-04b06e80-c5f8-4440-9cdc-5968be7a4467.png"/>
 </p>
-<span style="color:grey">- Mastermind is a classic two-player code-breaking board game that was invented in 1970 by Mordecai Meirowitz. The game is
+
+Mastermind is a classic two-player code-breaking board game that was invented in 1970 by Mordecai Meirowitz. The game is
 played on a board with a code-maker, who chooses a sequence of colored pegs (or other symbols) and hides them behind a
 screen. The code-breaker then tries to guess the sequence by placing pegs on the board in a particular order, and the
-code-maker provides feedback on the guess by placing white or black pegs on the board. </span>
+code-maker provides feedback on the guess by placing white or black pegs on the board.
 
-<span style="color:grey">- A white peg indicates that a guessed peg is the right color but in the wrong position, while a
+A white peg indicates that a guessed peg is the right color but in the wrong position, while a
 black peg indicates that
 a guessed peg is the right color and in the correct position. The code-breaker has a limited number of turns to guess
 the sequence, and the game can be played with different numbers of pegs and colors to make it more challenging. The game
 is won if the code-breaker correctly guesses the sequence before running out of turns, and lost otherwise. Mastermind is
-a popular game for all ages and has been adapted into many electronic versions and mobile apps. </span>
+a popular game for all ages and has been adapted into many electronic versions and mobile apps. 
