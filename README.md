@@ -1,12 +1,18 @@
-# MasterMind_SAE126
+# <u> MasterMind_SAE126 </u>
 
-### [Manuel LEITAO] : <span style="color:green"> Code AI </span>
-### [Lucas LAURET] : <span style="color:blue"> Test + JavaDoc + ReadMe </span>
-### [Quentin SAUNER] : <span style="color:red"> English report + translations </span>
-### [Lucas FULCRAND] : <span style="color:purple"> Test </span>
-### [Johan LANCON] : <span style="color:orange"> How to publish a game ? </span>
+#### [Manuel LEITAO] : <span style="color:green"> Code AI </span>
+#### [Lucas LAURET] : <span style="color:blue"> Test + JavaDoc + ReadMe </span>
+#### [Quentin SAUNER] : <span style="color:red"> English report + translations </span>
+#### [Lucas FULCRAND] : <span style="color:purple"> Test </span>
+#### [Johan LANCON] : <span style="color:orange"> How to publish a game ? </span>
 
-# Goal of the project
+## <u> To play the game : </u> 
+### In the terminal or in the settings of the program to set an argument :
+- 3 : For the smart AI
+- 2 : Smart AI
+- 1 : Random AI
+
+# <u> Goal of the project </u>
 
 The goal of the "HMI development" project is to build a board game type application using the Java language and the
 JavaFx graphic library. From a pedagogical point of view, this project makes it possible to put into practice the
@@ -29,12 +35,12 @@ decisions. More details are indicated in the specifications section.
 <p align="center">
     <img style="border:3px solid black" src="https://user-images.githubusercontent.com/114138178/235857664-04b06e80-c5f8-4440-9cdc-5968be7a4467.png"/>
 </p>
-<span style="color:grey"> Mastermind is a classic two-player code-breaking board game that was invented in 1970 by Mordecai Meirowitz. The game is
+<span style="color:grey">- Mastermind is a classic two-player code-breaking board game that was invented in 1970 by Mordecai Meirowitz. The game is
 played on a board with a code-maker, who chooses a sequence of colored pegs (or other symbols) and hides them behind a
 screen. The code-breaker then tries to guess the sequence by placing pegs on the board in a particular order, and the
 code-maker provides feedback on the guess by placing white or black pegs on the board. </span>
 
-<span style="color:grey">*A white peg indicates that a guessed peg is the right color but in the wrong position, while a
+<span style="color:grey">- A white peg indicates that a guessed peg is the right color but in the wrong position, while a
 black peg indicates that
 a guessed peg is the right color and in the correct position. The code-breaker has a limited number of turns to guess
 the sequence, and the game can be played with different numbers of pegs and colors to make it more challenging. The game
