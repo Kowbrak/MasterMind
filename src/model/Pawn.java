@@ -66,7 +66,7 @@ public class Pawn extends GameElement {
                 this.color = PAWN_PURPLE;
                 break;
             default:
-                System.out.println("mauvais changemant de couleur (erreur dans Pawn)");break;
+                System.out.println("wrong color change (error in Pawn)");break;
         }
         this.lookChanged = true;
     }
