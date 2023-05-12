@@ -16,7 +16,7 @@ public abstract class Controller {
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
     protected Scanner input = new Scanner(System.in);
-    private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
+    private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
@@ -28,10 +28,10 @@ public abstract class Controller {
         this.firstStageName = firstStageName;
     }
 
-    public void startGame(boolean boucle) throws GameException {
+    public void startGame(boolean loop) throws GameException {
         if (firstStageName.isEmpty()) throw new GameException("The name of the first stage have not been set. Abort");
         System.out.println("START THE GAME");
-        startStage(firstStageName, boucle);
+        startStage(firstStageName, loop);
     }
 
     /**
@@ -41,18 +41,18 @@ public abstract class Controller {
 
     /**
      * Start a stage of the game.
-     * This method MUST NOT BE called directly, except in the endStage() overrideen method.*
+     * This method MUST NOT BE called directly, except in the endStage() overridden method.*
      * @param stageName The name of the stage, as registered in the StageFactory.
      * @throws GameException
      */
-    protected void startStage(String stageName, boolean boucle) throws GameException {
+    protected void startStage(String stageName, boolean loop) throws GameException {
         if (model.isStageStarted()) {
             stopStage();
         }
-        if(boucle){
-            setCombinaisonBoucle();
+        if(loop){
+            setCombinationLoop();
         }else{
-            setCombinaison();
+            setCombination();
         }
         model.reset();
         //System.out.println("START STAGE "+stageName);
@@ -76,7 +76,7 @@ public abstract class Controller {
         }
     }
 
-    public void setCombinaison(){;
+    public void setCombination(){;
         boolean valide = false;
         System.out.println("Give a combination of 4 colors among the one below: : \n  Red = R\n  Blue = B\n  Yellow = J" +
                 "\n  Green = V\n  White = W\n  Black = N\n  Cyan = C\n  Purple = P");
@@ -89,7 +89,7 @@ public abstract class Controller {
         System.out.println("Good combination");
     }
 
-    public void setCombinaisonBoucle(){
+    public void setCombinationLoop(){
         this.Combination = setCombRand();
         System.out.println("Good combination");
     }
@@ -98,7 +98,7 @@ public abstract class Controller {
         String line = "";
         int nb;
         for (int i = 0; i < 4; i++) {
-            nb = loto.nextInt(8);
+            nb = lotto.nextInt(8);
             if (nb == 0) {
                 line += "N";
             } else if (nb == 1) {
