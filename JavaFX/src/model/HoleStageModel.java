@@ -9,10 +9,20 @@ public class HoleStageModel extends GameStageModel {
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
 
     private HoleBoard board;
+    private Pawn[] testPawns;
+
+    private HolePawnPot testPot;
+    Rect rectanglePot;
     private HolePawnPot blackPot;
     private HolePawnPot redPot;
+
+    private HolePawnPot invisiblePot;
+
+
     private Pawn[] blackPawns;
     private Pawn[] redPawns;
+
+    private Pawn[] invisiblePawn;
     private int blackPawnsToPlay;
     private int redPawnsToPlay;
     private TextElement playerName;
@@ -20,8 +30,8 @@ public class HoleStageModel extends GameStageModel {
     public HoleStageModel(String name, Model model) {
         super(name, model);
         state = STATE_SELECTPAWN;
-        blackPawnsToPlay = 4;
-        redPawnsToPlay = 4;
+        blackPawnsToPlay = 12;
+        redPawnsToPlay = 12;
         setupCallbacks();
     }
 
@@ -32,6 +42,8 @@ public class HoleStageModel extends GameStageModel {
         this.board = board;
         addGrid(board);
     }
+
+
 
     public HolePawnPot getBlackPot() {
         return blackPot;
@@ -44,10 +56,13 @@ public class HoleStageModel extends GameStageModel {
     public HolePawnPot getRedPot() {
         return redPot;
     }
+
+
     public void setRedPot(HolePawnPot redPot) {
         this.redPot = redPot;
         addGrid(redPot);
     }
+
 
     public Pawn[] getBlackPawns() {
         return blackPawns;
@@ -67,6 +82,45 @@ public class HoleStageModel extends GameStageModel {
         for(int i=0;i<redPawns.length;i++) {
             addElement(redPawns[i]);
         }
+    }
+
+    public HolePawnPot getInvisiblePot() {
+        return invisiblePot;
+    }
+
+
+    public void setInvisiblePot(HolePawnPot invisiblePot) {
+        this.invisiblePot = invisiblePot;
+        addGrid(invisiblePot);
+    }
+
+    public Pawn[] getInvisiblePawn() {
+        return invisiblePawn;
+    }
+
+    public void setInvisiblePawn(Pawn[] invisiblePawn) {
+        this.invisiblePawn = invisiblePawn;
+        for(int i=0;i<invisiblePawn.length;i++) {
+            addElement(invisiblePawn[i]);
+        }
+    }
+
+    public Pawn[] getTestPawns() {
+        return testPawns;
+    }
+    public void setTestPawns(Pawn[] testPawns) {
+        this.testPawns = testPawns;
+        for(int i=0;i<testPawns.length;i++) {
+            addElement(testPawns[i]);
+        }
+    }
+
+    public HolePawnPot getTestPot() {
+        return testPot;
+    }
+    public void setTestPot(HolePawnPot testPot) {
+        this.testPot = testPot;
+        addGrid(testPot);
     }
 
     public TextElement getPlayerName() {
@@ -121,7 +175,7 @@ public class HoleStageModel extends GameStageModel {
         // get the 4 adjacent cells (if they exist) starting by the upper one
         row = (i / 3) - 1;
         col = i % 3;
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 12; j++) {
             // skip invalid cells
             if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
                 p = (Pawn) (board.getElement(row, col));

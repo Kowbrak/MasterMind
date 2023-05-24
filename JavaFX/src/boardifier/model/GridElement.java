@@ -29,6 +29,8 @@ public class GridElement extends StaticElement {
         resetReachableCells(true);
     }
 
+
+
     // getters/setters
     public String getName() {
         return name;

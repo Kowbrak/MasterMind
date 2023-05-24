@@ -35,7 +35,7 @@ public class RootPane extends Pane {
      * This method can be overriden to define a different visual aspect.
      */
     protected void createDefaultGroup() {
-        Rectangle frame = new Rectangle(100, 100, Color.LIGHTGREY);
+        Rectangle frame = new Rectangle(50, 50, Color.LIGHTGREY);
         // remove existing children
         group.getChildren().clear();
         // adding default ones

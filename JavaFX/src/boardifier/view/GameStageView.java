@@ -1,6 +1,7 @@
 package boardifier.view;
 
 import boardifier.model.*;
+import model.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,12 +71,19 @@ public abstract class GameStageView {
         for (ElementLook look : looks) {
             if (look.getElement() == element) return look;
         }
+        for (ElementLook look : looks) {
+            if (look.getElement() == element) return look;
+        }
         return null;
     }
 
     public void addLook(ElementLook look) {
         looks.add(look);
     }
+
+//    public void addLook(Rect look) {
+//        looks.add(look);
+//    }
 
     public abstract void createLooks() throws GameException;
 

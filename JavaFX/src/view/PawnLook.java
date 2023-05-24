@@ -16,20 +16,30 @@ public class PawnLook extends ElementLook {
         super(element);
         Pawn pawn = (Pawn)element;
         circle = new Circle();
-        circle.setRadius(radius);
         if (pawn.getColor() == Pawn.PAWN_BLACK) {
             circle.setFill(Color.BLACK);
-        }
-        else {
+        }else if(pawn.getColor() == Pawn.PAWN_RED){
             circle.setFill(Color.RED);
+        }else if(pawn.getColor() == Pawn.PAWN_WHITE){
+            circle.setFill(Color.WHITE);
+        }else if(pawn.getColor() == Pawn.PAWN_BLUE){
+            circle.setFill(Color.BLUE);
+        }else if(pawn.getColor() == Pawn.PAWN_YELLOW) {
+            circle.setFill(Color.YELLOW);
+        }else if(pawn.getColor() == Pawn.PAWN_GREEN) {
+            circle.setFill(Color.GREEN);
+        }else if(pawn.getColor() == Pawn.PAWN_CYAN) {
+            circle.setFill(Color.CYAN);
+        }else if(pawn.getColor() == Pawn.PAWN_PURPLE) {
+            circle.setFill(Color.PURPLE);
         }
-
+        circle.setRadius(radius);
         circle.setCenterX(radius);
         circle.setCenterY(radius);
         addShape(circle);
         // NB: text won't change so no need to put it as an attribute
         Text text = new Text(String.valueOf(pawn.getNumber()));
-        text.setFont(new Font(24));
+        text.setFont(new Font(10));
         if (pawn.getColor() == Pawn.PAWN_BLACK) {
             text.setFill(Color.valueOf("0xFFFFFF"));
         }
@@ -46,7 +56,7 @@ public class PawnLook extends ElementLook {
     public void onSelectionChange() {
         Pawn pawn = (Pawn)getElement();
         if (pawn.isSelected()) {
-            circle.setStrokeWidth(3);
+            circle.setStrokeWidth(1);
             circle.setStrokeMiterLimit(10);
             circle.setStrokeType(StrokeType.CENTERED);
             circle.setStroke(Color.valueOf("0x333333"));
