@@ -15,12 +15,14 @@ public class HoleStageModel extends GameStageModel {
     Rect rectanglePot;
     private HolePawnPot blackPot;
     private HolePawnPot redPot;
+    private HolePawnPot colorPot;
 
     private HolePawnPot invisiblePot;
 
 
     private Pawn[] blackPawns;
     private Pawn[] redPawns;
+    private Pawn[] colorPawns;
 
     private Pawn[] invisiblePawn;
     private int blackPawnsToPlay;
@@ -52,18 +54,6 @@ public class HoleStageModel extends GameStageModel {
         this.blackPot = blackPot;
         addGrid(blackPot);
     }
-
-    public HolePawnPot getRedPot() {
-        return redPot;
-    }
-
-
-    public void setRedPot(HolePawnPot redPot) {
-        this.redPot = redPot;
-        addGrid(redPot);
-    }
-
-
     public Pawn[] getBlackPawns() {
         return blackPawns;
     }
@@ -74,6 +64,13 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
+    public HolePawnPot getRedPot() {
+        return redPot;
+    }
+    public void setRedPot(HolePawnPot redPot) {
+        this.redPot = redPot;
+        addGrid(redPot);
+    }
     public Pawn[] getRedPawns() {
         return redPawns;
     }
@@ -84,20 +81,17 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
+
     public HolePawnPot getInvisiblePot() {
         return invisiblePot;
     }
-
-
     public void setInvisiblePot(HolePawnPot invisiblePot) {
         this.invisiblePot = invisiblePot;
         addGrid(invisiblePot);
     }
-
     public Pawn[] getInvisiblePawn() {
         return invisiblePawn;
     }
-
     public void setInvisiblePawn(Pawn[] invisiblePawn) {
         this.invisiblePawn = invisiblePawn;
         for(int i=0;i<invisiblePawn.length;i++) {
@@ -105,6 +99,13 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
+    public HolePawnPot getTestPot() {
+        return testPot;
+    }
+    public void setTestPot(HolePawnPot testPot) {
+        this.testPot = testPot;
+        addGrid(testPot);
+    }
     public Pawn[] getTestPawns() {
         return testPawns;
     }
@@ -115,12 +116,21 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public HolePawnPot getTestPot() {
-        return testPot;
+    public HolePawnPot getColorPot() {
+        return colorPot;
     }
-    public void setTestPot(HolePawnPot testPot) {
-        this.testPot = testPot;
-        addGrid(testPot);
+    public void setColorPot(HolePawnPot colorPot) {
+        this.colorPot = colorPot;
+        addGrid(colorPot);
+    }
+    public Pawn[] getColorPawn() {
+        return colorPawns;
+    }
+    public void setColorPawns(Pawn[] colorPawns) {
+        this.colorPawns = colorPawns;
+        for(int i=0;i<colorPawns.length;i++) {
+            addElement(colorPawns[i]);
+        }
     }
 
     public TextElement getPlayerName() {
