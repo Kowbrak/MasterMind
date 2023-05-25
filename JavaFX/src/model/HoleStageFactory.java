@@ -18,9 +18,6 @@ public class HoleStageFactory extends StageElementsFactory {
 
     @Override
     public void setup() {
-
-
-
         // create the board
         stageModel.setBoard(new HoleBoard(263, 70, stageModel));
         //create the pots
@@ -28,17 +25,13 @@ public class HoleStageFactory extends StageElementsFactory {
         stageModel.setBlackPot(blackPot);
         HolePawnPot redPot = new HolePawnPot(403,70, stageModel, 12 ,1 );
         stageModel.setRedPot(redPot);
-//        HolePawnPot invisiblePot = new HolePawnPot(50, 50, stageModel, 48, 1);
-//        stageModel.setInvisiblePot(invisiblePot);
-
-
-
         HolePawnPot testPot = new HolePawnPot(263,400 + 72, stageModel,1,4);
         stageModel.setTestPot(testPot);
-
         HolePawnPot invisiblePot = new HolePawnPot(20, 20, stageModel, 48, 1);
         stageModel.setInvisiblePot(invisiblePot);
         invisiblePot.setVisible(false);
+        HolePawnPot colorPot = new HolePawnPot(453,70, stageModel,8,1);
+        stageModel.setColorPot(colorPot);
 
 
 
@@ -55,23 +48,24 @@ public class HoleStageFactory extends StageElementsFactory {
         }
 
         Rect rectangleBas = new Rect(200, 250, stageModel);
-//        stageModel.setRectanglePot(rectangleBas);
-
-
-
-
-
         // create the pawns
         Pawn[] blackPawns = new Pawn[12];
         for(int i=0;i<12;i++) {
             blackPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel);
         }
         stageModel.setBlackPawns(blackPawns);
+
         Pawn[] redPawns = new Pawn[12];
         for(int i=0;i<12;i++) {
             redPawns[i] = new Pawn(0, Pawn.PAWN_RED, stageModel);
         }
         stageModel.setRedPawns(redPawns);
+
+        Pawn[] colorPawns = new Pawn[8];
+        for(int i=0;i<8;i++) {
+            colorPawns[i] = new Pawn(0, i+1, stageModel);
+        }
+        stageModel.setColorPawns(colorPawns);
 
 
         // assign pawns to their pot
@@ -88,6 +82,10 @@ public class HoleStageFactory extends StageElementsFactory {
             invisiblePot.putElement(invisiblePawns[i], i, 0);
         }
         stageModel.setInvisiblePawn(invisiblePawns);
+
+        for (int i=0;i<8;i++) {
+            colorPot.putElement(colorPawns[i], i,0);
+        }
         // create the text
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
         text.setLocation(1000,0);
