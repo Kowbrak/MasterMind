@@ -18,12 +18,11 @@ public class HoleStageView extends GameStageView {
         HoleStageModel model = (HoleStageModel)gameStageModel;
 
         addLook(new HoleBoardLook(320, model.getBoard()));
-        addLook(new PawnPotLook(120,420,model.getBlackPot(), true));
-        addLook(new PawnPotLook(120,420,model.getRedPot(), true));
+        addLook(new PawnPotLook(130,420,model.getBlackPot(), true));
+        addLook(new PawnPotLook(130,420,model.getRedPot(), true));
         addLook(new PawnPotLook(118,400,model.getTestPot(), false));
-        addLook(new PawnPotLook(120, 420, model.getInvisiblePot(), true));
-        addLook(new PawnPotLook(120, 420, model.getColorPot(), true));
-//        addLook(new Rect(50, 50, model.getRectanglePot()));
+        addLook(new PawnPotLook(130, 420, model.getInvisiblePot(), true));
+        addLook(new PawnPotLook(130, 420, model.getColorPot(), true));
 
 
         for(int i=0;i<12;i++) {

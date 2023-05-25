@@ -22,6 +22,9 @@ public class HoleControllerKey extends ControllerKey implements EventHandler<Key
 
         // if a key is pressed, just prints its code
         System.out.println(event.getCode());
+        if(event.getCode() == KeyCode.ENTER){
+            System.out.println("Pour valider la combinaison");
+        }
     }
 }
 

@@ -88,7 +88,7 @@ public class HoleStageFactory extends StageElementsFactory {
         }
         // create the text
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
-        text.setLocation(1000,0);
+        text.setLocation(0,10);
         text.setLocationType(GameElement.LOCATION_TOPLEFT);
         stageModel.setPlayerName(text);
     }
