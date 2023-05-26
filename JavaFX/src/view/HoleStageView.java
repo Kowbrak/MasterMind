@@ -1,6 +1,7 @@
 package view;
 
 import boardifier.model.GameStageModel;
+import boardifier.view.ButtonLook;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
 import model.HoleStageModel;
@@ -43,6 +44,7 @@ public class HoleStageView extends GameStageView {
         }
 
         addLook(new TextLook(12, "0x000000", model.getPlayerName()));
+        addLook(new ButtonLook(12, "0x000000", 100, 20, model.getButtonElement()));
 
 
     }

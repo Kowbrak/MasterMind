@@ -1,9 +1,6 @@
 package model;
 
-import boardifier.model.GameElement;
-import boardifier.model.GameStageModel;
-import boardifier.model.StageElementsFactory;
-import boardifier.model.TextElement;
+import boardifier.model.*;
 import javafx.scene.shape.Rectangle;
 
 public class HoleStageFactory extends StageElementsFactory {
@@ -91,5 +88,10 @@ public class HoleStageFactory extends StageElementsFactory {
         text.setLocation(0,10);
         text.setLocationType(GameElement.LOCATION_TOPLEFT);
         stageModel.setPlayerName(text);
+
+        ButtonElement buttonElement = new ButtonElement("Confirm", stageModel);
+        buttonElement.setLocation(100, 0);
+        buttonElement.setLocationType(GameElement.LOCATION_TOPLEFT);
+        stageModel.setButtonElement(buttonElement);
     }
 }

@@ -16,7 +16,6 @@ public class HoleStageModel extends GameStageModel {
     private HolePawnPot blackPot;
     private HolePawnPot redPot;
     private HolePawnPot colorPot;
-
     private HolePawnPot invisiblePot;
 
 
@@ -28,6 +27,7 @@ public class HoleStageModel extends GameStageModel {
     private int blackPawnsToPlay;
     private int redPawnsToPlay;
     private TextElement playerName;
+    private ButtonElement ButtonElement;
 
     public HoleStageModel(String name, Model model) {
         super(name, model);
@@ -139,6 +139,14 @@ public class HoleStageModel extends GameStageModel {
     public void setPlayerName(TextElement playerName) {
         this.playerName = playerName;
         addElement(playerName);
+    }
+
+    public ButtonElement getButtonElement() {
+        return ButtonElement;
+    }
+    public void setButtonElement(ButtonElement ButtonElement) {
+        this.ButtonElement = ButtonElement;
+        addElement(ButtonElement);
     }
 
     private void setupCallbacks() {
