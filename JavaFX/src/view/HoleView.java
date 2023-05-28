@@ -3,10 +3,12 @@ package view;
 import boardifier.model.Model;
 import boardifier.view.RootPane;
 import boardifier.view.View;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import model.HoleStageModel;
 
 public class HoleView extends View {
 
@@ -41,5 +43,8 @@ public class HoleView extends View {
 
     public MenuItem getMenuQuit() {
         return menuQuit;
+    }
+    public Button getButton() {
+        return ((HoleStageModel) model.getGameStage()).getButtonElement().getButton();
     }
 }

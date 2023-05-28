@@ -16,7 +16,7 @@ public class HoleBoardLook extends GridLook {
         // NB: To have more liberty in the design, GridLook does not compute the cell size from the dimension of the element parameter.
         // If we create the 3x3 board by adding a border of 10 pixels, with cells occupying all the available surface,
         // then, cells have a size of (size-20)/3
-        super(size, size, (size-220)/3, (size-220)/3, 0, "0X000000", element);
+        super(size/4, size, size/12, size/12, 0, "0X000000", element);
         cells = new Rectangle[12][4];
         // create the rectangles.
         for (int i=0;i<12;i++) {

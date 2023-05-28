@@ -81,10 +81,6 @@ public abstract class GameStageView {
         looks.add(look);
     }
 
-//    public void addLook(Rect look) {
-//        looks.add(look);
-//    }
-
     public abstract void createLooks() throws GameException;
 
     /**

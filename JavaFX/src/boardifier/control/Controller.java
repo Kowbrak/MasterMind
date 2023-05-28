@@ -2,12 +2,14 @@ package boardifier.control;
 
 import boardifier.model.*;
 import boardifier.view.*;
+import control.MasterMindControllerButton;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
+import model.HoleStageModel;
 
 import java.util.*;
 
@@ -18,6 +20,7 @@ public abstract class Controller {
     protected ControllerKey controlKey;
     protected ControllerMouse controlMouse;
     protected ControllerAction controlAction;
+    protected ContollerButton controlButton;
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
     private boolean inUpdate;
@@ -41,8 +44,9 @@ public abstract class Controller {
     public void setControlAction(ControllerAction controlAction) {
         this.controlAction = controlAction;
     }
-
-
+    /*public void setControlButton(MasterMindControllerButton controlButton,HoleStageModel gameStageModel) {
+        gameStageModel.getButtonElement().getButton().setOnAction(controlButton);
+    }*/
     public void setFirstStageName(String firstStageName) {
         this.firstStageName = firstStageName;
     }
@@ -72,6 +76,7 @@ public abstract class Controller {
         GameStageModel gameStageModel = StageFactory.createStageModel(stageName, model);
         // create the elements of the stage by getting the default factory of this stage and giving it to createElements()
         gameStageModel.createElements(gameStageModel.getDefaultElementFactory());
+        /*setControlButton(new MasterMindControllerButton(model, view), (HoleStageModel) gameStageModel);*/
         // create the view of the stage by using the StageFactory
         GameStageView gameStageView = StageFactory.createStageView(stageName, gameStageModel);
         // create the looks of the stage (NB: no factory this time !)
@@ -87,6 +92,7 @@ public abstract class Controller {
         */
         view.getRootPane().setFocusTraversable(true);
         view.getRootPane().requestFocus();
+        //System.out.println(view.getRootPane().getChildren().get(0).);
 
         // create a map of GameElement <-> ElementLook, that helps the controller in its update() method
         mapElementLook = new HashMap<>();
@@ -94,7 +100,6 @@ public abstract class Controller {
             ElementLook look = gameStageView.getElementLook(element);
             mapElementLook.put(element, look);
         }
-
         controlAnimation.startAnimation();
     }
 

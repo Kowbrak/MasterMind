@@ -124,7 +124,6 @@ public class View {
      * @throws GameException thrown if there is no pane view with the given name
      */
     public void setView(GameStageView gameStageView) {
-
         rootPane.init(gameStageView);
         //NB: gameStageView may be null if there is no game stage view to draw (cf. SimpleTextView)
         this.gameStageView = gameStageView;
@@ -134,7 +133,7 @@ public class View {
                 /* create the new scene with vbox as a root node, and if specified the
                    dimensions.
                  */
-        if ((this.gameStageView != null) && (this.gameStageView.getWidth() != -1) && (this.gameStageView.getHeight() != -1)) {
+        /*if ((this.gameStageView != null) && (this.gameStageView.getWidth() != -1) && (this.gameStageView.getHeight() != -1)) {
             double h = 0;
             if (menuBar != null) h = menuBar.getHeight();
             scene = new Scene(vbox, this.gameStageView.getWidth(), h+ this.gameStageView.getHeight());
@@ -145,8 +144,8 @@ public class View {
             stage.setScene(scene);
             stage.sizeToScene();
         }
-        else {
-            scene = new Scene(vbox);
+        else {*/
+            scene = new Scene(vbox, (140-85)+(670/3)+(140-85)*2+10*4, 670+50+(140-85));
             // WARNING: must set the scene and resize the stage BEFORE defining the clipping.
             // Otherwise, dimensions won't be correct.
             stage.setScene(scene);
@@ -155,7 +154,8 @@ public class View {
             // set the clipping area with the boundaries of root pane.
             Rectangle r = new Rectangle(rootPane.getWidth(), rootPane.getHeight());
             rootPane.setClip(r);
-        }
+        /*}*/
+
     }
 
 

@@ -12,8 +12,11 @@ import model.Pawn;
 
 public class PawnLook extends ElementLook {
     private Circle circle;
-    public PawnLook(int radius, GameElement element) {
+    private boolean numberVisible;
+    private Text text;
+    public PawnLook(int radius, GameElement element,boolean numberVisible) {
         super(element);
+        this.numberVisible=numberVisible;
         Pawn pawn = (Pawn)element;
         circle = new Circle();
         if (pawn.getColor() == Pawn.PAWN_BLACK) {
@@ -38,13 +41,19 @@ public class PawnLook extends ElementLook {
         circle.setCenterY(radius);
         addShape(circle);
         // NB: text won't change so no need to put it as an attribute
-        Text text = new Text(String.valueOf(pawn.getNumber()));
-        text.setFont(new Font(10));
+        text = new Text(String.valueOf(pawn.getNumber()));
+        text.setFont(new Font(20));
         if (pawn.getColor() == Pawn.PAWN_BLACK) {
             text.setFill(Color.valueOf("0xFFFFFF"));
+            circle.setStroke(Color.valueOf("0xFFFFFF"));
         }
         else {
             text.setFill(Color.valueOf("0x000000"));
+            circle.setStroke(Color.GRAY);
+        }
+
+        if(!this.numberVisible){
+            text.setVisible(false);
         }
         Bounds bt = text.getBoundsInLocal();
         text.setX(radius - bt.getWidth()/2);

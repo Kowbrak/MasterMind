@@ -16,6 +16,12 @@ public class HolePawnPot extends GridElement {
     public int getNbPawns(){
         return nbRows * nbCols;
     }
+    public int getNbRows(){
+        return nbRows;
+    }
+    public int getNbCols(){
+        return nbCols;
+    }
 
 
 }
