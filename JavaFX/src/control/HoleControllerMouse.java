@@ -18,6 +18,7 @@ import model.HolePawnPot;
 import model.HoleStageModel;
 import model.Pawn;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,28 +40,23 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         // get elements at that position
         List<GameElement> list = control.elementsAt(clic);
         // for debug, uncomment next instructions to display x,y and elements at that postion
-        /*
+
         System.out.println("click in "+event.getSceneX()+","+event.getSceneY());
         for(GameElement element : list) {
-            System.out.println(element);
+            System.out.println("element : "+element);
         }
-         */
+
         HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
 
         if (stageModel.getState() == HoleStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {
-                if (element.getType() == ElementTypes.getType("pawn")) {
-                    Pawn pawn = (Pawn)element;
-                    // check if color of the pawn corresponds to the current player id
-                    if (pawn.getColor() == model.getIdPlayer()) {
-                        element.toggleSelected();
-                        stageModel.setState(HoleStageModel.STATE_SELECTDEST);
-                        return; // do not allow another element to be selected
-                    }
+                if (element.getType() == ElementTypes.getType("pawnSelect")) {
+                    element.toggleSelected();
+                    stageModel.setState(HoleStageModel.STATE_SELECTDEST);
+                    return; // do not allow another element to be selecte
                 }
             }
-        }
-        else if (stageModel.getState() == HoleStageModel.STATE_SELECTDEST) {
+        } else if (stageModel.getState() == HoleStageModel.STATE_SELECTDEST) {
             // first check if the click is on the current selected pawn. In this case, unselect it
             for (GameElement element : list) {
                 if (element.isSelected()) {
@@ -70,37 +66,38 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 }
             }
             // secondly, search if the board has been clicked. If not just return
-            boolean boardClicked = false;
+            boolean testPotClicked = false;
             for (GameElement element : list) {
-                if (element == stageModel.getBoard()) {
-                    boardClicked = true; break;
+                if (element == stageModel.getTestPot()) {
+                    testPotClicked = true; break;
                 }
             }
-            if (!boardClicked) return;
+            if (!testPotClicked) return;
             // get the board, pot,  and the selected pawn to simplify code in the following
-            HoleBoard board = stageModel.getBoard();
+            HolePawnPot pawnPotTest = stageModel.getTestPot();
             // by default get black pot
-            HolePawnPot pot = stageModel.getBlackPot();
-            // but if it's player2 that plays, get red pot
-            if (model.getIdPlayer() == 1) {
-                pot = stageModel.getRedPot();
-            }
+            HolePawnPot pot = stageModel.getColorPot();
             GameElement pawn = model.getSelected().get(0);
 
             // thirdly, get the clicked cell in the 3x3 board
-            GridLook lookBoard = (GridLook) control.getElementLook(board);
-            int[] dest = lookBoard.getCellFromSceneLocation(clic);
+            GridLook lookPawnPotTest = (GridLook) control.getElementLook(pawnPotTest);
+            System.out.println(lookPawnPotTest.toString());
+            int[] dest = lookPawnPotTest.getCellFromSceneLocation(clic);
             // get the cell in the pot that owns the selected pawn
             int[] from = pot.getElementCell(pawn);
+            //System.out.println(Arrays.toString(from));
+            //System.out.println(Arrays.toString(dest));
             System.out.println("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
-            // if the destination cell is valid for for the selected pawn
-            if (board.canReachCell(dest[0], dest[1])) {
+            // if the destination cell is valid for the selected pawn
+            System.out.println("nb ligne : "+pawnPotTest.getNbRows()+" nb colonne : "+pawnPotTest.getNbCols());
+            if (pawnPotTest.canReachCell(dest[0], dest[1])) {
+                pawnPotTest.setCellReachable(dest[0], dest[1], false);
                 // build the list of actions to do, and pass to the next player when done
-                ActionList actions = new ActionList(true);
+                ActionList actions = new ActionList(false);
                 // determine the destination point in the root pane
-                Coord2D center = lookBoard.getRootPaneLocationForCellCenter(dest[0], dest[1]);
+                Coord2D center = lookPawnPotTest.getRootPaneLocationForCellCenter(dest[0], dest[1]);
                 // create an action with a linear move animation, with 10 pixel/frame
-                GameAction move = new MoveAction(model, pawn, "holeboard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
+                GameAction move = new MoveAction(model, pawn, "holeboard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
                 // add the action to the action list.
                 actions.addSingleAction(move);
                 stageModel.unselectAll();

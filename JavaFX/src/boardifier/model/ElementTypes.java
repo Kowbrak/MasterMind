@@ -14,6 +14,8 @@ public final class ElementTypes {
         types.put("text",5);
         types.put("sprite",9);
         types.put("dice",10);
+        types.put("pawnTest",11);
+        types.put("pawnPosFinal",12);
     }
 
     private ElementTypes() {

@@ -58,4 +58,6 @@ public class GridGeometry {
         // must add the border width
         return p.add(look.getBorderWidth(), look.getBorderWidth());
     }
+
+    public GridLook getLook(){return look;}
 }

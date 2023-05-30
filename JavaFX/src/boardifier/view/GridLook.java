@@ -5,6 +5,8 @@ import boardifier.model.GameElement;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import model.HoleBoard;
+import model.HolePawnPot;
 
 public abstract class GridLook extends ElementLook {
 
@@ -16,12 +18,35 @@ public abstract class GridLook extends ElementLook {
     protected String borderColor;
     private GridGeometry geometry;
 
-    public GridLook(int width, int height, int cellWidth, int cellHeight, int borderWidth, String borderColor, GameElement element) {
+    public GridLook(int width, int height, int borderWidth, String borderColor, GameElement element) {
         super(element);
+        this.cellWidth = height/12;
+        this.cellHeight = height/12;
         this.width = width;
         this.height = height;
-        this.cellWidth = cellWidth;
-        this.cellHeight = cellHeight;
+        this.borderWidth = borderWidth;
+        this.borderColor = borderColor;
+
+        if (borderWidth > 0) {
+            Rectangle back = new Rectangle(width, height, Color.valueOf(borderColor));
+            addNode(back);
+        }
+
+        geometry = new GridGeometry(this);
+    }
+
+    public GridLook(int width, int height, int borderWidth, String borderColor, GameElement element, boolean isVertical) {
+        super(element);
+        HolePawnPot pot = (HolePawnPot) element;
+        if(isVertical){
+            this.cellWidth = height / pot.getNbPawns();
+            this.cellHeight = height / pot.getNbPawns();
+        }else{
+            this.cellWidth = width / pot.getNbPawns();
+            this.cellHeight = width / pot.getNbPawns();
+        }
+        this.width = width;
+        this.height = height;
         this.borderWidth = borderWidth;
         this.borderColor = borderColor;
 
@@ -92,6 +117,8 @@ public abstract class GridLook extends ElementLook {
     public int[] getCellFromSceneLocation(Coord2D p) {
         // get the group node that contains the shapes/nodes of this grid and get the coordinates of p within this group
         Point2D inMyGroup = getGroup().sceneToLocal(p.getX(), p.getY());
+        System.out.println("Dest inMyGroup = " + inMyGroup);
+        System.out.println("Dest Widht = " + width + ", Height = " + height);
         return getCellFromLocalLocation(inMyGroup.getX(), inMyGroup.getY());
     }
 
@@ -107,6 +134,9 @@ public abstract class GridLook extends ElementLook {
         return tab;
     }
 
+    public int[] getCellFromLocalLocation(int part) {
+        return getCellFromLocalLocation(part*cellWidth-20, 10);
+    }
     /* *********************************************
        TRAMPOLINE METHODS
        NB: gain access to the current grid geometry

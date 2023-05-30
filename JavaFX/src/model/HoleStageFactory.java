@@ -29,35 +29,34 @@ public class HoleStageFactory extends StageElementsFactory {
 
 
 
-        Pawn[] testPawns = new Pawn[4];
+        /*Pawn[] testPawns = new Pawn[4];
         for(int i=0;i<4;i++) {
-            testPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel);
+            testPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel,Pawn.TYPE_DESTPAWN);
         }
-        stageModel.setTestPawns(testPawns);
+        stageModel.setTestPawns(testPawns);*/
 
         Pawn[] invisiblePawns = new Pawn[48];
         for(int i=0; i<48; i++) {
-            invisiblePawns[i] = new Pawn(0, Pawn.PAWN_BLACK, stageModel);
+            invisiblePawns[i] = new Pawn(i, Pawn.PAWN_BLACK, stageModel, Pawn.TYPE_NONE);
             invisiblePawns[i].setVisible(false);
         }
+        stageModel.setInvisiblePawn(invisiblePawns);
 
-        Rect rectangleBas = new Rect(200, 250, stageModel);
         // create the pawns
         Pawn[] blackPawns = new Pawn[12];
         for(int i=0;i<12;i++) {
-            blackPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel);
+            blackPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel, Pawn.TYPE_NONE);
         }
         stageModel.setBlackPawns(blackPawns);
 
         Pawn[] redPawns = new Pawn[12];
         for(int i=0;i<12;i++) {
-            redPawns[i] = new Pawn(0, Pawn.PAWN_RED, stageModel);
+            redPawns[i] = new Pawn(0, Pawn.PAWN_RED, stageModel, Pawn.TYPE_NONE);
         }
         stageModel.setRedPawns(redPawns);
-
         Pawn[] colorPawns = new Pawn[8];
         for(int i=0;i<8;i++) {
-            colorPawns[i] = new Pawn(0, i+1, stageModel);
+            colorPawns[i] = new Pawn(0, i+1, stageModel, Pawn.TYPE_SELECTPAWN);
         }
         stageModel.setColorPawns(colorPawns);
 
@@ -68,14 +67,14 @@ public class HoleStageFactory extends StageElementsFactory {
             redPot.putElement(redPawns[i], i,0);
         }
 
-        for (int i=0;i<4;i++) {
+        /*for (int i=0;i<4;i++) {
             testPot.putElement(testPawns[i], 0,i);
-        }
+        }*/
 
         for (int i=0; i<48; i++) {
             invisiblePot.putElement(invisiblePawns[i], i, 0);
         }
-        stageModel.setInvisiblePawn(invisiblePawns);
+
 
         for (int i=0;i<8;i++) {
             colorPot.putElement(colorPawns[i], i,0);

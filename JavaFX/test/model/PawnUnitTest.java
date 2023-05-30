@@ -10,7 +10,7 @@ public class PawnUnitTest {
     @Test
     public void testCreatePawn() {
         GameStageModel stagemodel = Mockito.mock(GameStageModel.class);
-        Pawn pawn = new Pawn(42, 5, stagemodel);
+        Pawn pawn = new Pawn(42, 5, stagemodel, Pawn.TYPE_NONE);
         Assertions.assertEquals(42, pawn.getNumber());
         Assertions.assertEquals(5, pawn.getColor());
     }

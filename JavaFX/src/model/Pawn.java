@@ -18,12 +18,23 @@ public class Pawn extends GameElement {
     public static int PAWN_GREEN = 4;
     public static int PAWN_CYAN = 7;
     public static int PAWN_PURPLE = 8;
+    public static int TYPE_NONE = 0;
+    public static int TYPE_SELECTPAWN = 1;
+    public static int TYPE_DESTPAWN = 2;
 
-    public Pawn(int number, int color, GameStageModel gameStageModel) {
+    public Pawn(int number, int color, GameStageModel gameStageModel, int typePawn) {
         super(gameStageModel);
         // registering element types defined especially for this game
-        ElementTypes.register("pawn",50);
-        type = ElementTypes.getType("pawn");
+        if(typePawn == TYPE_NONE) {
+            ElementTypes.register("pawn", 50);
+            type = ElementTypes.getType("pawn");
+        }else if(typePawn == TYPE_SELECTPAWN) {
+            ElementTypes.register("pawnSelect", 60);
+            type = ElementTypes.getType("pawnSelect");
+        }else if(typePawn == TYPE_DESTPAWN){
+            ElementTypes.register("pawnDest",70);
+            type = ElementTypes.getType("pawnDest");
+        }
         this.number = number;
         this.color = color;
     }
@@ -47,5 +58,42 @@ public class Pawn extends GameElement {
                 animation = null;
             }
         }
+    }
+
+    public void setNumber(int number){
+        this.number = number;
+        this.lookChanged = true;
+    }
+
+    public void setColor(char c) {
+        switch(c){
+            case 'N':
+                this.color = PAWN_BLACK;
+                break;
+            case 'R':
+                this.color = PAWN_RED;
+                break;
+            case 'B':
+                this.color = PAWN_BLUE;
+                break;
+            case 'J':
+                this.color = PAWN_YELLOW;
+                break;
+            case 'V':
+                this.color = PAWN_GREEN;
+                break;
+            case 'W':
+                this.color = PAWN_WHITE;
+                break;
+            case 'C':
+                this.color = PAWN_CYAN;
+                break;
+            case 'P':
+                this.color = PAWN_PURPLE;
+                break;
+            default:
+                System.out.println("wrong color change (error in Pawn)");break;
+        }
+        this.lookChanged = true;
     }
 }

@@ -7,6 +7,7 @@ public class HoleStageModel extends GameStageModel {
     // states
     public final static int STATE_SELECTPAWN = 1; // the player must select a pawn
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
+    public final static int STATE_FULL = 3;
 
     private HoleBoard board;
     private Pawn[] testPawns;
