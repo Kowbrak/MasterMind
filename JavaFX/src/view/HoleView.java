@@ -3,6 +3,8 @@ package view;
 import boardifier.model.Model;
 import boardifier.view.RootPane;
 import boardifier.view.View;
+import control.HoleController;
+import control.HoleControllerAction;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -15,6 +17,8 @@ public class HoleView extends View {
     private MenuItem menuStart;
     private MenuItem menuIntro;
     private MenuItem menuQuit;
+    public Menu menu, option, help, adversaire, help1, help2, help3, help4, help5;
+    public MenuItem newGame, stop, quit, rule, hello, Pater, Perrot, Salom, Mourad, Viezzi;
 
     public HoleView(Model model, Stage stage, RootPane rootPane) {
         super(model, stage, rootPane);
@@ -22,7 +26,7 @@ public class HoleView extends View {
 
     @Override
     protected void createMenuBar() {
-        menuBar = new MenuBar();
+        /* menuBar = new MenuBar();
         Menu menu1 = new Menu("Game");
         menuStart = new MenuItem("New game");
         menuIntro = new MenuItem("Intro");
@@ -30,20 +34,59 @@ public class HoleView extends View {
         menu1.getItems().add(menuStart);
         menu1.getItems().add(menuIntro);
         menu1.getItems().add(menuQuit);
-        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu1);*/
+
+        // MENU
+        menu=new Menu("MENU");
+        newGame=new MenuItem("NEW GAME");
+        stop=new MenuItem("STOP");
+        quit=new MenuItem("QUITTER");
+        menu.getItems().addAll(newGame, stop, quit);
+
+        // OPTION
+        option = new Menu("OPTION");
+        adversaire=new Menu("Changer adversaire");
+        Pater =new MenuItem("Mme Paterlini");
+        Perrot =new MenuItem("Mr Perrot");
+        Salom =new MenuItem("Mr Salomon");
+        Mourad =new MenuItem("Mr Mourad");
+        Viezzi =new MenuItem("Mr Viezzi");
+        option.getItems().addAll(adversaire);
+        adversaire.getItems().addAll(Pater, Perrot, Salom, Mourad, Viezzi);
+
+        // AIDE
+        help = new Menu("AIDE");
+        hello = new MenuItem("Bonjour");
+        rule=new MenuItem("RÈGLE DU JEU");
+        help1 = new Menu("AIDE");
+        help2 = new Menu("AIDE");
+        help3 = new Menu("AIDE");
+        help4 = new Menu("AIDE");
+        help5 = new Menu("AIDE");
+        help.getItems().addAll(hello, rule, help1);
+        help1.getItems().addAll(help2);
+        help2.getItems().addAll(help3);
+        help3.getItems().addAll(help4);
+        help4.getItems().addAll(help5);
+
+        // MENUBAR
+        menuBar=new MenuBar();
+        menuBar.getMenus().addAll(menu, option, help);
     }
 
     public MenuItem getMenuStart() {
-        return menuStart;
+        return newGame;
     }
 
     public MenuItem getMenuIntro() {
-        return menuIntro;
+        return stop;
     }
 
     public MenuItem getMenuQuit() {
-        return menuQuit;
+        return quit;
     }
+
+
     public Button getButton() {
         return ((HoleStageModel) model.getGameStage()).getButtonElement().getButton();
     }
