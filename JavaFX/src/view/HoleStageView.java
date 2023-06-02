@@ -37,7 +37,7 @@ public class HoleStageView extends GameStageView {
         }*/
 
         for(int i=0;i<48;i++) {
-            addLook(new PawnLook(10, model.getInvisiblePawn()[i], false));
+            addLook(new PawnLook(20, model.getInvisiblePawn()[i], true));
         }
 
         for(int i=0;i<8;i++) {

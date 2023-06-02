@@ -96,4 +96,10 @@ public class Pawn extends GameElement {
         }
         this.lookChanged = true;
     }
+
+
+    public void setColor(int n) {
+        this.color = n;
+        this.lookChanged = true;
+    }
 }

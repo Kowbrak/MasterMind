@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/GridElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/GridElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/view/GameStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/view/GameStageView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/view/RootPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/view/RootPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HoleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HoleBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HolePawnPot.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HolePawnPot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleStageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleStageView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HolePawnPot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HolePawnPot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/HoleBoardLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/HoleBoardLook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/HoleStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/HoleStageView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/PawnPotLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/PawnPotLook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +31,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/JavaFX",
+    "last_opened_file_path": "/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/Boardifier",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -45,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1684951441182</updated>
       <workItem from="1684951442566" duration="21000" />
+      <workItem from="1685696281780" duration="753000" />
     </task>
     <servers />
   </component>

@@ -26,9 +26,12 @@ import java.util.List;
  * It gets the elements of the scene that are at the clicked position and prints them.
  */
 public class HoleControllerMouse extends ControllerMouse implements EventHandler<MouseEvent> {
+    private int pawnAPoser;
+    private double[] pawnAPoserCoord = new double[2];
 
     public HoleControllerMouse(Model model, View view, Controller control) {
         super(model, view, control);
+        this.pawnAPoser = 0;
     }
 
     public void handle(MouseEvent event) {
@@ -53,6 +56,8 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 if (element.getType() == ElementTypes.getType("pawnSelect")) {
                     element.toggleSelected();
                     stageModel.setState(HoleStageModel.STATE_SELECTDEST);
+                    pawnAPoserCoord[0] = event.getSceneX();
+                    pawnAPoserCoord[1] = event.getSceneY();
                     return; // do not allow another element to be selecte
                 }
             }
@@ -62,6 +67,8 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 if (element.isSelected()) {
                     element.toggleSelected();
                     stageModel.setState(HoleStageModel.STATE_SELECTPAWN);
+                    pawnAPoserCoord[0] = 0.00;
+                    pawnAPoserCoord[1] = 0.00;
                     return;
                 }
             }
@@ -77,10 +84,13 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             HolePawnPot pawnPotTest = stageModel.getTestPot();
             // by default get black pot
             HolePawnPot pot = stageModel.getColorPot();
+            HolePawnPot invisiblePot = stageModel.getInvisiblePot();
             GameElement pawn = model.getSelected().get(0);
 
             // thirdly, get the clicked cell in the 3x3 board
             GridLook lookPawnPotTest = (GridLook) control.getElementLook(pawnPotTest);
+            GridLook lookColorPot = (GridLook) control.getElementLook(pot);
+            GridLook lookInvisiblePot = (GridLook) control.getElementLook(invisiblePot);
             System.out.println(lookPawnPotTest.toString());
             int[] dest = lookPawnPotTest.getCellFromSceneLocation(clic);
             // get the cell in the pot that owns the selected pawn
@@ -90,16 +100,42 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             System.out.println("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
             // if the destination cell is valid for the selected pawn
             System.out.println("nb ligne : "+pawnPotTest.getNbRows()+" nb colonne : "+pawnPotTest.getNbCols());
+            System.out.println(this.pawnAPoser);
             if (pawnPotTest.canReachCell(dest[0], dest[1])) {
+                List<GameElement> InvisiblePotPawn = invisiblePot.getElements(this.pawnAPoser, 0);
+                int[] fromInvisible = {this.pawnAPoser, 0};
+                GameElement invisiblePawn = null;
+                for (GameElement element : InvisiblePotPawn) {
+                    if(element.getClass() == Pawn.class) {
+                        invisiblePawn = element;
+                        break;
+                    }
+                }
+                //System.out.println("Invisible Pawn : "+invisiblePawn.toString());
+                double[] from2 = {pawnAPoserCoord[0], pawnAPoserCoord[1]};
                 pawnPotTest.setCellReachable(dest[0], dest[1], false);
                 // build the list of actions to do, and pass to the next player when done
                 ActionList actions = new ActionList(false);
+                actions.addActionPack();
                 // determine the destination point in the root pane
                 Coord2D center = lookPawnPotTest.getRootPaneLocationForCellCenter(dest[0], dest[1]);
                 // create an action with a linear move animation, with 10 pixel/frame
                 GameAction move = new MoveAction(model, pawn, "holeboard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
                 // add the action to the action list.
-                actions.addSingleAction(move);
+                actions.addPackAction(move);
+
+                // determine the destination point in the root pane
+                center = lookColorPot.getRootPaneLocationForCellCenter(from[0], from[1]);
+                // create an action with a linear move animation, with 10 pixel/frame
+                move = new MoveAction(model, invisiblePawn, "colorPawnPot", from[0], from[1], AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 50);
+                // add the action to the action list.
+                actions.addPackAction(move);
+                System.out.println("From Invisible Pawn : ["+ this.pawnAPoser+",0]"+" to ["+from[0]+","+from[1]+"]");
+                this.pawnAPoser++;
+                invisiblePawn.setVisible(true);
+                invisiblePawn.setType(ElementTypes.getType("pawnSelect"));
+                //((Pawn)invisiblePawn).setColor(((Pawn)pawn).getColor());
+
                 stageModel.unselectAll();
                 stageModel.setState(HoleStageModel.STATE_SELECTPAWN);
                 ActionPlayer play = new ActionPlayer(model, control, actions);

@@ -6,9 +6,9 @@ import boardifier.model.GridElement;
 public class HolePawnPot extends GridElement {
     int nbRows;
     int nbCols;
-    public HolePawnPot(int x, int y, GameStageModel gameStageModel, int nbRows, int nbCols) {
+    public HolePawnPot(int x, int y, GameStageModel gameStageModel, int nbRows, int nbCols, String name) {
         // call the super-constructor to create a 4x1 grid, named "pawnpot", and in x,y in space
-        super("pawnpot", x, y, nbRows, nbCols, gameStageModel);
+        super(name, x, y, nbRows, nbCols, gameStageModel);
         this.nbRows = nbRows;
         this.nbCols = nbCols;
     }
@@ -22,6 +22,4 @@ public class HolePawnPot extends GridElement {
     public int getNbCols(){
         return nbCols;
     }
-
-
 }
