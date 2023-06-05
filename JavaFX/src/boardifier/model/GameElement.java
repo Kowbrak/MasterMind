@@ -2,6 +2,7 @@ package boardifier.model;
 
 import boardifier.model.animation.Animation;
 import boardifier.view.GridGeometry;
+import model.Pawn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -424,5 +425,11 @@ public abstract class GameElement {
      ********************************************* */
     public Model getModel() {
         return gameStageModel.getModel();
+    }
+    public void setColorPawn(int n){
+        if (this instanceof Pawn){
+            Pawn pawn = (Pawn) this;
+            pawn.setColor(n);
+        }
     }
 }

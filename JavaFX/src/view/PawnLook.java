@@ -77,5 +77,32 @@ public class PawnLook extends ElementLook {
 
     @Override
     public void onChange() {
+        Pawn pawn = (Pawn)getElement();
+        if (pawn.getColor() == Pawn.PAWN_BLACK) {
+            circle.setFill(Color.BLACK);
+        }else if(pawn.getColor() == Pawn.PAWN_RED){
+            circle.setFill(Color.RED);
+        }else if(pawn.getColor() == Pawn.PAWN_WHITE){
+            circle.setFill(Color.WHITE);
+        }else if(pawn.getColor() == Pawn.PAWN_BLUE){
+            circle.setFill(Color.BLUE);
+        }else if(pawn.getColor() == Pawn.PAWN_YELLOW) {
+            circle.setFill(Color.YELLOW);
+        }else if(pawn.getColor() == Pawn.PAWN_GREEN) {
+            circle.setFill(Color.GREEN);
+        }else if(pawn.getColor() == Pawn.PAWN_CYAN) {
+            circle.setFill(Color.CYAN);
+        }else if(pawn.getColor() == Pawn.PAWN_PURPLE) {
+            circle.setFill(Color.PURPLE);
+        }
+        text.setText(String.valueOf(pawn.getNumber()));
+        if (pawn.getColor() == Pawn.PAWN_BLACK) {
+            text.setFill(Color.valueOf("0xFFFFFF"));
+            circle.setStroke(Color.valueOf("0xFFFFFF"));
+        }
+        else {
+            text.setFill(Color.valueOf("0x000000"));
+            circle.setStroke(Color.GRAY);
+        }
     }
 }

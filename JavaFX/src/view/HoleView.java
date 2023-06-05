@@ -17,8 +17,8 @@ public class HoleView extends View {
     private MenuItem menuStart;
     private MenuItem menuIntro;
     private MenuItem menuQuit;
-    public Menu menu, option, help, adversaire, help1, help2, help3, help4, help5;
-    public MenuItem newGame, stop, quit, rule, hello, Pater, Perrot, Salom, Mourad, Viezzi;
+    public Menu menu, option, help, adversaire,help1, help2, help3, help4;
+    public MenuItem newGame, stop, quit, rule, hello, Pater, Perrot, Salom, Mourad, Viezzi, help5;
 
     public HoleView(Model model, Stage stage, RootPane rootPane) {
         super(model, stage, rootPane);
@@ -37,14 +37,14 @@ public class HoleView extends View {
         menuBar.getMenus().add(menu1);*/
 
         // MENU
-        menu=new Menu("MENU");
-        newGame=new MenuItem("NEW GAME");
-        stop=new MenuItem("STOP");
-        quit=new MenuItem("QUITTER");
+        menu=new Menu("Menu");
+        newGame=new MenuItem("New Game");
+        stop=new MenuItem("Stop");
+        quit=new MenuItem("Quitter");
         menu.getItems().addAll(newGame, stop, quit);
 
         // OPTION
-        option = new Menu("OPTION");
+        option = new Menu("Option");
         adversaire=new Menu("Changer adversaire");
         Pater =new MenuItem("Mme Paterlini");
         Perrot =new MenuItem("Mr Perrot");
@@ -55,14 +55,14 @@ public class HoleView extends View {
         adversaire.getItems().addAll(Pater, Perrot, Salom, Mourad, Viezzi);
 
         // AIDE
-        help = new Menu("AIDE");
+        help = new Menu("Aide");
         hello = new MenuItem("Bonjour");
-        rule=new MenuItem("RÈGLE DU JEU");
-        help1 = new Menu("AIDE");
-        help2 = new Menu("AIDE");
-        help3 = new Menu("AIDE");
-        help4 = new Menu("AIDE");
-        help5 = new Menu("AIDE");
+        rule=new MenuItem("Règle du jeu");
+        help1 = new Menu("Aide");
+        help2 = new Menu("Aide");
+        help3 = new Menu("Aide");
+        help4 = new Menu("Aide");
+        help5 = new MenuItem("Aide");
         help.getItems().addAll(hello, rule, help1);
         help1.getItems().addAll(help2);
         help2.getItems().addAll(help3);

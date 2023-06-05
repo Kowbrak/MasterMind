@@ -37,7 +37,7 @@ public class HoleStageFactory extends StageElementsFactory {
 
         Pawn[] invisiblePawns = new Pawn[48];
         for(int i=0; i<48; i++) {
-            invisiblePawns[i] = new Pawn(i, Pawn.PAWN_BLACK, stageModel, Pawn.TYPE_NONE);
+            invisiblePawns[i] = new Pawn(0, Pawn.PAWN_BLACK, stageModel, Pawn.TYPE_NONE);
             invisiblePawns[i].setVisible(false);
         }
         stageModel.setInvisiblePawn(invisiblePawns);

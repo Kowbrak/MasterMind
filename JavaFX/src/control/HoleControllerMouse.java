@@ -37,6 +37,7 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
     public void handle(MouseEvent event) {
         // if mouse event capture is disabled in the model, just return
         if (!model.isCaptureMouseEvent()) return;
+        if(!model.getCurrentPlayer().getName().equals("player")) return;
 
         // get the clic x,y in the whole scene (this includes the menu bar if it exists)
         Coord2D clic = new Coord2D(event.getSceneX(),event.getSceneY());
@@ -48,9 +49,16 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         for(GameElement element : list) {
             System.out.println("element : "+element);
         }
-
         HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
 
+        if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
+            actionButton(clic, stageModel, event);
+        }else{
+            actionPawn(clic, list, stageModel, event);
+        }
+    }
+
+    public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel,MouseEvent event){
         if (stageModel.getState() == HoleStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("pawnSelect")) {
@@ -100,18 +108,18 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             System.out.println("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
             // if the destination cell is valid for the selected pawn
             System.out.println("nb ligne : "+pawnPotTest.getNbRows()+" nb colonne : "+pawnPotTest.getNbCols());
-            System.out.println(this.pawnAPoser);
             if (pawnPotTest.canReachCell(dest[0], dest[1])) {
-                List<GameElement> InvisiblePotPawn = invisiblePot.getElements(this.pawnAPoser, 0);
-                int[] fromInvisible = {this.pawnAPoser, 0};
+                List<GameElement> InvisiblePotPawn = invisiblePot.getElements(0, 0);
+                System.out.println("InvisiblePotPawn : "+InvisiblePotPawn.toString());
                 GameElement invisiblePawn = null;
                 for (GameElement element : InvisiblePotPawn) {
                     if(element.getClass() == Pawn.class) {
                         invisiblePawn = element;
+                        System.out.println("OUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
                         break;
                     }
                 }
-                //System.out.println("Invisible Pawn : "+invisiblePawn.toString());
+                System.out.println("Invisible Pawn : "+invisiblePawn.toString());
                 double[] from2 = {pawnAPoserCoord[0], pawnAPoserCoord[1]};
                 pawnPotTest.setCellReachable(dest[0], dest[1], false);
                 // build the list of actions to do, and pass to the next player when done
@@ -134,14 +142,32 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 this.pawnAPoser++;
                 invisiblePawn.setVisible(true);
                 invisiblePawn.setType(ElementTypes.getType("pawnSelect"));
-                //((Pawn)invisiblePawn).setColor(((Pawn)pawn).getColor());
+
+                ((Pawn)invisiblePawn).setColor(((Pawn)pawn).getColor());
+                System.out.println("Couleurs : "+((Pawn)pawn).getColor());
 
                 stageModel.unselectAll();
                 stageModel.setState(HoleStageModel.STATE_SELECTPAWN);
                 ActionPlayer play = new ActionPlayer(model, control, actions);
+                System.out.println("-----------------------------------------------------------------------");
                 play.start();
             }
         }
+    }
+
+    public void actionButton(Coord2D clic, HoleStageModel stageModel,MouseEvent event){
+        HolePawnPot pawnPotTest = stageModel.getTestPot();
+        GridLook lookPawnPotTest = (GridLook) control.getElementLook(pawnPotTest);
+        List<GameElement> PawnPotPawn = pawnPotTest.getElements(0,0);
+        List<GameElement>[][] test = pawnPotTest.getgrid();
+
+        HolePawnPot test2 = stageModel.getInvisiblePot();
+        List<GameElement> listTest = test2.getElements(0, 0);
+
+        System.out.println(test.toString());
+        System.out.println(lookPawnPotTest.getElement().toString());
+
+        System.out.println("---------------------------------------------------------------------");
     }
 }
 

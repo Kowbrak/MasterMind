@@ -94,6 +94,7 @@ public class Pawn extends GameElement {
             default:
                 System.out.println("wrong color change (error in Pawn)");break;
         }
+        System.out.println("color changed to "+this.color);
         this.lookChanged = true;
     }
 

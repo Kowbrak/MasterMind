@@ -48,6 +48,9 @@ public class GridElement extends StaticElement {
     public int getNbCols() {
         return nbCols;
     }
+    public List<GameElement>[][] getgrid() {
+        return grid;
+    }
 
     public void resetReachableCells(boolean state) {
         for (int i = 0; i < nbRows; i++) {
