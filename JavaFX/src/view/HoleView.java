@@ -17,7 +17,7 @@ public class HoleView extends View {
     private MenuItem menuStart;
     private MenuItem menuIntro;
     private MenuItem menuQuit;
-    public Menu menu, option, help, adversaire,help1, help2, help3, help4;
+    public Menu menu, option, help, opponents, help1, help2, help3, help4;
     public MenuItem newGame, stop, quit, rule, hello, Pater, Perrot, Salom, Mourad, Viezzi, help5;
 
     public HoleView(Model model, Stage stage, RootPane rootPane) {
@@ -40,29 +40,29 @@ public class HoleView extends View {
         menu=new Menu("Menu");
         newGame=new MenuItem("New Game");
         stop=new MenuItem("Stop");
-        quit=new MenuItem("Quitter");
+        quit=new MenuItem("Quit");
         menu.getItems().addAll(newGame, stop, quit);
 
         // OPTION
-        option = new Menu("Option");
-        adversaire=new Menu("Changer adversaire");
-        Pater =new MenuItem("Mme Paterlini");
-        Perrot =new MenuItem("Mr Perrot");
-        Salom =new MenuItem("Mr Salomon");
+        option = new Menu("Options");
+        opponents=new Menu("Switch opponents");
         Mourad =new MenuItem("Mr Mourad");
+        Perrot =new MenuItem("Mr Perrot");
+        Pater =new MenuItem("Mrs Paterlini");
+        Salom =new MenuItem("Mr Salomon");
         Viezzi =new MenuItem("Mr Viezzi");
-        option.getItems().addAll(adversaire);
-        adversaire.getItems().addAll(Pater, Perrot, Salom, Mourad, Viezzi);
+        option.getItems().addAll(opponents);
+        opponents.getItems().addAll(Mourad, Perrot, Pater, Salom, Viezzi);
 
         // AIDE
-        help = new Menu("Aide");
-        hello = new MenuItem("Bonjour");
-        rule=new MenuItem("Règle du jeu");
-        help1 = new Menu("Aide");
-        help2 = new Menu("Aide");
-        help3 = new Menu("Aide");
-        help4 = new Menu("Aide");
-        help5 = new MenuItem("Aide");
+        help = new Menu("Help");
+        hello = new MenuItem("Hello");
+        rule=new MenuItem("Game Rules");
+        help1 = new Menu("Help");
+        help2 = new Menu("Help");
+        help3 = new Menu("Help");
+        help4 = new Menu("Help");
+        help5 = new MenuItem("Help");
         help.getItems().addAll(hello, rule, help1);
         help1.getItems().addAll(help2);
         help2.getItems().addAll(help3);
@@ -85,6 +85,12 @@ public class HoleView extends View {
     public MenuItem getMenuQuit() {
         return quit;
     }
+
+    public MenuItem getMenuRule() { return rule; }
+
+    public MenuItem getMenuHelp5() { return help5; }
+
+    public MenuItem getMenuHello() { return hello; }
 
 
     public Button getButton() {

@@ -5,7 +5,15 @@ import boardifier.control.ControllerAction;
 import boardifier.model.*;
 import boardifier.view.View;
 import javafx.event.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import view.HoleView;
+
+import java.util.Optional;
 
 /**
  * A basic action controller that only manages menu actions
@@ -48,12 +56,92 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
         });
         // set event handler on the MenuIntro item
         holeView.getMenuIntro().setOnAction(e -> {
-            control.stopGame();
-            holeView.resetView();
+            Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            quitAlert.setTitle("Stop the game");
+            quitAlert.setHeaderText(null);
+            quitAlert.setContentText("Are you sure you want to stop the game in progress ?");
+            Optional<ButtonType> result = quitAlert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                holeView.resetView();
+            } else {
+                control.stopGame();
+            }
         });
         // set event handler on the MenuQuit item
         holeView.getMenuQuit().setOnAction(e -> {
-            System.exit(0);
+            Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            quitAlert.setTitle("Exit the game");
+            quitAlert.setHeaderText(null);
+            quitAlert.setContentText("Are you sure you want to leave the game ?");
+            Optional<ButtonType> result = quitAlert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                System.exit(0);
+            } else {
+                quitAlert.close();
+            }
+        });
+        // set event handler on the MenuRule item
+        holeView.getMenuRule().setOnAction(e -> {
+            Label secondLabel = new Label("The goal of Mastermind is to win as many rounds as possible.\n" +
+                    "\n" +
+                    "The player who has to find the secret combination wins a round if he manages to do so in a maximum of 12 moves.\n" +
+                    "\n" +
+                    "The player who has devised the secret combination wins the round when his opponent has not managed to find the combination in 12 moves."
+            );
+
+            StackPane secondaryLayout = new StackPane();
+            secondaryLayout.getChildren().add(secondLabel);
+
+            Scene secondScene = new Scene(secondaryLayout, 1000, 100);
+
+            // New window (Stage)
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Game Rules");
+            newWindow.setScene(secondScene);
+            newWindow.show();
+        });
+
+        // set event handler on the MenuHelp5 item
+        holeView.getMenuHelp5().setOnAction(e -> {
+            Label troll = new Label(
+                    "You're determined, wow !\n" +
+                            "Did you think I was going to help you ?\n" +
+                            "You're cute but no.\n" +
+                            "Manage on your own, you've got the rules of the game above.\n" +
+                            "Kiss."
+            );
+
+            StackPane trollLayout = new StackPane();
+            trollLayout.getChildren().add(troll);
+
+            Scene trollScene = new Scene(trollLayout, 450, 250);
+
+            // Troll window (Stage)
+            Stage trollWindow = new Stage();
+            trollWindow.setTitle("Help");
+            trollWindow.setScene(trollScene);
+            trollWindow.show();
+        });
+
+        // set event handler on the MenuHello item
+        holeView.getMenuHello().setOnAction(e -> {
+            Label hello = new Label("Welcome to our beautiful game: MasterMind !\n" +
+                    "To begin, choose your opponent from the \"Options\" menu.\n" +
+                    "Then, click on \"New Game\" to start playing.\n" +
+                    "Finally, if you don't know the rules, click on \"Game Rules\" in the \"Help\" menu.\n" +
+                    "Good luck ! :)"
+            );
+
+            StackPane helloLayout = new StackPane();
+            helloLayout.getChildren().add(hello);
+
+            Scene helloScene = new Scene(helloLayout, 700, 200);
+
+            // Hello window (Stage)
+            Stage helloWindow = new Stage();
+            helloWindow.setTitle("Hello");
+            helloWindow.setScene(helloScene);
+            helloWindow.show();
         });
     }
 
