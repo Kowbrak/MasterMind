@@ -24,6 +24,8 @@ public abstract class Controller {
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
     private boolean inUpdate;
+    protected String Combination;
+    private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -265,6 +267,39 @@ public abstract class Controller {
         // get the center of the current cell because we can at least reach this center if Me is not already on it.
         Coord2D center = gridLook.getRootPaneLocationForCellCenter(coords[0], coords[1]);
         element.setLocation(center.getX(), center.getY());
+    }
+
+    public void setCombinationLoop(){
+        this.Combination = setCombRand();
+        System.out.println("Good combination");
+    }
+
+    public String setCombRand() {
+        String line = "";
+        int nb;
+        for (int i = 0; i < 4; i++) {
+            nb = lotto.nextInt(8);
+            if (nb == 0) {
+                line += "N";
+            } else if (nb == 1) {
+                line += "R";
+            } else if (nb == 2) {
+                line += "B";
+            } else if (nb == 3) {
+                line += "J";
+            } else if (nb == 4) {
+                line += "V";
+            } else if (nb == 5) {
+                line += "W";
+            } else if (nb == 6) {
+                line += "C";
+            } else {
+                line += "P";
+            }
+
+        }
+        //line = "PPPP";
+        return line;
     }
 
     /**

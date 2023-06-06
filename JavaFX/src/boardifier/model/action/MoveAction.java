@@ -48,6 +48,7 @@ public class MoveAction extends GameAction {
     public void execute() {
         GridElement gridSrc = element.getGrid();
         GridElement gridDest = model.getGrid(this.gridDest);
+        //System.out.println("MoveAction.execute: gridSrc=" + gridSrc + ", gridDest=" + gridDest);
         if (gridDest == null) return;
         boolean autoLoc = true;
         // NB : if an animation has been created, it should lead the element to its correct location, thus no reason to relocate it at its cell center.

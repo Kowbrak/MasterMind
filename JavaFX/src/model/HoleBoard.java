@@ -10,7 +10,7 @@ import java.awt.*;
 public class HoleBoard extends GridElement {
     public HoleBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
-        super("holeboard", x, y, 12 , 4, gameStageModel);
+        super("MasterMindboard", x, y, 12 , 4, gameStageModel);
         resetReachableCells(false);
     }
 

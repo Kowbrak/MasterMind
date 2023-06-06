@@ -1,6 +1,14 @@
 package model;
 
+import boardifier.control.Controller;
 import boardifier.model.*;
+import boardifier.model.action.ActionList;
+import boardifier.model.action.GameAction;
+import boardifier.model.action.MoveAction;
+import boardifier.model.animation.AnimationTypes;
+import boardifier.view.GridLook;
+
+import java.util.List;
 
 public class HoleStageModel extends GameStageModel {
 
@@ -235,6 +243,67 @@ public class HoleStageModel extends GameStageModel {
         model.setIdWinner(idWinner);
         // stop de the game
         model.stopGame();
+    }
+
+    public void moveLineUp(List<GameElement>[][] list2,ActionList actions, Controller control){
+        HoleBoard board = this.getBoard();
+        GridLook lookBoard = (GridLook) control.getElementLook(board);
+        boolean find = false;
+        for(int i = 0; i<list2.length-1; i++){
+            System.out.println("i : "+list2[i][0].isEmpty()+", i+1 : "+!list2[i+1][0].isEmpty());
+            if(list2[i][0].isEmpty() && !list2[i+1][0].isEmpty() || find){
+                find = true;
+                for(int j= 0; j<list2[i].length; j++){
+                    GameElement element = list2[i+1][j].get(0);
+                    Coord2D center = lookBoard.getRootPaneLocationForCellCenter(i, j);
+                    GameAction move = new MoveAction(model,element,"MasterMindboard",i,j, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
+                    actions.addPackAction(move);
+                }
+            }
+        }
+    }
+
+    public void upPawnRedWhite() {
+        int tmp;
+        for (int i = 0; i < 11; i++) {
+            Pawn p1 = (Pawn) (blackPot.getElement(i + 1, 0));
+            tmp = p1.getNumber();
+            Pawn p2 = (Pawn) (blackPot.getElement(i, 0));
+            p2.setNumber(tmp);
+            Pawn p3 = (Pawn) (redPot.getElement(i + 1, 0));
+            tmp = p3.getNumber();
+            Pawn p4 = (Pawn) (redPot.getElement(i, 0));
+            p4.setNumber(tmp);
+        }
+    }
+
+    public void setNumberPawnDown(String line, String comb) {
+        Pawn redPawn = (Pawn) (redPot.getElement(11, 0));
+        Pawn whitePawn = (Pawn) (blackPot.getElement(11, 0));
+        char[] combCharArray = comb.toCharArray();
+        char[] lineCharArray = line.toCharArray();
+        int tmpred = 0;
+        int tmpWhite = 0;
+        for (int i = 0; i < combCharArray.length; i++) {
+            if (combCharArray[i] == lineCharArray[i]) {
+                tmpred++;
+                combCharArray[i] = ' ';
+                lineCharArray[i] = ' ';
+            }
+        }
+        for (int i = 0; i < combCharArray.length; i++) {
+            if (lineCharArray[i] != ' ') {
+                for (int j = 0; j < combCharArray.length; j++) {
+                    if (lineCharArray[i] == combCharArray[j]) {
+                        tmpWhite++;
+                        combCharArray[j] = ' ';
+                        break;
+                    }
+                }
+            }
+        }
+        redPawn.setNumber(tmpred);
+        whitePawn.setNumber(tmpWhite);
     }
 
     @Override

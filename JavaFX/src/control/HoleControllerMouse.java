@@ -115,7 +115,6 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 for (GameElement element : InvisiblePotPawn) {
                     if(element.getClass() == Pawn.class) {
                         invisiblePawn = element;
-                        System.out.println("OUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
                         break;
                     }
                 }
@@ -128,14 +127,14 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 // determine the destination point in the root pane
                 Coord2D center = lookPawnPotTest.getRootPaneLocationForCellCenter(dest[0], dest[1]);
                 // create an action with a linear move animation, with 10 pixel/frame
-                GameAction move = new MoveAction(model, pawn, "holeboard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
+                GameAction move = new MoveAction(model, pawn, "testPawnPot", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
                 // add the action to the action list.
                 actions.addPackAction(move);
 
                 // determine the destination point in the root pane
                 center = lookColorPot.getRootPaneLocationForCellCenter(from[0], from[1]);
                 // create an action with a linear move animation, with 10 pixel/frame
-                move = new MoveAction(model, invisiblePawn, "colorPawnPot", from[0], from[1], AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 50);
+                move = new MoveAction(model, invisiblePawn, "colorPawnPot", from[0], from[1], AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 0);
                 // add the action to the action list.
                 actions.addPackAction(move);
                 System.out.println("From Invisible Pawn : ["+ this.pawnAPoser+",0]"+" to ["+from[0]+","+from[1]+"]");
@@ -157,17 +156,62 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
 
     public void actionButton(Coord2D clic, HoleStageModel stageModel,MouseEvent event){
         HolePawnPot pawnPotTest = stageModel.getTestPot();
-        GridLook lookPawnPotTest = (GridLook) control.getElementLook(pawnPotTest);
-        List<GameElement> PawnPotPawn = pawnPotTest.getElements(0,0);
-        List<GameElement>[][] test = pawnPotTest.getgrid();
+        List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
+        for(int i = 0; i<listTestPot[0].length;i++){
+            System.out.println(listTestPot[0][i].toString());
+        }
+        System.out.println("Board");
+        HoleBoard board = stageModel.getBoard();
+        List<GameElement>[][] listBoard = board.getgrid();
+        GridLook lookBoard = (GridLook) control.getElementLook(board);
+        for(int i = 0; i<listBoard.length; i++){
+            for(int j= 0; j<listBoard[i].length; j++){
+                System.out.print(listBoard[i][j].toString());
+            }
+            System.out.println("");
+        }
 
-        HolePawnPot test2 = stageModel.getInvisiblePot();
-        List<GameElement> listTest = test2.getElements(0, 0);
+        if(!checkListFull(listTestPot)) return;
+        System.out.println("actionBUTTON OUIIIIIIIIIIIIII");
+        board = stageModel.getBoard();
+        listBoard = board.getgrid();
 
-        System.out.println(test.toString());
-        System.out.println(lookPawnPotTest.getElement().toString());
+        // build the list of actions to do, and pass to the next player when done
+        ActionList actions = new ActionList(false);
+        actions.addActionPack();
 
+        stageModel.moveLineUp(listBoard, actions, control);
+
+        for(int i = 0; i<listTestPot[0].length; i++) {
+            GameElement element = listTestPot[0][i].get(0);
+            Coord2D center = lookBoard.getRootPaneLocationForCellCenter(11, i);
+            GameAction move = new MoveAction(model,element,"MasterMindboard",11,i, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
+            actions.addPackAction(move);
+            pawnPotTest.setCellReachable(0,i,true);
+        }
+
+        ActionPlayer play = new ActionPlayer(model, control, actions);
+        play.start();
+        //System.out.println(list.toString());
         System.out.println("---------------------------------------------------------------------");
+    }
+
+    public boolean checkListFull(List<GameElement>[][] list){
+        if(list == null){
+            return false;
+        }
+
+        for(int i = 0; i < list.length; i++){
+            for(int j = 0; j < list[i].length; j++){
+                //System.out.println(list[i][j].isEmpty()+", i :"+i+", j : "+j);
+                if(list[i][j].isEmpty()){
+                    return false;
+                }
+            }
+        }
+
+
+        return true;
     }
 }
 
