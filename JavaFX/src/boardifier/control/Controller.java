@@ -23,7 +23,7 @@ public abstract class Controller {
     protected ContollerButton controlButton;
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
-    private boolean inUpdate;
+    private boolean inUpdate, endTmp;
     protected String Combination;
     private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
 
@@ -33,6 +33,7 @@ public abstract class Controller {
         controlAnimation = new ControllerAnimation(model,view, this);
         firstStageName = "";
         inUpdate = false;
+        endTmp = false;
     }
 
     public void setControlKey(ControllerKey controlKey) {
@@ -72,12 +73,14 @@ public abstract class Controller {
      * @throws GameException
      */
     protected void startStage(String stageName) throws GameException {
+        endTmp = false;
         if (model.isStageStarted()) stopGame();
         System.out.println("START STAGE "+stageName);
+        this.Combination = setCombRand();
         // create the model of the stage by using the StageFactory
         GameStageModel gameStageModel = StageFactory.createStageModel(stageName, model);
         // create the elements of the stage by getting the default factory of this stage and giving it to createElements()
-        gameStageModel.createElements(gameStageModel.getDefaultElementFactory());
+        gameStageModel.createElements(gameStageModel.getDefaultElementFactory(), this.Combination);
         /*setControlButton(new MasterMindControllerButton(model, view), (HoleStageModel) gameStageModel);*/
         // create the view of the stage by using the StageFactory
         GameStageView gameStageView = StageFactory.createStageView(stageName, gameStageModel);
@@ -103,6 +106,7 @@ public abstract class Controller {
             mapElementLook.put(element, look);
         }
         controlAnimation.startAnimation();
+        System.out.println("Comb : "+this.Combination);
     }
 
     /**
@@ -112,7 +116,7 @@ public abstract class Controller {
      */
     public void stopStage() {
         model.stopStage();
-        model.reset();
+        //model.reset();
     }
 
     /**
@@ -130,52 +134,55 @@ public abstract class Controller {
      * winner and that proposes to start a new game or to quit.
      */
     public void endGame() {
-        //System.out.println("END THE GAME");
+        if(!endTmp){
+            endTmp = true;
+            System.out.println("END THE GAME");
 
-        String message = "";
-        if (model.getIdWinner() != -1) {
-            message = model.getPlayers().get(model.getIdWinner()).getName() + " wins";
-        }
-        else {
-            message = "Draw game";
-        }
-        // disable all events
-        model.setCaptureEvents(false);
-        // create a dialog
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        // remove the frame around the dialog
-        alert.initStyle(StageStyle.UNDECORATED);
-        // make it a children of the main game window => it appears centered
-        alert.initOwner(view.getStage());
-        // set the message displayed
-        alert.setHeaderText(message);
-        // define new ButtonType to fit with our needs => one type is for Quit, one for New Game
-        ButtonType quit = new ButtonType("Quit");
-        ButtonType newGame = new ButtonType("New Game");
-        // remove default ButtonTypes
-        alert.getButtonTypes().clear();
-        // add the new ones
-        alert.getButtonTypes().addAll(quit, newGame);
-        // show the dialog and wait for the result
-        Optional<ButtonType> option = alert.showAndWait();
-        // check if result is quit
-        if (option.get() == quit) {
-            System.exit(0);
-        }
-        // check if result is new game
-        else if (option.get() == newGame) {
-            try {
-                startGame();
-            } catch (GameException e) {
-                e.printStackTrace();
+            String message = "";
+            if (model.getIdWinner() == 1) {
+                message = model.getPlayers().get(0).getName() + " wins";
+            } else {
+                message = "You loose";
+            }
+            // disable all events
+            model.setCaptureEvents(false);
+            // create a dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            // remove the frame around the dialog
+            alert.initStyle(StageStyle.UNDECORATED);
+            // make it a children of the main game window => it appears centered
+            alert.initOwner(view.getStage());
+            // set the message displayed
+            alert.setHeaderText(message);
+            // define new ButtonType to fit with our needs => one type is for Quit, one for New Game
+            ButtonType quit = new ButtonType("Quit");
+            ButtonType newGame = new ButtonType("New Game");
+            // remove default ButtonTypes
+            alert.getButtonTypes().clear();
+            // add the new ones
+            alert.getButtonTypes().addAll(quit, newGame);
+            // show the dialog and wait for the result
+            Optional<ButtonType> option = alert.showAndWait();
+            // check if result is quit
+            if (option.get() == quit) {
+                System.exit(0);
+            }
+            // check if result is new game
+            else if (option.get() == newGame) {
+                try {
+                    startGame();
+                } catch (GameException e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            }
+            // abnormal case :-)
+            else {
+                System.err.println("Abnormal case: dialog closed with not choice");
                 System.exit(1);
             }
         }
-        // abnormal case :-)
-        else {
-            System.err.println("Abnormal case: dialog closed with not choice");
-            System.exit(1);
-        }
+
     }
 
     /**
@@ -220,13 +227,14 @@ public abstract class Controller {
             k.resetChanged();
         });
 
+        //System.out.println("End Game : "+model.isEndGame());
         if (model.isEndStage()) {
-            controlAnimation.stopAnimation();
+            //controlAnimation.stopAnimation();
             Platform.runLater( () -> {
                 stopStage();});
         }
         else if (model.isEndGame()) {
-            controlAnimation.stopAnimation();
+            //controlAnimation.stopAnimation();
             Platform.runLater( () -> {endGame();});
         }
 

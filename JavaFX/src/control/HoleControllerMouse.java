@@ -51,11 +51,20 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         }
         HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
 
+        //for debug
+        /*HolePawnPot combFinalPot = stageModel.getCombFinalPot();
+        List<GameElement>[][] listCombFinal = combFinalPot.getgrid();
+        for(int i = 0; i<listCombFinal[0].length;i++){
+            System.out.print(((Pawn)listCombFinal[0][i].get(0)).getColor()+" ");
+        }*/
+
         if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
             actionButton(clic, stageModel, event);
         }else{
             actionPawn(clic, list, stageModel, event);
         }
+
+
     }
 
     public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel,MouseEvent event){
@@ -185,14 +194,25 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         for(int i = 0; i<listTestPot[0].length; i++) {
             GameElement element = listTestPot[0][i].get(0);
             Coord2D center = lookBoard.getRootPaneLocationForCellCenter(11, i);
-            GameAction move = new MoveAction(model,element,"MasterMindboard",11,i, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
+            GameAction move = new MoveAction(model,element,"MasterMindboard",11,i, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
             actions.addPackAction(move);
             pawnPotTest.setCellReachable(0,i,true);
         }
 
+        stageModel.upPawnRedWhite();
+        stageModel.setNumberPawnDown();
+
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
         //System.out.println(list.toString());
+
+        if (stageModel.verifWin() == 4) {
+            model.stopStage();
+            model.setEnd(1);
+        } else if (!(stageModel.getBoard().getgrid())[1][0].isEmpty()) {
+            model.stopStage();
+            model.setEnd(2);
+        }
         System.out.println("---------------------------------------------------------------------");
     }
 

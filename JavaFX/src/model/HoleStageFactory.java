@@ -11,7 +11,7 @@ public class HoleStageFactory extends StageElementsFactory {
     }
 
     @Override
-    public void setup() {
+    public void setup(String comb) {
         // create the board
         stageModel.setBoard(new HoleBoard(140-85+10, 20, stageModel));
         //create the pots
@@ -26,14 +26,10 @@ public class HoleStageFactory extends StageElementsFactory {
         invisiblePot.setVisible(false);
         HolePawnPot colorPot = new HolePawnPot((140-85)+(670/3)+(140-85)+10*3,20, stageModel,8,1, "colorPawnPot");
         stageModel.setColorPot(colorPot);
+        HolePawnPot combFinalPot = new HolePawnPot(20, 20, stageModel, 1, 4, "combFinalPawnPot");
+        stageModel.setCombFinalPot(combFinalPot);
+        combFinalPot.setVisible(false);
 
-
-
-        /*Pawn[] testPawns = new Pawn[4];
-        for(int i=0;i<4;i++) {
-            testPawns[i] = new Pawn(0, Pawn.PAWN_WHITE, stageModel,Pawn.TYPE_DESTPAWN);
-        }
-        stageModel.setTestPawns(testPawns);*/
 
         Pawn[] invisiblePawns = new Pawn[48];
         for(int i=0; i<48; i++) {
@@ -60,6 +56,14 @@ public class HoleStageFactory extends StageElementsFactory {
         }
         stageModel.setColorPawns(colorPawns);
 
+        Pawn[] combFinalPawns = new Pawn[4];
+        char[] combChar = comb.toCharArray();
+        for(int i=0;i<4;i++) {
+            combFinalPawns[i] = new Pawn(0, findColor(combChar[i]), stageModel,Pawn.TYPE_NONE);
+            combFinalPawns[i].setVisible(false);
+        }
+        stageModel.setCombFinalPawns(combFinalPawns);
+
 
         // assign pawns to their pot
         for (int i=0;i<12;i++) {
@@ -67,9 +71,9 @@ public class HoleStageFactory extends StageElementsFactory {
             redPot.putElement(redPawns[i], i,0);
         }
 
-        /*for (int i=0;i<4;i++) {
-            testPot.putElement(testPawns[i], 0,i);
-        }*/
+        for (int i=0;i<4;i++) {
+            combFinalPot.putElement(combFinalPawns[i], 0,i);
+        }
 
         for (int i=0; i<48; i++) {
             invisiblePot.putElement(invisiblePawns[i], 0, 0);
@@ -89,5 +93,29 @@ public class HoleStageFactory extends StageElementsFactory {
         buttonElement.setLocation((140-85)*5+30, 670 + 20 + (double) (140 - 85) /4);
         buttonElement.setLocationType(GameElement.LOCATION_TOPLEFT);
         stageModel.setButtonElement(buttonElement);
+    }
+
+    public int findColor(char c) {
+        switch(c){
+            case 'N':
+                return Pawn.PAWN_BLACK;
+            case 'R':
+                return Pawn.PAWN_RED;
+            case 'B':
+                return Pawn.PAWN_BLUE;
+            case 'J':
+                return Pawn.PAWN_YELLOW;
+            case 'V':
+                return Pawn.PAWN_GREEN;
+            case 'W':
+                return Pawn.PAWN_WHITE;
+            case 'C':
+                return Pawn.PAWN_CYAN;
+            case 'P':
+                return Pawn.PAWN_PURPLE;
+            default:
+                System.out.println("wrong color change (error in Pawn)");break;
+        }
+        return 0;
     }
 }

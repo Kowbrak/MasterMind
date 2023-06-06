@@ -26,12 +26,13 @@ public class HoleStageModel extends GameStageModel {
     private HolePawnPot redPot;
     private HolePawnPot colorPot;
     private HolePawnPot invisiblePot;
+    private HolePawnPot combFinalPot;
 
 
     private Pawn[] blackPawns;
     private Pawn[] redPawns;
     private Pawn[] colorPawns;
-
+    private Pawn[] combFinalPawns;
     private Pawn[] invisiblePawn;
     private int blackPawnsToPlay;
     private int redPawnsToPlay;
@@ -70,6 +71,23 @@ public class HoleStageModel extends GameStageModel {
         this.blackPawns = blackPawns;
         for(int i=0;i<blackPawns.length;i++) {
             addElement(blackPawns[i]);
+        }
+    }
+
+    public HolePawnPot getCombFinalPot() {
+        return combFinalPot;
+    }
+    public void setCombFinalPot(HolePawnPot CombFinalPot) {
+        this.combFinalPot = CombFinalPot;
+        addGrid(CombFinalPot);
+    }
+    public Pawn[] getCombFinalPawns() {
+        return combFinalPawns;
+    }
+    public void setCombFinalPawns(Pawn[] CombFinalPawns) {
+        this.combFinalPawns = CombFinalPawns;
+        for(int i=0;i<CombFinalPawns.length;i++) {
+            addElement(CombFinalPawns[i]);
         }
     }
 
@@ -250,13 +268,14 @@ public class HoleStageModel extends GameStageModel {
         GridLook lookBoard = (GridLook) control.getElementLook(board);
         boolean find = false;
         for(int i = 0; i<list2.length-1; i++){
-            System.out.println("i : "+list2[i][0].isEmpty()+", i+1 : "+!list2[i+1][0].isEmpty());
+            // for debug
+            //System.out.println("i : "+list2[i][0].isEmpty()+", i+1 : "+!list2[i+1][0].isEmpty());
             if(list2[i][0].isEmpty() && !list2[i+1][0].isEmpty() || find){
                 find = true;
                 for(int j= 0; j<list2[i].length; j++){
                     GameElement element = list2[i+1][j].get(0);
                     Coord2D center = lookBoard.getRootPaneLocationForCellCenter(i, j);
-                    GameAction move = new MoveAction(model,element,"MasterMindboard",i,j, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 50);
+                    GameAction move = new MoveAction(model,element,"MasterMindboard",i,j, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
                     actions.addPackAction(move);
                 }
             }
@@ -277,9 +296,19 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public void setNumberPawnDown(String line, String comb) {
+    public void setNumberPawnDown() {
         Pawn redPawn = (Pawn) (redPot.getElement(11, 0));
         Pawn whitePawn = (Pawn) (blackPot.getElement(11, 0));
+        String comb = "";
+        String line = "";
+
+        for(int i = 0; i<4; i++){
+            Pawn p = (Pawn) (combFinalPot.getElement(0, i));
+            comb += p.getColor();
+            Pawn p2 = (Pawn) (testPot.getElement(0, i));
+            line += p2.getColor();
+        }
+
         char[] combCharArray = comb.toCharArray();
         char[] lineCharArray = line.toCharArray();
         int tmpred = 0;
@@ -304,6 +333,11 @@ public class HoleStageModel extends GameStageModel {
         }
         redPawn.setNumber(tmpred);
         whitePawn.setNumber(tmpWhite);
+    }
+
+    public int verifWin(){
+        Pawn p = (Pawn) (redPot.getElement(11, 0));
+        return p.getNumber();
     }
 
     @Override

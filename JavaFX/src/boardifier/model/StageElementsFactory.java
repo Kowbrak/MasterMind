@@ -8,5 +8,5 @@ public abstract class StageElementsFactory {
         this.model = model;
     }
 
-    public abstract void setup();
+    public abstract void setup(String comb);
 }

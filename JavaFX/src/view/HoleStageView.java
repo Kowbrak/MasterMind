@@ -25,6 +25,7 @@ public class HoleStageView extends GameStageView {
         addLook(new PawnPotLook(223,140,model.getTestPot()));
         addLook(new PawnPotLook(140, 420, model.getInvisiblePot()));
         addLook(new PawnPotLook(140, 446, model.getColorPot()));
+        addLook(new PawnPotLook(140, 420, model.getCombFinalPot()));
 
 
         for(int i=0;i<12;i++) {
@@ -32,9 +33,9 @@ public class HoleStageView extends GameStageView {
             addLook(new PawnLook(20, model.getRedPawns()[i], true));
         }
 
-        /*for(int i=0;i<4;i++) {
-            addLook(new PawnLook(20, model.getTestPawns()[i], false));
-        }*/
+        for(int i=0;i<4;i++) {
+            addLook(new PawnLook(20, model.getCombFinalPawns()[i], false));
+        }
 
         for(int i=0;i<48;i++) {
             addLook(new PawnLook(20, model.getInvisiblePawn()[i], true));

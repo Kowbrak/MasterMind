@@ -212,6 +212,14 @@ public class Model {
         this.idWinner = idWinner;
     }
 
+    public int getEnd() {
+        return idWinner;
+    }
+    public void setEnd(int end) {
+        stopGame();
+        this.idWinner = end;
+    }
+
     public String getPlayerLastKey(int idPlayer) {
         return players.get(idPlayer).getLastKeyPressed();
     }

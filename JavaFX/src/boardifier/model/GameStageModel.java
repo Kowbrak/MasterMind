@@ -141,8 +141,8 @@ public abstract class GameStageModel {
      * be set.
      * @param elementsFactory
      */
-    public void createElements(StageElementsFactory elementsFactory) {
-        elementsFactory.setup();
+    public void createElements(StageElementsFactory elementsFactory, String combinaison) {
+        elementsFactory.setup(combinaison);
     }
 
     public abstract StageElementsFactory getDefaultElementFactory();
