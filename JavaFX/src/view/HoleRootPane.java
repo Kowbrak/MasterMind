@@ -39,12 +39,12 @@ public class HoleRootPane extends RootPane {
         Text text2 = new Text("Select the opponent : ");
         text2.setFont(new Font(20));
         text2.setFill(Color.BLACK);
-        rbPater = new RadioButton("Mme. Paterlini");
+        rbPater = new RadioButton("Mme.Paterlini");
         rbPater.setSelected(true);
-        rbViez = new RadioButton("M. Viezzi");
-        rbMour = new RadioButton("M. Mourad");
-        rbPerr = new RadioButton("M. Perrot");
-        rbsalom = new RadioButton("M. Salomon");
+        rbViez = new RadioButton("M.Viezzi");
+        rbMour = new RadioButton("M.Mourad");
+        rbPerr = new RadioButton("M.Perrot");
+        rbsalom = new RadioButton("M.Salomon");
         tgOpponent = new ToggleGroup();
         tgOpponent.getToggles().addAll(rbPater,rbViez,rbMour,rbPerr,rbsalom);
         hbox2_1.getChildren().add(text2);
@@ -63,9 +63,9 @@ public class HoleRootPane extends RootPane {
         text3.setFill(Color.BLACK);
         rbPlayer = new RadioButton("Player");
         rbPlayer.setSelected(true);
-        rbIARand = new RadioButton("IA Random");
-        rbIA2 = new RadioButton("IA 2");
-        rbIA3 = new RadioButton("IA 3");
+        rbIARand = new RadioButton("IA_Random");
+        rbIA2 = new RadioButton("IA_2");
+        rbIA3 = new RadioButton("IA_3");
         tgIA = new ToggleGroup();
         tgIA.getToggles().addAll(rbPlayer,rbIARand,rbIA2,rbIA3);
         hbox3_1.getChildren().add(text3);
@@ -100,7 +100,7 @@ public class HoleRootPane extends RootPane {
         btnStart.setAlignment(Pos.CENTER);
         vbox5.getChildren().add(btnStart);
         vbox5.setAlignment(Pos.CENTER);
-        vbox5.setPadding(new Insets(0,0,40,0));
+        vbox5.setPadding(new Insets(0,0,20,0));
 
         vbox.getChildren().addAll(hbox1,vbox2,vbox3,vbox4,vbox5);
         vbox.setSpacing(40);

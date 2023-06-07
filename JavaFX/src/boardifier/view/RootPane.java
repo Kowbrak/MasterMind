@@ -31,6 +31,22 @@ public class RootPane extends Pane {
         resetToDefault();
     }
 
+    public Button getButton(){
+        return this.btnStart;
+    }
+
+    public ToggleGroup getGroupOpponent(){
+        return this.tgOpponent;
+    }
+
+    public ToggleGroup getGroupIa(){
+        return this.tgIA;
+    }
+
+    public ToggleGroup getGroupRandConf(){
+        return this.tgRandConf;
+    }
+
     public final void resetToDefault() {
         createDefaultGroup();
         // add the group to the pane

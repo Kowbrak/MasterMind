@@ -8,6 +8,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioButton;
 import javafx.stage.StageStyle;
 import model.HoleStageModel;
 
@@ -23,9 +24,10 @@ public abstract class Controller {
     protected ContollerButton controlButton;
     protected String firstStageName;
     protected Map<GameElement, ElementLook> mapElementLook;
-    private boolean inUpdate, endTmp;
+    private boolean inUpdate, endTmp, generateRandComb;
     protected String Combination;
     private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
+    protected int opponent,gameMode;
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -57,7 +59,67 @@ public abstract class Controller {
     public void startGame() throws GameException {
         if (firstStageName.isEmpty()) throw new GameException("The name of the first stage have not been set. Abort");
         System.out.println("START THE GAME");
+        RootPane rootPane = (RootPane)view.getRootPane();
+        this.opponent = getTheOpponent(rootPane);
+        this.gameMode = getTheGameMode(rootPane);
+        this.generateRandComb = getTheRandConf(rootPane);
+        System.out.println("opponent : "+this.opponent+" gameMode : "+this.gameMode+" generateRandComb : "+this.generateRandComb);
+
+        model.getPlayers().clear();
+        //model.removePlayerKeyPressed(0, model.getCurrentPlayer().getName());
+        if(this.gameMode == 1) {
+            model.addHumanPlayer("player");
+        }else if(this.gameMode == 2) {
+            model.addComputerPlayer("computerDumb");
+        }else if(this.gameMode == 3) {
+            model.addComputerPlayer("computerSmart1");
+        }else if(this.gameMode == 4) {
+            model.addComputerPlayer("computerSmart2");
+        }
+
         startStage(firstStageName);
+    }
+
+    public int getTheOpponent(RootPane rootPane){
+        String tmp = ((RadioButton)(rootPane.getGroupOpponent().getSelectedToggle())).getText();
+        switch (tmp){
+            case "Mme.Paterlini":
+                return 1;
+            case "M.Viezzi":
+                return 2;
+            case "M.Mourad":
+                return 3;
+            case "M.Perrot":
+                return 4;
+            case "M.Salomon":
+                return 5;
+            default:
+                return 0;
+        }
+    }
+
+    public int getTheGameMode(RootPane rootPane){
+        String tmp = ((RadioButton)(rootPane.getGroupIa().getSelectedToggle())).getText();
+        switch (tmp){
+            case "Player":
+                return 1;
+            case "IA_Random":
+                return 2;
+            case "IA_2":
+                return 3;
+            case "IA_3":
+                return 4;
+            default:
+                return 0;
+        }
+    }
+
+    public boolean getTheRandConf(RootPane rootPane){
+        if(((RadioButton)(rootPane.getGroupRandConf().getSelectedToggle())).getText().equals("Yes")){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void stopGame() {

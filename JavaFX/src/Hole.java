@@ -10,19 +10,6 @@ public class Hole extends Application {
 
     private static int mode;
     public static void main(String[] args) {
-        if(args.length == 1){
-            if(args[0].equals("1")){
-                mode = 1;
-            }else if(args[0].equals("2")){
-                mode = 2;
-            }else if(args[0].equals("3")){
-                mode = 3;
-            }else{
-                mode = 0;
-            }
-        }else{
-            mode = 0;
-        }
         launch(args);
     }
 
@@ -32,7 +19,7 @@ public class Hole extends Application {
         // create the global model
         Model model = new Model();
         // add some players taking mode into account
-        if(mode == 1){
+        /*if(mode == 1){
             model.addComputerPlayer("computerDumb");
         }else if(mode == 2){
             model.addComputerPlayer("computerSmart1");
@@ -40,7 +27,7 @@ public class Hole extends Application {
             model.addComputerPlayer("computerSmart2");
         }else{
             model.addHumanPlayer("player");
-        }
+        }*/
         // register a single stage for the game, called hole
         StageFactory.registerModelAndView("hole", "model.HoleStageModel", "view.HoleStageView");
         // create the root pane, using the subclass HoleRootPane
