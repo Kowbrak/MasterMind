@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/GameStageModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/GameStageModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/StageElementsFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/StageElementsFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/HoleStageModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleStageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleStageView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/HoleView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/GameStageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/GameStageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/StageElementsFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/StageElementsFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/HoleStageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/HoleStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/HoleStageView.java" afterDir="false" />
-    </list>
+    <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +48,7 @@
       <workItem from="1685888773629" duration="1919000" />
       <workItem from="1686041228068" duration="1725000" />
       <workItem from="1686050157935" duration="1474000" />
-      <workItem from="1686079310854" duration="3475000" />
+      <workItem from="1686079310854" duration="3799000" />
     </task>
     <servers />
   </component>

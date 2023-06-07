@@ -2,6 +2,9 @@ package boardifier.view;
 
 import boardifier.model.GameElement;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +20,9 @@ public class RootPane extends Pane {
 
     protected GameStageView gameStageView;
     protected Group group; // the group that contains all game elements of the current stage
+    protected RadioButton rbPater,rbViez,rbMour,rbPerr,rbsalom,rbPlayer,rbIARand,rbIA2,rbIA3,rbRandConfTrue,rbRandConfFalse;
+    protected ToggleGroup tgOpponent,tgIA,tgRandConf;
+    protected Button btnStart;
 
     public RootPane() {
         this.gameStageView = null;
