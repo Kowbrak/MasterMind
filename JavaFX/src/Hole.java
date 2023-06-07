@@ -52,7 +52,7 @@ public class Hole extends Application {
         // set the name of the first stage to create when the game is started
         control.setFirstStageName("hole");
         // set the stage title
-        stage.setTitle("The Hole");
+        stage.setTitle("MasterMind");
         // show the JavaFx main stage
         stage.show();
         //view.resetView();
