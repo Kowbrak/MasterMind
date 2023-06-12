@@ -2,15 +2,15 @@ package boardifier.control;
 
 import boardifier.model.*;
 import boardifier.view.*;
-import control.MasterMindControllerButton;
+import control.HoleDecider;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.stage.StageStyle;
 import model.HoleStageModel;
+import model.Pawn;
 
 import java.util.*;
 
@@ -27,15 +27,40 @@ public abstract class Controller {
     private boolean inUpdate, endTmp, generateRandComb;
     protected String Combination;
     private static final Random lotto = new Random(Calendar.getInstance().getTimeInMillis());
-    protected int opponent,gameMode;
+    protected int opponent, gameMode;
+    int pawnAToPos;
+    private String[][] detail = {
+            {"R", "B", "J", "V", "W", "N", "C", "P"},
+            {"1", "2", "3", "4", "5", "6", "7", "8"},
+            {"0", "0", "0", "0", "0", "0", "0", "0"}};
+
+    private char[][] detailChar = {
+            {'R', 'B', 'J', 'V', 'W', 'N', 'C', 'P'},
+            {'1', '2', '3', '4', '5', '6', '7', '8'},
+            {'0', '0', '0', '0', '0', '0', '0', '0'}}; // 0 = not used, 1 = used
+    private int[][] combs;
+    private int countCombs;
+    private boolean generateCombs;
 
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-        controlAnimation = new ControllerAnimation(model,view, this);
+        controlAnimation = new ControllerAnimation(model, view, this);
         firstStageName = "";
         inUpdate = false;
         endTmp = false;
+        this.combs = new int[12][4];
+        this.generateCombs = true;
+        this.countCombs = 0;
+        this.pawnAToPos = 0;
+    }
+
+    public int getPawnAToPos(){
+        return this.pawnAToPos;
+    }
+
+    public int add1PawnAToPos(){
+        return this.pawnAToPos++;
     }
 
     public void setControlKey(ControllerKey controlKey) {
@@ -49,9 +74,7 @@ public abstract class Controller {
     public void setControlAction(ControllerAction controlAction) {
         this.controlAction = controlAction;
     }
-    /*public void setControlButton(MasterMindControllerButton controlButton,HoleStageModel gameStageModel) {
-        gameStageModel.getButtonElement().getButton().setOnAction(controlButton);
-    }*/
+
     public void setFirstStageName(String firstStageName) {
         this.firstStageName = firstStageName;
     }
@@ -59,30 +82,29 @@ public abstract class Controller {
     public void startGame() throws GameException {
         if (firstStageName.isEmpty()) throw new GameException("The name of the first stage have not been set. Abort");
         System.out.println("START THE GAME");
-        RootPane rootPane = (RootPane)view.getRootPane();
+        RootPane rootPane = (RootPane) view.getRootPane();
         this.opponent = getTheOpponent(rootPane);
         this.gameMode = getTheGameMode(rootPane);
-        this.generateRandComb = getTheRandConf(rootPane);
-        System.out.println("opponent : "+this.opponent+" gameMode : "+this.gameMode+" generateRandComb : "+this.generateRandComb);
+        this.generateRandComb = getIfTheRandConf(rootPane);
+        System.out.println("opponent : " + this.opponent + " gameMode : " + this.gameMode + " generateRandComb : " + this.generateRandComb);
 
         model.getPlayers().clear();
-        //model.removePlayerKeyPressed(0, model.getCurrentPlayer().getName());
-        if(this.gameMode == 1) {
+        if (this.gameMode == 1) {
             model.addHumanPlayer("player");
-        }else if(this.gameMode == 2) {
+        } else if (this.gameMode == 2) {
             model.addComputerPlayer("computerDumb");
-        }else if(this.gameMode == 3) {
+        } else if (this.gameMode == 3) {
             model.addComputerPlayer("computerSmart1");
-        }else if(this.gameMode == 4) {
+        } else if (this.gameMode == 4) {
             model.addComputerPlayer("computerSmart2");
         }
 
         startStage(firstStageName);
     }
 
-    public int getTheOpponent(RootPane rootPane){
-        String tmp = ((RadioButton)(rootPane.getGroupOpponent().getSelectedToggle())).getText();
-        switch (tmp){
+    public int getTheOpponent(RootPane rootPane) {
+        String tmp = ((RadioButton) (rootPane.getGroupOpponent().getSelectedToggle())).getText();
+        switch (tmp) {
             case "Mme.Paterlini":
                 return 1;
             case "M.Viezzi":
@@ -98,9 +120,9 @@ public abstract class Controller {
         }
     }
 
-    public int getTheGameMode(RootPane rootPane){
-        String tmp = ((RadioButton)(rootPane.getGroupIa().getSelectedToggle())).getText();
-        switch (tmp){
+    public int getTheGameMode(RootPane rootPane) {
+        String tmp = ((RadioButton) (rootPane.getGroupIa().getSelectedToggle())).getText();
+        switch (tmp) {
             case "Player":
                 return 1;
             case "IA_Random":
@@ -114,10 +136,10 @@ public abstract class Controller {
         }
     }
 
-    public boolean getTheRandConf(RootPane rootPane){
-        if(((RadioButton)(rootPane.getGroupRandConf().getSelectedToggle())).getText().equals("Yes")){
+    public boolean getIfTheRandConf(RootPane rootPane) {
+        if (((RadioButton) (rootPane.getGroupRandConf().getSelectedToggle())).getText().equals("Yes")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -137,13 +159,16 @@ public abstract class Controller {
     protected void startStage(String stageName) throws GameException {
         endTmp = false;
         if (model.isStageStarted()) stopGame();
-        System.out.println("START STAGE "+stageName);
-        this.Combination = setCombRand();
+        System.out.println("START STAGE " + stageName);
+        if (this.generateRandComb) {
+            this.Combination = setCombRand();
+        } else {
+            this.Combination = "RVBN";
+        }
         // create the model of the stage by using the StageFactory
         GameStageModel gameStageModel = StageFactory.createStageModel(stageName, model);
         // create the elements of the stage by getting the default factory of this stage and giving it to createElements()
         gameStageModel.createElements(gameStageModel.getDefaultElementFactory(), this.Combination);
-        /*setControlButton(new MasterMindControllerButton(model, view), (HoleStageModel) gameStageModel);*/
         // create the view of the stage by using the StageFactory
         GameStageView gameStageView = StageFactory.createStageView(stageName, gameStageModel);
         // create the looks of the stage (NB: no factory this time !)
@@ -163,12 +188,422 @@ public abstract class Controller {
 
         // create a map of GameElement <-> ElementLook, that helps the controller in its update() method
         mapElementLook = new HashMap<>();
-        for(GameElement element : model.getElements()) {
+        for (GameElement element : model.getElements()) {
             ElementLook look = gameStageView.getElementLook(element);
             mapElementLook.put(element, look);
         }
         controlAnimation.startAnimation();
-        System.out.println("Comb : "+this.Combination);
+        System.out.println("Comb : " + this.Combination);
+
+        if (model.getCurrentPlayer().getType() == Player.COMPUTER) {
+            if (model.getCurrentPlayer().getName().equals("computerDumb")) {
+                System.out.println("computerDumb");
+                analyseComputer1();
+                playComputer();
+            } else if (model.getCurrentPlayer().getName().equals("computerSmart1")) {
+                System.out.println("computerSmart1");
+                analyseComputer3();
+                playComputer();
+
+            } else if (model.getCurrentPlayer().getName().equals("computerSmart2")) {
+                System.out.println("computerSmart2");
+                analyseComputer2();
+                playComputer();
+            }
+        }
+    }
+
+    public void analyseComputer2() {
+        int k = 4; // Number of color balls in the combination
+        int n = 8; // Number of different colors
+        int[] combi = combiStringToInt(Combination);
+        int coul = 1; // Color test�, we start with the first color : 1
+
+        int[] combiAttempt = new int[k]; // Table containing the combination
+        // IA attempt
+        int[] combiFound = new int[k]; // Table containing the colours
+        // found,
+        int nbWellPlaced = 0;
+        int nbMisplaced = 0;
+        int nbFound = 0; // Number of colored balls whose position has been found
+        int nbAttempt = 0;
+        int pos = 0;
+
+        /*
+         * Loop generating attempts until Mastermind resolution
+         */
+
+        // as long as the number of goods placed is less than the number of boxes
+        // (as long as the MM is not resolved) do
+        while (nbGoodPlaced(combi, combiAttempt, k) < k /* && coul <= n */) {
+            // We create the new combination to try, which determines the presence
+            // or not of a color. While taking into account the positions of the color
+            // balls already found
+            for (int i = 0; i < k; i++) {
+                if (combiFound[i] == 0)
+                    combiAttempt[i] = coul;
+                else
+                    combiAttempt[i] = combiFound[i];
+            }
+            if (countCombs < 12) {
+                for (int i = 0; i < combiAttempt.length; i++) {
+                    combs[countCombs][i] = combiAttempt[i];
+                }
+                countCombs++;
+            }
+            nbAttempt++;
+
+            // Determine the number of well-placed and misplaced balls
+            nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
+            nbMisplaced = nbCommons(combi, combiAttempt, k)
+                    - nbGoodPlaced(combi, combiAttempt, k);
+            int nbBalls = nbWellPlaced - nbFound;
+
+            // If the tested color is present (i.e. nbWellPlaced-nbFound >= 1), then do:
+            if (nbBalls >= 1 && coul <= (n + 1)) {
+                for (int x = 1; x <= nbBalls; x++) {
+                    // Set nbMisplaced to a different number than 0
+                    nbMisplaced = 1;
+                    // Index of the tested position to find the location of the color coul.
+                    // We don't test a position that we already know the location of.
+                    // So we create a loop that searches for a possible position.
+                    pos = 0;
+                    // While nbMisplaced != 0, do:
+                    while (nbMisplaced > 0) {
+                        while ((pos < k) && combiFound[pos] != 0)
+                            pos++;
+                        // Create the new combination to try, which seeks the exact position
+                        // of the current color ball, while taking into account the positions
+                        // of the colors balls already found.
+                        for (int i = 0; i < k; i++) {
+                            if (combiFound[i] == 0) // If the current slot is not a slot that we know
+                            // the color of (i.e. combiFound==0)
+                            {
+                                if (i != pos) // If the slot is not the tested slot, then put
+                                    // the next color ball
+                                    combiAttempt[i] = coul + 1;
+                                else
+                                    combiAttempt[i] = coul;
+                            } else
+                                combiAttempt[i] = combiFound[i];
+                        }
+                        if (countCombs < 12) {
+                            for (int i = 0; i < combiAttempt.length; i++) {
+                                combs[countCombs][i] = combiAttempt[i];
+                            }
+                            countCombs++;
+                        }
+                        // Test the new attempt
+                        // Calculate the number of balls misplaced (assuming there are 0)
+                        nbAttempt++;
+                        nbWellPlaced = nbGoodPlaced(combi, combiAttempt, k);
+                        nbMisplaced = nbCommons(combi, combiAttempt, k) - nbWellPlaced;
+
+                        // Prepare to test the next position
+                        pos++;
+                    }
+                    // At the end of the loop, we have the position of the color ball -> pos - 1
+                    // So we add this ball to the combination of balls found.
+                    combiFound[pos - 1] = coul;
+
+                    // Increment the number of balls found.
+                    nbFound++;
+                }
+            }
+            coul++;
+        }
+        countCombs = 0;
+    }
+
+    public void analyseComputer3() {
+        int k = 4; // Number of color balls in the combination
+        int n = 8; // Number of different colors
+        int[] combi = combiStringToInt(Combination);
+        int coul = 1; // Color tested, we start with the 1st color: 1
+        int[] combiTest = new int[k]; // Table containing the combination
+        // tent� par l'ia
+        int[] combiFind = new int[k]; // Table containing the colors
+        // trouv�es,
+        int nbGoodPlace = 0;
+        int nbBadPlace = 0;
+        int nbFind = 0; // Number of colored balls of which have found the
+        // position
+        int nbAttempt = 0;
+        int pos = 0;
+
+        int NextCol = 1; // Contains the next color to fill the combination with
+        // when searching for the position of the current color
+
+        int nbNextBalls = 0;
+
+        // while the number of well-placed balls is less than the number of slots (i.e., while
+        // the MM is not yet solved) use *** the variable nbGoodPlace ***
+        while (nbGoodPlaced(combi, combiTest, k) < k && coul <= n) {
+
+            coul = NextCol;
+            // We create the new combination to try, which determines the
+            // presence or absence of a color. Taking into account the
+            // positions of the
+            // previously found color balls
+            for (int i = 0; i < k; i++) {
+                if (combiFind[i] == 0)
+                    combiTest[i] = coul;
+                else
+                    combiTest[i] = combiFind[i];
+            }
+            //showTab1D(combiTest);
+            if (countCombs < 12) {
+                for (int i = 0; i < combiTest.length; i++) {
+                    combs[countCombs][i] = combiTest[i];
+                }
+                countCombs++;
+            }
+
+
+            // We verify that the combination being tried is not the one already tried recently
+
+
+            // We determine the number of well-placed and misplaced balls
+            nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
+            nbBadPlace = nbCommons(combi, combiTest, k)
+                    - nbGoodPlaced(combi, combiTest, k);
+
+            // increment the number of attempted combinations
+            nbAttempt++;
+
+            // display the tried combination and the given indications
+            //System.out.print("color search : ");
+            //printTab(combiTest);
+            //System.out.println(" --> "+nbGoodPlace+" well placed, "+nbBadPlace+" misplaced.");
+            /*
+             * Analysis of the indications given by nbGoodPlace and nbBadPlace
+             */
+
+            // 1 - If the number of well-placed balls = k, no need to continue, we have finished the resolution
+            if (nbGoodPlace == k)
+                break;
+
+
+            // Determining the number of balls of the current color
+            int nbBalls = nbGoodPlace - nbFind;
+
+
+            // If the color being tested is present (i.e. nbBalls >= 1),
+            // then do the following
+            if (nbBalls >= 1 && coul <= (n + 1)) {
+
+                do {
+
+                    if (nbNextBalls > 0) // if the color search has been short-circuited
+                    {
+                        //System.out.println("Short-circuited search");
+                        coul = NextCol;
+                        nbBalls = nbNextBalls;
+                    }
+                    nbNextBalls = 0; // initialize the number of balls of the next color
+
+                    NextCol = coul + 1;
+
+                    for (int x = 1; x <= nbBalls; x++) { // search for the position of each color
+                        // Set nbBadPlace to a value different from 0
+                        nbBadPlace = 1;
+
+                        // index of the position being tested to find the location of the
+                        // current color ball. We do not test a position whose color we
+                        // already know. Therefore, we create a loop that looks for a
+                        // possible position.
+                        pos = 0;
+
+                        // while nbBadPlace != 0, do the following
+                        while (nbBadPlace > 0) {
+
+                            // look for a position to test that has not already been found
+                            while ((pos < k) && combiFind[pos] != 0)
+                                pos++;
+
+                            // create the new combination to be tested, which looks for
+                            // the exact position of the current color ball, while taking into account the positions of the
+                            // already found color balls
+                            for (int i = 0; i < k; i++) {
+
+                                if (combiFind[i] == 0) // if the current position is not a position whose color we know (i.e. combiFind==0)
+                                {
+                                    if (i != pos) // if the position is not the position being tested, we add the next color ball
+                                        combiTest[i] = NextCol;
+                                    else
+                                        combiTest[i] = coul;
+
+                                } else
+                                    combiTest[i] = combiFind[i];
+                            }
+                            //showTab1D(combiTest);
+                            if (countCombs < 12) {
+                                for (int i = 0; i < combiTest.length; i++) {
+                                    combs[countCombs][i] = combiTest[i];
+                                }
+                                countCombs++;
+                            }
+
+
+                            // Testing the new attempt
+                            // Calculation of the number of balls incorrectly
+                            // placed (assuming there are 0)
+                            nbGoodPlace = nbGoodPlaced(combi, combiTest, k);
+                            int nbCommuns = nbCommons(combi, combiTest, k);
+                            nbBadPlace = nbCommuns - nbGoodPlace;
+
+                            //  Display of the attempt ***
+                            //displayTab(combiTest);
+                            //System.out.println(" --> "+nbGoodPlace+" correctly placed, "+nbBadPlace+" incorrectly placed.");
+                            nbAttempt++;
+
+                            /*
+                             * Analyse des indications donn�es
+                             */
+                            int nbNextCol = (nbCommuns - nbFind - 1);
+                            //System.out.println("NextCol : "+ NextCol+ " nbNextCol : "+nbNextCol);
+                            if (nbNextCol <= 0) {
+                                NextCol++;
+                                //	System.out.println(NextCol);
+                            } else
+                                nbNextBalls = nbNextCol;
+
+                            pos++;
+                        }
+
+                        // At the end of the loop, we have the position of the color ball -> pos - 1
+                        // We then add this ball to the combination containing the found balls
+                        combiFind[pos - 1] = coul;
+                        // We increment the number of found balls
+                        nbFind++;
+                    }
+
+                }
+                while (nbNextBalls > 0 && nbGoodPlace != k); // As long as the following color is present
+            } else
+                NextCol++;
+
+        }
+        countCombs = 0;
+    }
+
+    public void analyseComputer1(){
+        String lineTmp = "";
+        for(int i = 0; i < 12; i++){
+            lineTmp = setCombRand();
+            char[] line = lineTmp.toCharArray();
+            for(int j = 0; j < 4; j++){
+                combs[i][j] = convertColorChatToInt(line[j]);
+            }
+        }
+    }
+
+    public void playComputer() {
+        String line = "";
+        //showTab1D(combi);
+        //showTab2D(combs);
+        int tmp = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (combs[countCombs][i] == Integer.parseInt(detail[1][j])) {
+                    tmp = j;
+                    break;
+                }
+            }
+            line += detail[0][tmp];
+        }
+        countCombs++;
+        System.out.println("Line : " + line);
+
+        HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
+        //System.out.println("COMPUTER PLAYS");
+        HoleDecider decider = new HoleDecider(model, this, line);
+        ActionPlayer play = new ActionPlayer(model, this, decider, null);
+        play.start();
+        gameStage.setNumberPawnDown(line);
+        if (gameStage.verifWin() == 4) {
+            stopStage();
+            model.setEnd(1);
+        }
+    }
+
+    public int convertColorChatToInt(char c){
+        switch(c){
+            case 'N':
+                return Pawn.PAWN_BLACK;
+            case 'R':
+                return Pawn.PAWN_RED;
+            case 'B':
+                return Pawn.PAWN_BLUE;
+            case 'J':
+                return Pawn.PAWN_YELLOW;
+            case 'V':
+                return Pawn.PAWN_GREEN;
+            case 'W':
+                return Pawn.PAWN_WHITE;
+            case 'C':
+                return Pawn.PAWN_CYAN;
+            case 'P':
+                return Pawn.PAWN_PURPLE;
+            default:
+                return -1;
+        }
+    }
+
+    /**
+     * Method that returns the number of well-placed token
+     * @param tab1
+     * @param tab2
+     * @param k
+     * @return
+     */
+    public static int nbGoodPlaced(int[] tab1, int[] tab2, int k) {
+        int nb_well_placed = 0;
+        for (int i = 0; i < k; i++) {
+            if (tab1[i] == tab2[i]) {
+                nb_well_placed++;
+            }
+        }
+        return nb_well_placed;
+    }
+
+    public int[] combiStringToInt(String combi) {
+        int[] combiInt = new int[4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (combi.charAt(i) == this.detailChar[0][j]) {
+                    combiInt[i] = Character.getNumericValue(this.detailChar[1][j]);
+                }
+            }
+        }
+        return combiInt;
+    }
+
+    public static int nbCommons(int[] tab1, int[] tab2, int k) {
+        int[] t1 = new int[k];
+        int[] t2 = new int[k];
+        for (int i = 0; i < k; i++) {
+            t1[i] = tab1[i];
+            t2[i] = tab2[i];
+        }
+
+        int cpt = 0;
+        boolean find = false;
+
+        for (int i = 0; i < k; i++) {
+            int j = 0;
+            find = false;
+            do {
+                if (t1[i] == t2[j]) {
+                    cpt++;
+                    t2[j] = 0;
+                    find = true;
+                }
+                j++;
+            } while (j < k && !find);
+        }
+
+        return cpt;
     }
 
     /**
@@ -188,7 +623,10 @@ public abstract class Controller {
      * next player, and then to take actions if needed. For example, a method of the model can be called to update who is the current player.
      * Then, if it is a computer, a Decider object can be used to determine what to play and then to play it.
      */
-    public void nextPlayer() {};
+    public void nextPlayer() {
+    }
+
+    ;
 
     /**
      * Execute actions at the end of the game.
@@ -196,7 +634,7 @@ public abstract class Controller {
      * winner and that proposes to start a new game or to quit.
      */
     public void endGame() {
-        if(!endTmp){
+        if (!endTmp) {
             endTmp = true;
             System.out.println("END THE GAME");
 
@@ -252,12 +690,12 @@ public abstract class Controller {
      * This method MUST NOT BE called directly, and is only called by the ControllerAnimation
      * at each frame. It is used to update the model and then the view.
      * It must be noticed that the process of updating follows a fixed scheme :
-     *   - update all game element of the current game stage,
-     *   - update the grid cell of element that are in a grid and that have moved in space, and thus may have changed of cell,
-     *   - update the looks of all elements, calling dedicated methods according the type indicators of change (location, look, selection, ...),
-     *   - reset the change indicators in elements,
-     *   - check if the sage is finished,
-     *   - check if the game is finished.
+     * - update all game element of the current game stage,
+     * - update the grid cell of element that are in a grid and that have moved in space, and thus may have changed of cell,
+     * - update the looks of all elements, calling dedicated methods according the type indicators of change (location, look, selection, ...),
+     * - reset the change indicators in elements,
+     * - check if the sage is finished,
+     * - check if the game is finished.
      */
     public void update() {
         if (inUpdate) {
@@ -266,15 +704,14 @@ public abstract class Controller {
         inUpdate = true;
 
         // update the model of all elements :
-        mapElementLook.forEach((k,v) -> {
+        mapElementLook.forEach((k, v) -> {
             // get the bounds of the look
             Bounds b = v.getGroup().getBoundsInParent();
             // get the geometry of the grid that owns the element, if it exists
             if (k.getGrid() != null) {
                 GridLook look = getElementGridLook(k);
                 k.update(b.getWidth(), b.getHeight(), look.getGeometry());
-            }
-            else {
+            } else {
                 k.update(b.getWidth(), b.getHeight(), null);
             }
             // if the element must be auto-localized in its cell center
@@ -285,19 +722,21 @@ public abstract class Controller {
         // update the looks
         view.update();
         // reset changed indicators
-        mapElementLook.forEach((k,v) -> {
+        mapElementLook.forEach((k, v) -> {
             k.resetChanged();
         });
 
         //System.out.println("End Game : "+model.isEndGame());
         if (model.isEndStage()) {
             //controlAnimation.stopAnimation();
-            Platform.runLater( () -> {
-                stopStage();});
-        }
-        else if (model.isEndGame()) {
+            Platform.runLater(() -> {
+                stopStage();
+            });
+        } else if (model.isEndGame()) {
             //controlAnimation.stopAnimation();
-            Platform.runLater( () -> {endGame();});
+            Platform.runLater(() -> {
+                endGame();
+            });
         }
 
         inUpdate = false;
@@ -309,9 +748,9 @@ public abstract class Controller {
 
     /**
      * Get the look of a given element
+     *
      * @param element the element for which the look is asked.
      * @return an ElementLook object that is the look of the element
-     *
      */
     public ElementLook getElementLook(GameElement element) {
         return mapElementLook.get(element);
@@ -319,6 +758,7 @@ public abstract class Controller {
 
     /**
      * Get the look of the grid that owns an element
+     *
      * @param element the element for which the grid llok is asked.
      * @return an ElementLook object that is the look of the grid that owns the element.
      */
@@ -328,6 +768,7 @@ public abstract class Controller {
 
     /**
      * Set the location of an element at the center of the cell it is placed.
+     *
      * @param element
      */
     public void setElementLocationToCellCenter(GameElement element) {
@@ -339,7 +780,7 @@ public abstract class Controller {
         element.setLocation(center.getX(), center.getY());
     }
 
-    public void setCombinationLoop(){
+    public void setCombinationLoop() {
         this.Combination = setCombRand();
         System.out.println("Good combination");
     }
@@ -374,12 +815,13 @@ public abstract class Controller {
 
     /**
      * Get all visible and clickable elements that are at a given point in the scene coordinate space.
+     *
      * @param point the coordinate of a point
      * @return A list of game element
      */
     public List<GameElement> elementsAt(Coord2D point) {
         List<GameElement> list = new ArrayList<>();
-        for(GameElement element : model.getElements()) {
+        for (GameElement element : model.getElements()) {
             if ((element.isVisible()) && (element.isClickable())) {
                 ElementLook look = mapElementLook.get(element);
                 if ((look != null) && (look.isPointWithin(point))) {

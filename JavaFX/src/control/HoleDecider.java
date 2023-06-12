@@ -25,14 +25,18 @@ public class HoleDecider extends Decider {
 
     private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
-    public HoleDecider(Model model, Controller control) {
+    private String line;
+
+    public HoleDecider(Model model, Controller control, String line) {
         super(model, control);
+        this.line = line;
     }
 
     @Override
     public ActionList decide() {
+        return super.action(line);
         // do a cast get a variable of the real type to get access to the attributes of HoleStageModel
-        HoleStageModel stage = (HoleStageModel)model.getGameStage();
+        /*HoleStageModel stage = (HoleStageModel)model.getGameStage();
         HoleBoard board = stage.getBoard(); // get the board
         HolePawnPot pot = null; // the pot where to take a pawn
         GameElement pawn = null; // the pawn that is moved
@@ -71,6 +75,6 @@ public class HoleDecider extends Decider {
         // create the move action
         GameAction move = new MoveAction(model, pawn, "holeboard", rowDest, colDest, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
         actions.addSingleAction(move);
-        return actions;
+        return actions;*/
     }
 }

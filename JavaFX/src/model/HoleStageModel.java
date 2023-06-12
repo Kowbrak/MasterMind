@@ -297,16 +297,22 @@ public class HoleStageModel extends GameStageModel {
     }
 
     public void setNumberPawnDown() {
+        String line = "";
+        for(int i = 0; i<4; i++){
+            Pawn p2 = (Pawn) (testPot.getElement(0, i));
+            line += p2.getColor();
+        }
+        setNumberPawnDown(line);
+    }
+
+    public void setNumberPawnDown(String line) {
         Pawn redPawn = (Pawn) (redPot.getElement(11, 0));
         Pawn whitePawn = (Pawn) (blackPot.getElement(11, 0));
         String comb = "";
-        String line = "";
 
         for(int i = 0; i<4; i++){
             Pawn p = (Pawn) (combFinalPot.getElement(0, i));
             comb += p.getColor();
-            Pawn p2 = (Pawn) (testPot.getElement(0, i));
-            line += p2.getColor();
         }
 
         char[] combCharArray = comb.toCharArray();

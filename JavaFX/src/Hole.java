@@ -18,16 +18,6 @@ public class Hole extends Application {
 
         // create the global model
         Model model = new Model();
-        // add some players taking mode into account
-        /*if(mode == 1){
-            model.addComputerPlayer("computerDumb");
-        }else if(mode == 2){
-            model.addComputerPlayer("computerSmart1");
-        }else if(mode == 3){
-            model.addComputerPlayer("computerSmart2");
-        }else{
-            model.addHumanPlayer("player");
-        }*/
         // register a single stage for the game, called hole
         StageFactory.registerModelAndView("hole", "model.HoleStageModel", "view.HoleStageView");
         // create the root pane, using the subclass HoleRootPane

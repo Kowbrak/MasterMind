@@ -26,45 +26,43 @@ import java.util.List;
  * It gets the elements of the scene that are at the clicked position and prints them.
  */
 public class HoleControllerMouse extends ControllerMouse implements EventHandler<MouseEvent> {
-    private int pawnAPoser;
     private double[] pawnAPoserCoord = new double[2];
 
     public HoleControllerMouse(Model model, View view, Controller control) {
         super(model, view, control);
-        this.pawnAPoser = 0;
     }
 
     public void handle(MouseEvent event) {
-        // if mouse event capture is disabled in the model, just return
-        if (!model.isCaptureMouseEvent()) return;
-        if(!model.getCurrentPlayer().getName().equals("player")) return;
+        if(model.getCurrentPlayer().getType() == Player.HUMAN){
+            // if mouse event capture is disabled in the model, just return
+            if (!model.isCaptureMouseEvent()) return;
+            if(!model.getCurrentPlayer().getName().equals("player")) return;
 
-        // get the clic x,y in the whole scene (this includes the menu bar if it exists)
-        Coord2D clic = new Coord2D(event.getSceneX(),event.getSceneY());
-        // get elements at that position
-        List<GameElement> list = control.elementsAt(clic);
-        // for debug, uncomment next instructions to display x,y and elements at that postion
+            // get the clic x,y in the whole scene (this includes the menu bar if it exists)
+            Coord2D clic = new Coord2D(event.getSceneX(),event.getSceneY());
+            // get elements at that position
+            List<GameElement> list = control.elementsAt(clic);
+            // for debug, uncomment next instructions to display x,y and elements at that postion
 
-        System.out.println("click in "+event.getSceneX()+","+event.getSceneY());
-        for(GameElement element : list) {
-            System.out.println("element : "+element);
-        }
-        HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
+            System.out.println("click in "+event.getSceneX()+","+event.getSceneY());
+            for(GameElement element : list) {
+                System.out.println("element : "+element);
+            }
+            HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
 
-        //for debug
-        /*HolePawnPot combFinalPot = stageModel.getCombFinalPot();
-        List<GameElement>[][] listCombFinal = combFinalPot.getgrid();
-        for(int i = 0; i<listCombFinal[0].length;i++){
+            //for debug
+            /*HolePawnPot combFinalPot = stageModel.getCombFinalPot();
+            List<GameElement>[][] listCombFinal = combFinalPot.getgrid();
+            for(int i = 0; i<listCombFinal[0].length;i++){
             System.out.print(((Pawn)listCombFinal[0][i].get(0)).getColor()+" ");
-        }*/
+            }*/
 
-        if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
-            actionButton(clic, stageModel, event);
-        }else{
-            actionPawn(clic, list, stageModel, event);
+            if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
+                actionButton(clic, stageModel, event);
+            }else{
+                actionPawn(clic, list, stageModel, event);
+            }
         }
-
-
     }
 
     public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel,MouseEvent event){
@@ -146,8 +144,8 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
                 move = new MoveAction(model, invisiblePawn, "colorPawnPot", from[0], from[1], AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 0);
                 // add the action to the action list.
                 actions.addPackAction(move);
-                System.out.println("From Invisible Pawn : ["+ this.pawnAPoser+",0]"+" to ["+from[0]+","+from[1]+"]");
-                this.pawnAPoser++;
+                System.out.println("From Invisible Pawn : ["+ control.getPawnAToPos()+",0]"+" to ["+from[0]+","+from[1]+"]");
+                control.add1PawnAToPos();
                 invisiblePawn.setVisible(true);
                 invisiblePawn.setType(ElementTypes.getType("pawnSelect"));
 

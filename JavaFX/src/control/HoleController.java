@@ -18,7 +18,7 @@ public class HoleController extends Controller {
 
     public void nextPlayer() {
         // use the default method to compute next player
-        model.setNextPlayer();
+        /*model.setNextPlayer();
         // get the new player
         Player p = model.getCurrentPlayer();
         // change the text of the TextElement
@@ -29,6 +29,6 @@ public class HoleController extends Controller {
             HoleDecider decider = new HoleDecider(model,this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
-        }
+        }*/
     }
 }

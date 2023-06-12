@@ -1,6 +1,7 @@
 package boardifier.view;
 
 import boardifier.model.GameElement;
+import control.MasterMindControllerButton;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
