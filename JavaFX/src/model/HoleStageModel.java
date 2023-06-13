@@ -306,8 +306,12 @@ public class HoleStageModel extends GameStageModel {
     }
 
     public void setNumberPawnDown(String line) {
-        Pawn redPawn = (Pawn) (redPot.getElement(11, 0));
-        Pawn whitePawn = (Pawn) (blackPot.getElement(11, 0));
+        setNumberPawnDown(line, 11, 0);
+    }
+
+    public void setNumberPawnDown(String line, int row, int col) {
+        Pawn redPawn = (Pawn) (redPot.getElement(row, col));
+        Pawn whitePawn = (Pawn) (blackPot.getElement(row, col));
         String comb = "";
 
         for(int i = 0; i<4; i++){
@@ -337,6 +341,7 @@ public class HoleStageModel extends GameStageModel {
                 }
             }
         }
+        System.out.println("red : "+tmpred+", white : "+tmpWhite+", combFQINAL : "+comb+", line : "+line);
         redPawn.setNumber(tmpred);
         whitePawn.setNumber(tmpWhite);
     }

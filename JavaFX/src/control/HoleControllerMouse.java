@@ -33,7 +33,7 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
     }
 
     public void handle(MouseEvent event) {
-        if(model.getCurrentPlayer().getType() == Player.HUMAN){
+        //if(model.getCurrentPlayer().getType() == Player.HUMAN){
             // if mouse event capture is disabled in the model, just return
             if (!model.isCaptureMouseEvent()) return;
             if(!model.getCurrentPlayer().getName().equals("player")) return;
@@ -62,7 +62,7 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             }else{
                 actionPawn(clic, list, stageModel, event);
             }
-        }
+        //}
     }
 
     public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel,MouseEvent event){

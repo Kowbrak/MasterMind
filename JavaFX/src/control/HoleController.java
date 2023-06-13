@@ -18,15 +18,15 @@ public class HoleController extends Controller {
 
     public void nextPlayer() {
         // use the default method to compute next player
-        /*model.setNextPlayer();
+        //model.setNextPlayer();
         // get the new player
-        Player p = model.getCurrentPlayer();
+        /*Player p = model.getCurrentPlayer();
         // change the text of the TextElement
         HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
-        stageModel.getPlayerName().setText(p.getName());
+        //stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             System.out.println("COMPUTER PLAYS");
-            HoleDecider decider = new HoleDecider(model,this);
+            HoleDecider decider = new HoleDecider(model,this,);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
         }*/

@@ -55,10 +55,12 @@ public class MoveAction extends GameAction {
         if (animation != null) autoLoc = false;
         if (gridSrc == gridDest) {
             gridDest.moveElement(element, rowDest, colDest, autoLoc);
+            System.out.println("move"+gridSrc.getName()+" to "+gridDest.getName());
         }
         else {
             gridSrc.removeElement(element);
             gridDest.putElement(element, rowDest, colDest, autoLoc);
+            System.out.println("rm and put"+gridSrc.getName()+" to "+gridDest.getName());
         }
         onEndCallback.execute();
     }

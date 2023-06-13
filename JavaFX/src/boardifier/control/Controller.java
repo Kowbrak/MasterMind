@@ -1,6 +1,10 @@
 package boardifier.control;
 
 import boardifier.model.*;
+import boardifier.model.action.ActionList;
+import boardifier.model.action.GameAction;
+import boardifier.model.action.MoveAction;
+import boardifier.model.animation.AnimationTypes;
 import boardifier.view.*;
 import control.HoleDecider;
 import javafx.application.Platform;
@@ -9,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.stage.StageStyle;
+import model.HoleBoard;
+import model.HolePawnPot;
 import model.HoleStageModel;
 import model.Pawn;
 
@@ -39,7 +45,7 @@ public abstract class Controller {
             {'1', '2', '3', '4', '5', '6', '7', '8'},
             {'0', '0', '0', '0', '0', '0', '0', '0'}}; // 0 = not used, 1 = used
     private int[][] combs;
-    private int countCombs;
+    private int countCombs,diff;
     private boolean generateCombs;
 
     public Controller(Model model, View view) {
@@ -53,14 +59,15 @@ public abstract class Controller {
         this.generateCombs = true;
         this.countCombs = 0;
         this.pawnAToPos = 0;
+        this.diff = 0;
     }
 
     public int getPawnAToPos(){
         return this.pawnAToPos;
     }
 
-    public int add1PawnAToPos(){
-        return this.pawnAToPos++;
+    public void add1PawnAToPos(){
+        this.pawnAToPos++;
     }
 
     public void setControlKey(ControllerKey controlKey) {
@@ -199,16 +206,36 @@ public abstract class Controller {
             if (model.getCurrentPlayer().getName().equals("computerDumb")) {
                 System.out.println("computerDumb");
                 analyseComputer1();
-                playComputer();
             } else if (model.getCurrentPlayer().getName().equals("computerSmart1")) {
                 System.out.println("computerSmart1");
                 analyseComputer3();
-                playComputer();
-
             } else if (model.getCurrentPlayer().getName().equals("computerSmart2")) {
                 System.out.println("computerSmart2");
                 analyseComputer2();
-                playComputer();
+            }
+            showComb();
+            int i = 0;
+            getDiff();
+            while(i<12){
+                playComputer(i);
+                i++;
+            }
+        }
+    }
+
+    public void showComb(){
+        for(int i = 0; i<combs.length; i++){
+            for(int j = 0; j<combs[i].length; j++){
+                System.out.print(combs[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public void getDiff(){
+        for(int i = 0; i<combs.length; i++){
+            if(combs[i][0] == 0){
+                this.diff++;
             }
         }
     }
@@ -493,13 +520,17 @@ public abstract class Controller {
             lineTmp = setCombRand();
             char[] line = lineTmp.toCharArray();
             for(int j = 0; j < 4; j++){
-                combs[i][j] = convertColorChatToInt(line[j]);
+                combs[i][j] = convertColorCharToInt(line[j]);
             }
         }
     }
 
-    public void playComputer() {
-        String line = "";
+    public void playComputer(int row) {
+        if(combs[row][0] == 0){
+            return;
+        }
+        String lineString = "";
+        String lineInt = "";
         //showTab1D(combi);
         //showTab2D(combs);
         int tmp = 0;
@@ -510,24 +541,50 @@ public abstract class Controller {
                     break;
                 }
             }
-            line += detail[0][tmp];
+            lineInt += detail[1][tmp];
+            lineString += detail[0][tmp];
         }
         countCombs++;
-        System.out.println("Line : " + line);
+        System.out.println("LineString : " + lineString+", LineInt : " + lineInt);
 
         HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
-        //System.out.println("COMPUTER PLAYS");
-        HoleDecider decider = new HoleDecider(model, this, line);
-        ActionPlayer play = new ActionPlayer(model, this, decider, null);
+        ActionList actions = new ActionList(false);
+        actions.addActionPack();
+
+        gameStage.setNumberPawnDown(lineInt, row+this.diff, 0);
+
+        char[] lineChar = lineString.toCharArray();
+        HoleBoard board = gameStage.getBoard();
+        List<GameElement>[][] listBoard = board.getgrid();
+        HolePawnPot invisiblePot = gameStage.getInvisiblePot();
+        System.out.println(row+ ", " + listBoard[0].length);
+        for(int i = 0; i<listBoard[0].length; i++){
+            GridLook lookBoard = (GridLook) this.getElementLook(board);
+            List<GameElement>[][] listPotInvisible = invisiblePot.getgrid();
+            GameElement elementInvisible = listPotInvisible[0][0].get(this.getPawnAToPos());
+            System.out.println("pawnAtoPos : " + this.getPawnAToPos() + " row : " + row+this.diff + " col : " + i + ", pawn:"+ elementInvisible);
+            this.add1PawnAToPos();
+            Coord2D center = lookBoard.getRootPaneLocationForCellCenter(row+this.diff, i);
+            GameAction move = new MoveAction(model,elementInvisible,"MasterMindboard",row+this.diff,i, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 50);
+            actions.addPackAction(move);
+            elementInvisible.setVisible(true);
+            ((Pawn)elementInvisible).setColor(lineChar[i]);
+        }
+
+        ActionPlayer play = new ActionPlayer(model, this,actions);
         play.start();
-        gameStage.setNumberPawnDown(line);
+
+        System.out.println(row);
         if (gameStage.verifWin() == 4) {
-            stopStage();
+            model.stopStage();
             model.setEnd(1);
+        } else if (row == 11) {
+            model.stopStage();
+            model.setEnd(2);
         }
     }
 
-    public int convertColorChatToInt(char c){
+    public int convertColorCharToInt(char c){
         switch(c){
             case 'N':
                 return Pawn.PAWN_BLACK;
