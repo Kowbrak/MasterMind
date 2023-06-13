@@ -42,7 +42,7 @@ public class HoleRootPane extends RootPane {
         rbPater = new RadioButton("Mme.Paterlini");
         rbPater.setSelected(true);
         rbViez = new RadioButton("M.Viezzi");
-        rbMour = new RadioButton("M.Mourad");
+        rbMour = new RadioButton("M.Hakem");
         rbPerr = new RadioButton("M.Perrot");
         rbsalom = new RadioButton("M.Salomon");
         tgOpponent = new ToggleGroup();

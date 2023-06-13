@@ -46,7 +46,7 @@ public class HoleView extends View {
         // OPTION
         option = new Menu("Options");
         opponents=new Menu("Switch opponents");
-        Mourad =new MenuItem("Mr Mourad");
+        Mourad =new MenuItem("Mr Hakem");
         Perrot =new MenuItem("Mr Perrot");
         Pater =new MenuItem("Mrs Paterlini");
         Salom =new MenuItem("Mr Salomon");
