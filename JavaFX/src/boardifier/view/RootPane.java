@@ -1,5 +1,6 @@
 package boardifier.view;
 
+import boardifier.control.Controller;
 import boardifier.model.GameElement;
 import control.MasterMindControllerButton;
 import javafx.scene.Group;
@@ -24,15 +25,31 @@ public class RootPane extends Pane {
     protected RadioButton rbPater,rbViez,rbMour,rbPerr,rbsalom,rbPlayer,rbIARand,rbIA2,rbIA3,rbRandConfTrue,rbRandConfFalse;
     protected ToggleGroup tgOpponent,tgIA,tgRandConf;
     protected Button btnStart;
+    private Controller control;
 
     public RootPane() {
         this.gameStageView = null;
         group = new Group();
         //setBackground(Background.EMPTY);
         resetToDefault();
+        addListernerControlButton();
     }
 
-    public Button getButton(){
+    public void setController(Controller control){
+        this.control = control;
+    }
+
+    public Controller getController(){
+        return this.control;
+    }
+
+    public void addListernerControlButton(){
+        System.out.println("add listerner");
+        MasterMindControllerButton cb = new MasterMindControllerButton(this);
+        getButtonStart().setOnAction(cb);
+    }
+
+    public Button getButtonStart(){
         return this.btnStart;
     }
 

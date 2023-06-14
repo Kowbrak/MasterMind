@@ -105,7 +105,8 @@ public abstract class Controller {
         } else if (this.gameMode == 4) {
             model.addComputerPlayer("computerSmart2");
         }
-
+        this.pawnAToPos = 0;
+        this.countCombs = 0;
         startStage(firstStageName);
     }
 

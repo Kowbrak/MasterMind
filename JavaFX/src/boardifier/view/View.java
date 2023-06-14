@@ -3,6 +3,7 @@ package boardifier.view;
 import boardifier.model.GameElement;
 import boardifier.model.GameException;
 import boardifier.model.Model;
+import control.MasterMindControllerButton;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -91,6 +92,7 @@ public class View {
 
     public void resetView() {
         rootPane.resetToDefault();
+        rootPane.addListernerControlButton();
         if (scene != null) {
             // detach the current vbox as a root node of the current scene
             // so that it can be reused for the new scene.

@@ -5,6 +5,7 @@ import boardifier.view.RootPane;
 import boardifier.view.View;
 import control.HoleController;
 import control.HoleControllerAction;
+import control.MasterMindControllerButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;

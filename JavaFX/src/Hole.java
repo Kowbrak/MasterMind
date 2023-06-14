@@ -27,6 +27,7 @@ public class Hole extends Application {
         // create the controllers.
         HoleController control = new HoleController(model,view);
         // set the name of the first stage to create when the game is started
+        rootPane.setController(control);
         control.setFirstStageName("hole");
         // set the stage title
         stage.setTitle("MasterMind");
