@@ -70,6 +70,7 @@ public class MasterMindRootPane extends RootPane {
         hbox3_1.setAlignment(Pos.CENTER);
         hbox3_2.setAlignment(Pos.CENTER);
         Text text3 = new Text("Select the gamemode : ");
+        text3.getStyleClass().add("text3");
         text3.setFont(new Font(20));
         text3.setFill(Color.BLACK);
         rbPlayer = new RadioButton("Player");
