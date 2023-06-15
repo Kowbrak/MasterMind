@@ -66,13 +66,16 @@
     -fx-font-weight: bold;
     -fx-text-alignment: center;
     -fx-padding: 10 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
 }
 
 .text2, .text3, .text4 {
     -fx-font-size: 20px;
     -fx-fill: #555555;
     -fx-font-family: "Arial", sans-serif;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 3, 0, 0, 1);
 }
+
 
 .hbox2_1, .hbox2_2, .hbox3_1, .hbox3_2, .hbox4_1, .hbox4_2, .vbox2, .vbox3, .vbox4 {
     -fx-alignment: center;

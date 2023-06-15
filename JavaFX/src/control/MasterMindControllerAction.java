@@ -96,6 +96,8 @@ public class MasterMindControllerAction extends ControllerAction implements Even
             secondaryLayout.getChildren().add(secondLabel);
 
             Scene secondScene = new Scene(secondaryLayout, 1000, 100);
+            secondScene.getStylesheets().add("stylesheet.css");
+
 
             // New window (Stage)
             Stage newWindow = new Stage();
@@ -118,6 +120,7 @@ public class MasterMindControllerAction extends ControllerAction implements Even
             trollLayout.getChildren().add(troll);
 
             Scene trollScene = new Scene(trollLayout, 450, 250);
+            trollScene.getStylesheets().add("stylesheet.css");
 
             // Troll window (Stage)
             Stage trollWindow = new Stage();

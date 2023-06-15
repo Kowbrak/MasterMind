@@ -56,7 +56,7 @@ public class View {
         this.rootPane = rootPane;
         // create the vbox that will be the root node of the scene
         vbox = new VBox();
-        
+
 
         // create the menu bar if needed
         createMenuBar();
@@ -101,6 +101,7 @@ public class View {
         }
         // create the scene
         scene = new Scene(vbox);
+        scene.getStylesheets().add("stylesheet.css");
         // WARNING: must set the scene and resize the stage BEFORE defining the clipping.
         // Otherwise, dimensions won't be correct.
         stage.setScene(scene);

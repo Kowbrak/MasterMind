@@ -92,6 +92,7 @@ public class MasterMindRootPane extends RootPane {
         hbox4_1.setAlignment(Pos.CENTER);
         hbox4_2.setAlignment(Pos.CENTER);
         Text text4 = new Text("Random generation of the combination : ");
+        text4.getStyleClass().add("text4");
         text4.setFont(new Font(20));
         text4.setFill(Color.BLACK);
         rbRandConfTrue = new RadioButton("Yes");
