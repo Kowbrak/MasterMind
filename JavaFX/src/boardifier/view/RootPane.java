@@ -44,7 +44,7 @@ public class RootPane extends Pane {
     }
 
     public void addListernerControlButton(){
-        System.out.println("add listerner");
+        System.out.println("add listener");
         MasterMindControllerButton cb = new MasterMindControllerButton(this);
         getButtonStart().setOnAction(cb);
     }
