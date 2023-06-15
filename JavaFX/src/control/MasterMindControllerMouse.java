@@ -14,7 +14,7 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import model.MasterMindBoard;
 import model.MasterMindPawnPot;
-import model.HoleStageModel;
+import model.MasterMindStageModel;
 import model.Pawn;
 
 import java.util.List;
@@ -32,58 +32,58 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
 
     public void handle(MouseEvent event) {
         //if(model.getCurrentPlayer().getType() == Player.HUMAN){
-            // if mouse event capture is disabled in the model, just return
-            if (!model.isCaptureMouseEvent()) return;
-            if(!model.getCurrentPlayer().getName().equals("player")) return;
+        // if mouse event capture is disabled in the model, just return
+        if (!model.isCaptureMouseEvent()) return;
+        if (!model.getCurrentPlayer().getName().equals("player")) return;
 
-            // get the clic x,y in the whole scene (this includes the menu bar if it exists)
-            Coord2D clic = new Coord2D(event.getSceneX(),event.getSceneY());
-            // get elements at that position
-            List<GameElement> list = control.elementsAt(clic);
-            // for debug, uncomment next instructions to display x,y and elements at that postion
+        // get the clic x,y in the whole scene (this includes the menu bar if it exists)
+        Coord2D clic = new Coord2D(event.getSceneX(), event.getSceneY());
+        // get elements at that position
+        List<GameElement> list = control.elementsAt(clic);
+        // for debug, uncomment next instructions to display x,y and elements at that postion
 
-            System.out.println("click in "+event.getSceneX()+","+event.getSceneY());
-            for(GameElement element : list) {
-                System.out.println("element : "+element);
-            }
-            HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
+        System.out.println("click in " + event.getSceneX() + "," + event.getSceneY());
+        for (GameElement element : list) {
+            System.out.println("element : " + element);
+        }
+        MasterMindStageModel stageModel = (MasterMindStageModel) model.getGameStage();
 
-            //for debug
+        //for debug
             /*HolePawnPot combFinalPot = stageModel.getCombFinalPot();
             List<GameElement>[][] listCombFinal = combFinalPot.getgrid();
             for(int i = 0; i<listCombFinal[0].length;i++){
             System.out.print(((Pawn)listCombFinal[0][i].get(0)).getColor()+" ");
             }*/
 
-            if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
-                if(((ButtonElement)list.get(0)).getText().equals("Confirm")){
-                    actionButtonConfirm(clic, stageModel, event);
-                }else{
-                    actionButtonClear(stageModel);
-                }
-            }else{
-                actionPawn(clic, list, stageModel, event);
+        if ((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)) {
+            if (((ButtonElement) list.get(0)).getText().equals("Confirm")) {
+                actionButtonConfirm(clic, stageModel, event);
+            } else {
+                actionButtonClear(stageModel);
             }
+        } else {
+            actionPawn(clic, list, stageModel, event);
+        }
         //}
     }
 
-    public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel, MouseEvent event){
-        if (stageModel.getState() == HoleStageModel.STATE_SELECTPAWN) {
+    public void actionPawn(Coord2D clic, List<GameElement> list, MasterMindStageModel stageModel, MouseEvent event) {
+        if (stageModel.getState() == MasterMindStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("pawnSelect")) {
                     element.toggleSelected();
-                    stageModel.setState(HoleStageModel.STATE_SELECTDEST);
+                    stageModel.setState(MasterMindStageModel.STATE_SELECTDEST);
                     pawnAPoserCoord[0] = event.getSceneX();
                     pawnAPoserCoord[1] = event.getSceneY();
                     return; // do not allow another element to be selecte
                 }
             }
-        } else if (stageModel.getState() == HoleStageModel.STATE_SELECTDEST) {
+        } else if (stageModel.getState() == MasterMindStageModel.STATE_SELECTDEST) {
             // first check if the click is on the current selected pawn. In this case, unselect it
             for (GameElement element : list) {
                 if (element.isSelected()) {
                     element.toggleSelected();
-                    stageModel.setState(HoleStageModel.STATE_SELECTPAWN);
+                    stageModel.setState(MasterMindStageModel.STATE_SELECTPAWN);
                     pawnAPoserCoord[0] = 0.00;
                     pawnAPoserCoord[1] = 0.00;
                     return;
@@ -93,7 +93,8 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
             boolean testPotClicked = false;
             for (GameElement element : list) {
                 if (element == stageModel.getTestPot()) {
-                    testPotClicked = true; break;
+                    testPotClicked = true;
+                    break;
                 }
             }
             if (!testPotClicked) return;
@@ -114,20 +115,20 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
             int[] from = pot.getElementCell(pawn);
             //System.out.println(Arrays.toString(from));
             //System.out.println(Arrays.toString(dest));
-            System.out.println("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
+            System.out.println("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
             // if the destination cell is valid for the selected pawn
-            System.out.println("nb ligne : "+pawnPotTest.getNbRows()+" nb colonne : "+pawnPotTest.getNbCols());
+            System.out.println("nb ligne : " + pawnPotTest.getNbRows() + " nb colonne : " + pawnPotTest.getNbCols());
             if (pawnPotTest.canReachCell(dest[0], dest[1])) {
                 List<GameElement> InvisiblePotPawn = invisiblePot.getElements(0, 0);
-                System.out.println("InvisiblePotPawn : "+InvisiblePotPawn.toString());
+                System.out.println("InvisiblePotPawn : " + InvisiblePotPawn.toString());
                 GameElement invisiblePawn = null;
                 for (GameElement element : InvisiblePotPawn) {
-                    if(element.getClass() == Pawn.class) {
+                    if (element.getClass() == Pawn.class) {
                         invisiblePawn = element;
                         break;
                     }
                 }
-                System.out.println("Invisible Pawn : "+invisiblePawn.toString());
+                System.out.println("Invisible Pawn : " + invisiblePawn.toString());
                 double[] from2 = {pawnAPoserCoord[0], pawnAPoserCoord[1]};
                 pawnPotTest.setCellReachable(dest[0], dest[1], false);
                 // build the list of actions to do, and pass to the next player when done
@@ -146,16 +147,16 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
                 move = new MoveAction(model, invisiblePawn, "colorPawnPot", from[0], from[1], AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 0);
                 // add the action to the action list.
                 actions.addPackAction(move);
-                System.out.println("From Invisible Pawn : ["+ control.getPawnAToPos()+",0]"+" to ["+from[0]+","+from[1]+"]");
+                System.out.println("From Invisible Pawn : [" + control.getPawnAToPos() + ",0]" + " to [" + from[0] + "," + from[1] + "]");
                 control.add1PawnAToPos();
                 invisiblePawn.setVisible(true);
                 invisiblePawn.setType(ElementTypes.getType("pawnSelect"));
 
-                ((Pawn)invisiblePawn).setColor(((Pawn)pawn).getColor());
-                System.out.println("Couleurs : "+((Pawn)pawn).getColor());
+                ((Pawn) invisiblePawn).setColor(((Pawn) pawn).getColor());
+                System.out.println("Couleurs : " + ((Pawn) pawn).getColor());
 
                 stageModel.unselectAll();
-                stageModel.setState(HoleStageModel.STATE_SELECTPAWN);
+                stageModel.setState(MasterMindStageModel.STATE_SELECTPAWN);
                 ActionPlayer play = new ActionPlayer(model, control, actions);
                 System.out.println("-----------------------------------------------------------------------");
                 play.start();
@@ -163,24 +164,24 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
         }
     }
 
-    public void actionButtonConfirm(Coord2D clic, HoleStageModel stageModel, MouseEvent event){
+    public void actionButtonConfirm(Coord2D clic, MasterMindStageModel stageModel, MouseEvent event) {
         MasterMindPawnPot pawnPotTest = stageModel.getTestPot();
         List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
-        for(int i = 0; i<listTestPot[0].length;i++){
+        for (int i = 0; i < listTestPot[0].length; i++) {
             System.out.println(listTestPot[0][i].toString());
         }
         System.out.println("Board");
         MasterMindBoard board = stageModel.getBoard();
         List<GameElement>[][] listBoard = board.getgrid();
         GridLook lookBoard = (GridLook) control.getElementLook(board);
-        for(int i = 0; i<listBoard.length; i++){
-            for(int j= 0; j<listBoard[i].length; j++){
+        for (int i = 0; i < listBoard.length; i++) {
+            for (int j = 0; j < listBoard[i].length; j++) {
                 System.out.print(listBoard[i][j].toString());
             }
             System.out.println("");
         }
 
-        if(!checkListFull(listTestPot)) return;
+        if (!checkListFull(listTestPot)) return;
         System.out.println("actionBUTTON OUIIIIIIIIIIIIII");
         board = stageModel.getBoard();
         listBoard = board.getgrid();
@@ -191,12 +192,12 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
 
         stageModel.moveLineUp(listBoard, actions, control);
 
-        for(int i = 0; i<listTestPot[0].length; i++) {
+        for (int i = 0; i < listTestPot[0].length; i++) {
             GameElement element = listTestPot[0][i].get(0);
             Coord2D center = lookBoard.getRootPaneLocationForCellCenter(11, i);
-            GameAction move = new MoveAction(model,element,"MasterMindboard",11,i, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
+            GameAction move = new MoveAction(model, element, "MasterMindboard", 11, i, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
             actions.addPackAction(move);
-            pawnPotTest.setCellReachable(0,i,true);
+            pawnPotTest.setCellReachable(0, i, true);
         }
 
         stageModel.upPawnRedWhite();
@@ -216,7 +217,7 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
         System.out.println("---------------------------------------------------------------------");
     }
 
-    public void actionButtonClear(HoleStageModel stageModel){
+    public void actionButtonClear(MasterMindStageModel stageModel) {
         System.out.println("actionBUTTON CLEAR");
         MasterMindPawnPot pawnPotTest = stageModel.getTestPot();
         List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
@@ -227,29 +228,29 @@ public class MasterMindControllerMouse extends ControllerMouse implements EventH
         ActionList actions = new ActionList(false);
         actions.addActionPack();
 
-        for(int i = 0; i<listTestPot[0].length; i++){
-            if(listTestPot[0][i].isEmpty()) continue;
+        for (int i = 0; i < listTestPot[0].length; i++) {
+            if (listTestPot[0][i].isEmpty()) continue;
             GameElement element = listTestPot[0][i].get(0);
-            System.out.println("Element : "+element.toString());
-            Coord2D center = ((GridLook)control.getElementLook(invisiblePot)).getRootPaneLocationForCellCenter(0, 0);
-            GameAction move = new MoveAction(model,element,"invisiblePawnPot",0,0, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 10);
+            System.out.println("Element : " + element.toString());
+            Coord2D center = ((GridLook) control.getElementLook(invisiblePot)).getRootPaneLocationForCellCenter(0, 0);
+            GameAction move = new MoveAction(model, element, "invisiblePawnPot", 0, 0, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 10);
             actions.addPackAction(move);
-            pawnPotTest.setCellReachable(0,i,true);
+            pawnPotTest.setCellReachable(0, i, true);
             element.setVisible(false);
         }
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
     }
 
-    public boolean checkListFull(List<GameElement>[][] list){
-        if(list == null){
+    public boolean checkListFull(List<GameElement>[][] list) {
+        if (list == null) {
             return false;
         }
 
-        for(int i = 0; i < list.length; i++){
-            for(int j = 0; j < list[i].length; j++){
+        for (int i = 0; i < list.length; i++) {
+            for (int j = 0; j < list[i].length; j++) {
                 //System.out.println(list[i][j].isEmpty()+", i :"+i+", j : "+j);
-                if(list[i][j].isEmpty()){
+                if (list[i][j].isEmpty()) {
                     return false;
                 }
             }

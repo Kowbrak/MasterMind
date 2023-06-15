@@ -8,7 +8,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import model.HoleStageModel;
+import model.MasterMindStageModel;
 
 public class MasterMindView extends View {
 
@@ -38,27 +38,27 @@ public class MasterMindView extends View {
         menuBar.getMenus().add(menu1);*/
 
         // MENU
-        menu=new Menu("Menu");
-        newGame=new MenuItem("New Game");
-        stop=new MenuItem("Stop");
-        quit=new MenuItem("Quit");
+        menu = new Menu("Menu");
+        newGame = new MenuItem("New Game");
+        stop = new MenuItem("Stop");
+        quit = new MenuItem("Quit");
         menu.getItems().addAll(newGame, stop, quit);
 
         // OPTION
         option = new Menu("Options");
-        opponents=new Menu("Switch opponents");
-        Mourad =new MenuItem("Mr Hakem");
-        Perrot =new MenuItem("Mr Perrot");
-        Pater =new MenuItem("Mrs Paterlini");
-        Salom =new MenuItem("Mr Salomon");
-        Viezzi =new MenuItem("Mr Viezzi");
+        opponents = new Menu("Switch opponents");
+        Mourad = new MenuItem("Mr Hakem");
+        Perrot = new MenuItem("Mr Perrot");
+        Pater = new MenuItem("Mrs Paterlini");
+        Salom = new MenuItem("Mr Salomon");
+        Viezzi = new MenuItem("Mr Viezzi");
         option.getItems().addAll(opponents);
         opponents.getItems().addAll(Mourad, Perrot, Pater, Salom, Viezzi);
 
         // AIDE
         help = new Menu("Help");
         hello = new MenuItem("Hello");
-        rule=new MenuItem("Game Rules");
+        rule = new MenuItem("Game Rules");
         help1 = new Menu("Help");
         help2 = new Menu("Help");
         help3 = new Menu("Help");
@@ -71,7 +71,7 @@ public class MasterMindView extends View {
         help4.getItems().addAll(help5);
 
         // MENUBAR
-        menuBar=new MenuBar();
+        menuBar = new MenuBar();
         menuBar.getMenus().addAll(menu, option, help);
     }
 
@@ -87,14 +87,20 @@ public class MasterMindView extends View {
         return quit;
     }
 
-    public MenuItem getMenuRule() { return rule; }
+    public MenuItem getMenuRule() {
+        return rule;
+    }
 
-    public MenuItem getMenuHelp5() { return help5; }
+    public MenuItem getMenuHelp5() {
+        return help5;
+    }
 
-    public MenuItem getMenuHello() { return hello; }
+    public MenuItem getMenuHello() {
+        return hello;
+    }
 
 
     public Button getButton() {
-        return ((HoleStageModel) model.getGameStage()).getButtonElementConfirm().getButton();
+        return ((MasterMindStageModel) model.getGameStage()).getButtonElementConfirm().getButton();
     }
 }

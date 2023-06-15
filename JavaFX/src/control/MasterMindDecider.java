@@ -12,7 +12,7 @@ import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GridLook;
 import model.MasterMindBoard;
 import model.MasterMindPawnPot;
-import model.HoleStageModel;
+import model.MasterMindStageModel;
 
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +33,7 @@ public class MasterMindDecider extends Decider {
 
     /**
      * Decide what to do
+     *
      * @return
      */
     @Override
@@ -40,21 +41,21 @@ public class MasterMindDecider extends Decider {
         char[] lineChar = line.toCharArray();
         ActionList actions = new ActionList(false);
         actions.addActionPack();
-        HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
+        MasterMindStageModel stageModel = (MasterMindStageModel) model.getGameStage();
 
         MasterMindPawnPot invisiblePot = stageModel.getInvisiblePot();
         MasterMindBoard board = stageModel.getBoard();
         List<GameElement>[][] listBoard = board.getgrid();
-        stageModel.moveLineUp(listBoard, actions,control);
+        stageModel.moveLineUp(listBoard, actions, control);
         System.out.println(this.row + ", " + listBoard[0].length);
-        for(int i = 0; i<listBoard[0].length; i++){
+        for (int i = 0; i < listBoard[0].length; i++) {
             GridLook lookBoard = (GridLook) control.getElementLook(board);
             List<GameElement>[][] listPotInvisible = invisiblePot.getgrid();
             GameElement elementInvisible = listPotInvisible[0][0].get(control.getPawnAToPos());
-            System.out.println("pawnAtoPos : " + control.getPawnAToPos() + " row : " + this.row + " col : " + i + ", pawn:"+ elementInvisible);
+            System.out.println("pawnAtoPos : " + control.getPawnAToPos() + " row : " + this.row + " col : " + i + ", pawn:" + elementInvisible);
             control.add1PawnAToPos();
             Coord2D center = lookBoard.getRootPaneLocationForCellCenter(this.row, i);
-            GameAction move = new MoveAction(model,elementInvisible,"MasterMindboard",this.row,i, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 50);
+            GameAction move = new MoveAction(model, elementInvisible, "MasterMindboard", this.row, i, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 50);
             actions.addPackAction(move);
             elementInvisible.setVisible(true);
         }

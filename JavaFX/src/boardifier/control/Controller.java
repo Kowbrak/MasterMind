@@ -14,7 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.StageStyle;
 import model.MasterMindBoard;
 import model.MasterMindPawnPot;
-import model.HoleStageModel;
+import model.MasterMindStageModel;
 import model.Pawn;
 
 import java.util.*;
@@ -547,7 +547,7 @@ public abstract class Controller {
         countCombs++;
         System.out.println("LineString : " + lineString+", LineInt : " + lineInt);
 
-        HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
+        MasterMindStageModel gameStage = (MasterMindStageModel) model.getGameStage();
         ActionList actions = new ActionList(false);
         actions.addActionPack();
 
