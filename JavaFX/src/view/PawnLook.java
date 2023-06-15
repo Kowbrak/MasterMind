@@ -31,7 +31,7 @@ public class PawnLook extends ElementLook {
         }else if(pawn.getColor() == Pawn.PAWN_RED){
             circle.setFill(Color.RED);
         }else if(pawn.getColor() == Pawn.PAWN_WHITE){
-            circle.setFill(Color.WHITE);
+            circle.setFill(Color.WHITESMOKE);
         }else if(pawn.getColor() == Pawn.PAWN_BLUE){
             circle.setFill(Color.BLUE);
         }else if(pawn.getColor() == Pawn.PAWN_YELLOW) {
@@ -58,6 +58,8 @@ public class PawnLook extends ElementLook {
             text.setFill(Color.valueOf("0x000000"));
             circle.setStroke(Color.GRAY);
         }
+        circle.setStroke(Color.GRAY);
+
 
         if(!this.numberVisible){
             text.setVisible(false);
