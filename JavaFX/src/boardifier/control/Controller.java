@@ -202,6 +202,7 @@ public abstract class Controller {
         controlAnimation.startAnimation();
         System.out.println("Comb : " + this.Combination);
 
+        resetCombs();
         if (model.getCurrentPlayer().getType() == Player.COMPUTER) {
             if (model.getCurrentPlayer().getName().equals("computerDumb")) {
                 System.out.println("computerDumb");
@@ -223,6 +224,14 @@ public abstract class Controller {
         }
     }
 
+    public void resetCombs(){
+        for(int i = 0; i<combs.length; i++){
+            for(int j = 0; j<combs[i].length; j++){
+                combs[i][j] = 0;
+            }
+        }
+    }
+
     public void showComb(){
         for(int i = 0; i<combs.length; i++){
             for(int j = 0; j<combs[i].length; j++){
@@ -233,6 +242,7 @@ public abstract class Controller {
     }
 
     public void getDiff(){
+        this.diff = 0;
         for(int i = 0; i<combs.length; i++){
             if(combs[i][0] == 0){
                 this.diff++;
