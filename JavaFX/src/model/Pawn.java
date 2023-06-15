@@ -97,8 +97,6 @@ public class Pawn extends GameElement {
         System.out.println("color changed to "+this.color);
         this.lookChanged = true;
     }
-
-
     public void setColor(int n) {
         this.color = n;
         this.lookChanged = true;

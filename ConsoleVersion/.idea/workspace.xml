@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/view/RootPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/view/RootPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/model/Pawn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/MasterMindStageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/MasterMindStageView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnLook.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnLook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/MasterMindStageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/MasterMindStageFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/model/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/model/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/MasterMindStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/MasterMindStageView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +44,8 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="MasterMindConsoleLoop" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MasterMindConsoleLoop" />
+    <configuration name="MasterMindConsole" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MasterMindConsole" />
       <module name="Boardifier" />
       <option name="PROGRAM_PARAMETERS" value="3" />
       <method v="2">
@@ -69,6 +76,7 @@
       <workItem from="1686664054003" duration="1828000" />
       <workItem from="1686856734813" duration="13000" />
       <workItem from="1686858904648" duration="1708000" />
+      <workItem from="1686863836967" duration="426000" />
     </task>
     <servers />
   </component>

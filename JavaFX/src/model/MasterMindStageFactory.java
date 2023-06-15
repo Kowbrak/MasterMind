@@ -50,7 +50,7 @@ public class MasterMindStageFactory extends StageElementsFactory {
 
         Pawn[] redPawns = new Pawn[12];
         for(int i=0;i<12;i++) {
-            redPawns[i] = new Pawn(0, Pawn.PAWN_RED, stageModel, Pawn.TYPE_NONE);
+            redPawns[i] = new Pawn(0, Pawn.PAWN_RED, stageModel, Pawn.TYPE_NONE);;
         }
         stageModel.setRedPawns(redPawns);
         Pawn[] colorPawns = new Pawn[8];

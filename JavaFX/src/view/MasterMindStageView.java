@@ -39,11 +39,11 @@ public class MasterMindStageView extends GameStageView {
         }
 
         for(int i=0;i<48;i++) {
-            addLook(new PawnLook(20, model.getInvisiblePawn()[i], true));
+            addLook(new PawnLook(20, model.getInvisiblePawn()[i], false));
         }
 
         for(int i=0;i<8;i++) {
-            addLook(new PawnLook(20, model.getColorPawn()[i], true));
+            addLook(new PawnLook(20, model.getColorPawn()[i], false));
         }
 
         addLook(new TextLook(12, "0x000000", model.getPlayerName()));

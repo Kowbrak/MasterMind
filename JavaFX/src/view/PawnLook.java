@@ -102,7 +102,13 @@ public class PawnLook extends ElementLook {
         }else if(pawn.getColor() == Pawn.PAWN_PURPLE) {
             circle.setFill(Color.PURPLE);
         }
-        text.setText(String.valueOf(pawn.getNumber()));
+        if(!this.numberVisible){
+            text.setVisible(false);
+        }
+        else{
+            text.setVisible(true);
+            text.setText(String.valueOf(pawn.getNumber()));
+        }
         if (pawn.getColor() == Pawn.PAWN_BLACK) {
             text.setFill(Color.valueOf("0xFFFFFF"));
             circle.setStroke(Color.valueOf("0xFFFFFF"));
