@@ -6,15 +6,14 @@ import boardifier.model.action.GameAction;
 import boardifier.model.action.MoveAction;
 import boardifier.model.animation.AnimationTypes;
 import boardifier.view.*;
-import control.HoleDecider;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.stage.StageStyle;
-import model.HoleBoard;
-import model.HolePawnPot;
+import model.MasterMindBoard;
+import model.MasterMindPawnPot;
 import model.HoleStageModel;
 import model.Pawn;
 
@@ -555,9 +554,9 @@ public abstract class Controller {
         gameStage.setNumberPawnDown(lineInt, row+this.diff, 0);
 
         char[] lineChar = lineString.toCharArray();
-        HoleBoard board = gameStage.getBoard();
+        MasterMindBoard board = gameStage.getBoard();
         List<GameElement>[][] listBoard = board.getgrid();
-        HolePawnPot invisiblePot = gameStage.getInvisiblePot();
+        MasterMindPawnPot invisiblePot = gameStage.getInvisiblePot();
         System.out.println(row+ ", " + listBoard[0].length);
         for(int i = 0; i<listBoard[0].length; i++){
             GridLook lookBoard = (GridLook) this.getElementLook(board);

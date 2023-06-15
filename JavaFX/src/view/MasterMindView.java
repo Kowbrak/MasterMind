@@ -10,7 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import model.HoleStageModel;
 
-public class HoleView extends View {
+public class MasterMindView extends View {
 
     private MenuItem menuStart;
     private MenuItem menuIntro;
@@ -18,7 +18,7 @@ public class HoleView extends View {
     public Menu menu, option, help, opponents, help1, help2, help3, help4;
     public MenuItem newGame, stop, quit, rule, hello, Pater, Perrot, Salom, Mourad, Viezzi, help5;
 
-    public HoleView(Model model, Stage stage, RootPane rootPane) {
+    public MasterMindView(Model model, Stage stage, RootPane rootPane) {
         super(model, stage, rootPane);
     }
 

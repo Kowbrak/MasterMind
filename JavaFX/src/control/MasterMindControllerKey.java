@@ -11,9 +11,9 @@ import javafx.scene.input.*;
  * A basic keystrokes handler.
  * Generally useless for board games, but it can still be used if needed
  */
-public class HoleControllerKey extends ControllerKey implements EventHandler<KeyEvent> {
+public class MasterMindControllerKey extends ControllerKey implements EventHandler<KeyEvent> {
 
-    public HoleControllerKey(Model model, View view, Controller control) {
+    public MasterMindControllerKey(Model model, View view, Controller control) {
         super(model, view, control);
     }
 

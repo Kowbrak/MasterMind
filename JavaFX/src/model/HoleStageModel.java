@@ -17,16 +17,16 @@ public class HoleStageModel extends GameStageModel {
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
     public final static int STATE_FULL = 3;
 
-    private HoleBoard board;
+    private MasterMindBoard board;
     private Pawn[] testPawns;
 
-    private HolePawnPot testPot;
+    private MasterMindPawnPot testPot;
     Rect rectanglePot;
-    private HolePawnPot blackPot;
-    private HolePawnPot redPot;
-    private HolePawnPot colorPot;
-    private HolePawnPot invisiblePot;
-    private HolePawnPot combFinalPot;
+    private MasterMindPawnPot blackPot;
+    private MasterMindPawnPot redPot;
+    private MasterMindPawnPot colorPot;
+    private MasterMindPawnPot invisiblePot;
+    private MasterMindPawnPot combFinalPot;
 
 
     private Pawn[] blackPawns;
@@ -50,20 +50,20 @@ public class HoleStageModel extends GameStageModel {
 
     //-----------------------------------------------------------------------------------\\
     //-------------------------------Getters and setters---------------------------------\\
-    public HoleBoard getBoard() {
+    public MasterMindBoard getBoard() {
         return board;
     }
-    public void setBoard(HoleBoard board) {
+    public void setBoard(MasterMindBoard board) {
         this.board = board;
         addGrid(board);
     }
 
 
 
-    public HolePawnPot getBlackPot() {
+    public MasterMindPawnPot getBlackPot() {
         return blackPot;
     }
-    public void setBlackPot(HolePawnPot blackPot) {
+    public void setBlackPot(MasterMindPawnPot blackPot) {
         this.blackPot = blackPot;
         addGrid(blackPot);
     }
@@ -77,10 +77,10 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public HolePawnPot getCombFinalPot() {
+    public MasterMindPawnPot getCombFinalPot() {
         return combFinalPot;
     }
-    public void setCombFinalPot(HolePawnPot CombFinalPot) {
+    public void setCombFinalPot(MasterMindPawnPot CombFinalPot) {
         this.combFinalPot = CombFinalPot;
         addGrid(CombFinalPot);
     }
@@ -94,10 +94,10 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public HolePawnPot getRedPot() {
+    public MasterMindPawnPot getRedPot() {
         return redPot;
     }
-    public void setRedPot(HolePawnPot redPot) {
+    public void setRedPot(MasterMindPawnPot redPot) {
         this.redPot = redPot;
         addGrid(redPot);
     }
@@ -112,10 +112,10 @@ public class HoleStageModel extends GameStageModel {
     }
 
 
-    public HolePawnPot getInvisiblePot() {
+    public MasterMindPawnPot getInvisiblePot() {
         return invisiblePot;
     }
-    public void setInvisiblePot(HolePawnPot invisiblePot) {
+    public void setInvisiblePot(MasterMindPawnPot invisiblePot) {
         this.invisiblePot = invisiblePot;
         addGrid(invisiblePot);
     }
@@ -129,10 +129,10 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public HolePawnPot getTestPot() {
+    public MasterMindPawnPot getTestPot() {
         return testPot;
     }
-    public void setTestPot(HolePawnPot testPot) {
+    public void setTestPot(MasterMindPawnPot testPot) {
         this.testPot = testPot;
         addGrid(testPot);
     }
@@ -146,10 +146,10 @@ public class HoleStageModel extends GameStageModel {
         }
     }
 
-    public HolePawnPot getColorPot() {
+    public MasterMindPawnPot getColorPot() {
         return colorPot;
     }
-    public void setColorPot(HolePawnPot colorPot) {
+    public void setColorPot(MasterMindPawnPot colorPot) {
         this.colorPot = colorPot;
         addGrid(colorPot);
     }
@@ -280,7 +280,7 @@ public class HoleStageModel extends GameStageModel {
     }
 
     public void moveLineUp(List<GameElement>[][] list2,ActionList actions, Controller control){
-        HoleBoard board = this.getBoard();
+        MasterMindBoard board = this.getBoard();
         GridLook lookBoard = (GridLook) control.getElementLook(board);
         boolean find = false;
         for(int i = 0; i<list2.length-1; i++){
@@ -374,6 +374,6 @@ public class HoleStageModel extends GameStageModel {
 
     @Override
     public StageElementsFactory getDefaultElementFactory() {
-        return new HoleStageFactory(this);
+        return new MasterMindStageFactory(this);
     }
 }

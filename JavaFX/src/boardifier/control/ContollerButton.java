@@ -4,7 +4,6 @@ import boardifier.model.Model;
 import boardifier.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import model.HoleStageModel;
 
 public class ContollerButton implements EventHandler<ActionEvent> {
     protected Model model;

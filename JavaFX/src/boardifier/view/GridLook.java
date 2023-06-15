@@ -5,8 +5,7 @@ import boardifier.model.GameElement;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import model.HoleBoard;
-import model.HolePawnPot;
+import model.MasterMindPawnPot;
 
 public abstract class GridLook extends ElementLook {
 
@@ -37,7 +36,7 @@ public abstract class GridLook extends ElementLook {
 
     public GridLook(int width, int height, int borderWidth, String borderColor, GameElement element, boolean isVertical) {
         super(element);
-        HolePawnPot pot = (HolePawnPot) element;
+        MasterMindPawnPot pot = (MasterMindPawnPot) element;
         if(isVertical){
             this.cellWidth = height / pot.getNbPawns();
             this.cellHeight = height / pot.getNbPawns();

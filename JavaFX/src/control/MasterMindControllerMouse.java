@@ -12,8 +12,8 @@ import boardifier.view.GridLook;
 import boardifier.view.View;
 import javafx.event.*;
 import javafx.scene.input.*;
-import model.HoleBoard;
-import model.HolePawnPot;
+import model.MasterMindBoard;
+import model.MasterMindPawnPot;
 import model.HoleStageModel;
 import model.Pawn;
 
@@ -23,10 +23,10 @@ import java.util.List;
  * A basic mouse controller that just grabs the mouse clicks and prints out some informations.
  * It gets the elements of the scene that are at the clicked position and prints them.
  */
-public class HoleControllerMouse extends ControllerMouse implements EventHandler<MouseEvent> {
+public class MasterMindControllerMouse extends ControllerMouse implements EventHandler<MouseEvent> {
     private double[] pawnAPoserCoord = new double[2];
 
-    public HoleControllerMouse(Model model, View view, Controller control) {
+    public MasterMindControllerMouse(Model model, View view, Controller control) {
         super(model, view, control);
     }
 
@@ -67,7 +67,7 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         //}
     }
 
-    public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel,MouseEvent event){
+    public void actionPawn(Coord2D clic, List<GameElement> list, HoleStageModel stageModel, MouseEvent event){
         if (stageModel.getState() == HoleStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("pawnSelect")) {
@@ -98,10 +98,10 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             }
             if (!testPotClicked) return;
             // get the board, pot,  and the selected pawn to simplify code in the following
-            HolePawnPot pawnPotTest = stageModel.getTestPot();
+            MasterMindPawnPot pawnPotTest = stageModel.getTestPot();
             // by default get black pot
-            HolePawnPot pot = stageModel.getColorPot();
-            HolePawnPot invisiblePot = stageModel.getInvisiblePot();
+            MasterMindPawnPot pot = stageModel.getColorPot();
+            MasterMindPawnPot invisiblePot = stageModel.getInvisiblePot();
             GameElement pawn = model.getSelected().get(0);
 
             // thirdly, get the clicked cell in the 3x3 board
@@ -164,13 +164,13 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
     }
 
     public void actionButtonConfirm(Coord2D clic, HoleStageModel stageModel, MouseEvent event){
-        HolePawnPot pawnPotTest = stageModel.getTestPot();
+        MasterMindPawnPot pawnPotTest = stageModel.getTestPot();
         List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
         for(int i = 0; i<listTestPot[0].length;i++){
             System.out.println(listTestPot[0][i].toString());
         }
         System.out.println("Board");
-        HoleBoard board = stageModel.getBoard();
+        MasterMindBoard board = stageModel.getBoard();
         List<GameElement>[][] listBoard = board.getgrid();
         GridLook lookBoard = (GridLook) control.getElementLook(board);
         for(int i = 0; i<listBoard.length; i++){
@@ -218,10 +218,10 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
 
     public void actionButtonClear(HoleStageModel stageModel){
         System.out.println("actionBUTTON CLEAR");
-        HolePawnPot pawnPotTest = stageModel.getTestPot();
+        MasterMindPawnPot pawnPotTest = stageModel.getTestPot();
         List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
 
-        HolePawnPot invisiblePot = stageModel.getInvisiblePot();
+        MasterMindPawnPot invisiblePot = stageModel.getInvisiblePot();
         List<GameElement> InvisiblePotPawn = invisiblePot.getElements(0, 0);
 
         ActionList actions = new ActionList(false);

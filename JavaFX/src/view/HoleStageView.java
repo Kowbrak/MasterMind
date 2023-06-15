@@ -20,7 +20,7 @@ public class HoleStageView extends GameStageView {
     public void createLooks() {
         HoleStageModel model = (HoleStageModel)gameStageModel;
 
-        addLook(new HoleBoardLook(670, model.getBoard()));
+        addLook(new MasterMindBoardLook(670, model.getBoard()));
         addLook(new PawnPotLook(140,670,model.getBlackPot()));
         addLook(new PawnPotLook(140,670,model.getRedPot()));
         addLook(new PawnPotLook(223,140,model.getTestPot()));

@@ -1,10 +1,10 @@
-import control.HoleController;
+import control.MasterMindController;
 import boardifier.control.StageFactory;
 import boardifier.model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.HoleRootPane;
-import view.HoleView;
+import view.MasterMindView;
 
 public class Hole extends Application {
 
@@ -23,9 +23,9 @@ public class Hole extends Application {
         // create the root pane, using the subclass HoleRootPane
         HoleRootPane rootPane = new HoleRootPane();
         // create the global view.
-        HoleView view = new HoleView(model, stage, rootPane);
+        MasterMindView view = new MasterMindView(model, stage, rootPane);
         // create the controllers.
-        HoleController control = new HoleController(model,view);
+        MasterMindController control = new MasterMindController(model,view);
         // set the name of the first stage to create when the game is started
         rootPane.setController(control);
         control.setFirstStageName("hole");

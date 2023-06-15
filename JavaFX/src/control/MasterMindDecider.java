@@ -10,25 +10,22 @@ import boardifier.model.action.GameAction;
 import boardifier.model.action.MoveAction;
 import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GridLook;
-import javafx.geometry.Point2D;
-import model.HoleBoard;
-import model.HolePawnPot;
+import model.MasterMindBoard;
+import model.MasterMindPawnPot;
 import model.HoleStageModel;
-import model.Pawn;
 
-import java.awt.*;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-public class HoleDecider extends Decider {
+public class MasterMindDecider extends Decider {
 
     private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
     private String line;
     private int row;
 
-    public HoleDecider(Model model, Controller control, String line, int row) {
+    public MasterMindDecider(Model model, Controller control, String line, int row) {
         super(model, control);
         this.line = line;
         this.row = row;
@@ -45,8 +42,8 @@ public class HoleDecider extends Decider {
         actions.addActionPack();
         HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
 
-        HolePawnPot invisiblePot = stageModel.getInvisiblePot();
-        HoleBoard board = stageModel.getBoard();
+        MasterMindPawnPot invisiblePot = stageModel.getInvisiblePot();
+        MasterMindBoard board = stageModel.getBoard();
         List<GameElement>[][] listBoard = board.getgrid();
         stageModel.moveLineUp(listBoard, actions,control);
         System.out.println(this.row + ", " + listBoard[0].length);

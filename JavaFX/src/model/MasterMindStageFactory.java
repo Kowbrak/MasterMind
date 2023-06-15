@@ -2,9 +2,9 @@ package model;
 
 import boardifier.model.*;
 
-public class HoleStageFactory extends StageElementsFactory {
+public class MasterMindStageFactory extends StageElementsFactory {
     private HoleStageModel stageModel;
-    public HoleStageFactory(GameStageModel gameStageModel) {
+    public MasterMindStageFactory(GameStageModel gameStageModel) {
         super(gameStageModel);
         stageModel = (HoleStageModel) gameStageModel;
     }
@@ -16,20 +16,20 @@ public class HoleStageFactory extends StageElementsFactory {
     @Override
     public void setup(String comb) {
         // create the board
-        stageModel.setBoard(new HoleBoard(140-85+10, 20, stageModel));
+        stageModel.setBoard(new MasterMindBoard(140-85+10, 20, stageModel));
         //create the pots
-        HolePawnPot blackPot = new HolePawnPot(0,20, stageModel, 12, 1, "whitePawnPot");
+        MasterMindPawnPot blackPot = new MasterMindPawnPot(0,20, stageModel, 12, 1, "whitePawnPot");
         stageModel.setBlackPot(blackPot);
-        HolePawnPot redPot = new HolePawnPot((140-85)+(670/3)+10*2,20, stageModel, 12 ,1, "redPawnPot");
+        MasterMindPawnPot redPot = new MasterMindPawnPot((140-85)+(670/3)+10*2,20, stageModel, 12 ,1, "redPawnPot");
         stageModel.setRedPot(redPot);
-        HolePawnPot testPot = new HolePawnPot((140-85)+10,670 + 20, stageModel,1,4, "testPawnPot");
+        MasterMindPawnPot testPot = new MasterMindPawnPot((140-85)+10,670 + 20, stageModel,1,4, "testPawnPot");
         stageModel.setTestPot(testPot);
-        HolePawnPot invisiblePot = new HolePawnPot(20, 20, stageModel, 48, 1, "invisiblePawnPot");
+        MasterMindPawnPot invisiblePot = new MasterMindPawnPot(20, 20, stageModel, 48, 1, "invisiblePawnPot");
         stageModel.setInvisiblePot(invisiblePot);
         invisiblePot.setVisible(false);
-        HolePawnPot colorPot = new HolePawnPot((140-85)+(670/3)+(140-85)+10*3,20, stageModel,8,1, "colorPawnPot");
+        MasterMindPawnPot colorPot = new MasterMindPawnPot((140-85)+(670/3)+(140-85)+10*3,20, stageModel,8,1, "colorPawnPot");
         stageModel.setColorPot(colorPot);
-        HolePawnPot combFinalPot = new HolePawnPot(20, 20, stageModel, 1, 4, "combFinalPawnPot");
+        MasterMindPawnPot combFinalPot = new MasterMindPawnPot(20, 20, stageModel, 1, 4, "combFinalPawnPot");
         stageModel.setCombFinalPot(combFinalPot);
         combFinalPot.setVisible(false);
 

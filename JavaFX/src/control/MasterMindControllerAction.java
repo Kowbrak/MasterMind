@@ -11,7 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import view.HoleView;
+import view.MasterMindView;
 
 import java.util.Optional;
 
@@ -20,15 +20,15 @@ import java.util.Optional;
  * Action events are mostly generated when there are user interactions with widgets like
  * buttons, checkboxes, menus, ...
  */
-public class HoleControllerAction extends ControllerAction implements EventHandler<ActionEvent> {
+public class MasterMindControllerAction extends ControllerAction implements EventHandler<ActionEvent> {
 
     // to avoid lots of casts, create an attribute that matches the instance type.
-    private HoleView holeView;
+    private MasterMindView masterMindView;
 
-    public HoleControllerAction(Model model, View view, Controller control) {
+    public MasterMindControllerAction(Model model, View view, Controller control) {
         super(model, view, control);
         // take the view parameter ot define a local view attribute with the real instance type, i.e. HoleView.
-        holeView = (HoleView) view;
+        masterMindView = (MasterMindView) view;
 
         // set handlers dedicated to menu items
         setMenuHandlers();
@@ -48,7 +48,7 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
     private void setMenuHandlers() {
 
         // set event handler on the MenuStart item
-        holeView.getMenuStart().setOnAction(e -> {
+        masterMindView.getMenuStart().setOnAction(e -> {
             try {
                 control.startGame();
             }
@@ -58,20 +58,20 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
             }
         });
         // set event handler on the MenuIntro item
-        holeView.getMenuIntro().setOnAction(e -> {
+        masterMindView.getMenuIntro().setOnAction(e -> {
             Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
             quitAlert.setTitle("Stop the game");
             quitAlert.setHeaderText(null);
             quitAlert.setContentText("Are you sure you want to stop the game in progress ?");
             Optional<ButtonType> result = quitAlert.showAndWait();
             if (result.get() == ButtonType.OK){
-                holeView.resetView();
+                masterMindView.resetView();
             } else {
                 control.stopGame();
             }
         });
         // set event handler on the MenuQuit item
-        holeView.getMenuQuit().setOnAction(e -> {
+        masterMindView.getMenuQuit().setOnAction(e -> {
             Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
             quitAlert.setTitle("Exit the game");
             quitAlert.setHeaderText(null);
@@ -84,7 +84,7 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
             }
         });
         // set event handler on the MenuRule item
-        holeView.getMenuRule().setOnAction(e -> {
+        masterMindView.getMenuRule().setOnAction(e -> {
             Label secondLabel = new Label("The goal of Mastermind is to win as many rounds as possible.\n" +
                     "\n" +
                     "The player who has to find the secret combination wins a round if he manages to do so in a maximum of 12 moves.\n" +
@@ -105,7 +105,7 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
         });
 
         // set event handler on the MenuHelp5 item
-        holeView.getMenuHelp5().setOnAction(e -> {
+        masterMindView.getMenuHelp5().setOnAction(e -> {
             Label troll = new Label(
                     "You're determined, wow !\n" +
                             "Did you think I was going to help you ?\n" +
@@ -127,7 +127,7 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
         });
 
         // set event handler on the MenuHello item
-        holeView.getMenuHello().setOnAction(e -> {
+        masterMindView.getMenuHello().setOnAction(e -> {
             Label hello = new Label("Welcome to our beautiful game: MasterMind !\n" +
                     "To begin, choose your opponent from the \"Options\" menu.\n" +
                     "Then, click on \"New Game\" to start playing.\n" +

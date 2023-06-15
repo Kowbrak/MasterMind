@@ -5,7 +5,7 @@ import boardifier.view.GridLook;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
-import model.HolePawnPot;
+import model.MasterMindPawnPot;
 
 public class PawnPotLook extends GridLook {
 
@@ -20,7 +20,7 @@ public class PawnPotLook extends GridLook {
      */
     public PawnPotLook(int width, int height, GameElement element) {
         super(width, height, 0, "0X000000", element, height > width);
-        int nbPanws = ((HolePawnPot)element).getNbPawns();
+        int nbPanws = ((MasterMindPawnPot)element).getNbPawns();
         cells = new Rectangle[nbPanws];
         // create the rectangles.
         for(int i=0;i<nbPanws;i++) {

@@ -1,19 +1,16 @@
 package control;
 
-import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
 import boardifier.model.Model;
-import boardifier.model.Player;
 import boardifier.view.View;
-import model.HoleStageModel;
 
-public class HoleController extends Controller {
+public class MasterMindController extends Controller {
 
-    public HoleController(Model model, View view) {
+    public MasterMindController(Model model, View view) {
         super(model, view);
-        setControlKey(new HoleControllerKey(model, view, this));
-        setControlMouse(new HoleControllerMouse(model, view, this));
-        setControlAction (new HoleControllerAction(model, view, this));
+        setControlKey(new MasterMindControllerKey(model, view, this));
+        setControlMouse(new MasterMindControllerMouse(model, view, this));
+        setControlAction (new MasterMindControllerAction(model, view, this));
     }
 
     public void nextPlayer() {
