@@ -698,29 +698,29 @@ public abstract class Controller {
             String message = "";
             if (model.getIdWinner() == 1) {
                 if(this.opponent == 1){
-                    message =  "Congratulation "+ model.getPlayers().get(0).getName() +", you won, your level of analysis is superior to mine. I will have to review my lessons.";
+                    message =  "Congratulation "+ model.getPlayers().get(0).getName() +", you won. your level of analysis is superior to mine. I will have to review my lessons.";
                 }else if(this.opponent == 2){
-                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Viezzi";
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", your level of mastery of the game's rights is excellent.";
                 }else if(this.opponent == 3){
-                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Hakem";
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +",  you've won. Your classes and methods are well-written for finding the combination. I am jealous.";
                 }else if(this.opponent == 4) {
-                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Perrot";
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", you've won. So, I'm going to go play with my guitar.";
                 }else if(this.opponent == 5) {
-                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Salomon";
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +",  You have a better network than mine, that's why you won.";
                 }else{
                     message = model.getPlayers().get(0).getName() + " wins";
                 }
             } else {
                 if(this.opponent == 1){
-                    message =  "You lost "+ model.getPlayers().get(0).getName() +"! You will have to review your analysis lessons if you want to beat me.";
+                    message =  "You lost "+ model.getPlayers().get(0).getName() +" ! You will have to review your analysis lessons if you want to beat me.";
                 }else if(this.opponent == 2){
-                    message = "message de defaite contre M. Viezzi";
+                    message = "You lost "+ model.getPlayers().get(0).getName() +" ! I master the rights to this game, you've lost.";
                 }else if(this.opponent == 3){
-                    message = "message de defaite contre M. Hakem";
+                    message = "You lost "+ model.getPlayers().get(0).getName() +" ! My classes and methods are well implemented, the combination was challenging. You've lost !";
                 }else if(this.opponent == 4) {
-                    message = "message de defaite contre M. Perrot";
+                    message = "You lost "+ model.getPlayers().get(0).getName() +" ! Go implement a guitar, it's better.";
                 }else if(this.opponent == 5) {
-                    message = "message de defaite contre M. Salomon";
+                    message = "My network informed me of the victory, you've lost."+ model.getPlayers().get(0).getName();
                 }else{
                     message = "You loose";
                 }
