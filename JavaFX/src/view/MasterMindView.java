@@ -42,6 +42,10 @@ public class MasterMindView extends View {
         newGame = new MenuItem("New Game");
         stop = new MenuItem("Stop");
         quit = new MenuItem("Quit");
+        menu.getStyleClass().add("menu");
+        newGame.getStyleClass().add("menu-item");
+        stop.getStyleClass().add("menu-item");
+        quit.getStyleClass().add("menu-item");
         menu.getItems().addAll(newGame, stop, quit);
 
         // OPTION
@@ -53,6 +57,13 @@ public class MasterMindView extends View {
         Salom = new MenuItem("Mr Salomon");
         Viezzi = new MenuItem("Mr Viezzi");
         option.getItems().addAll(opponents);
+        option.getStyleClass().add("menu");
+        opponents.getStyleClass().add("menu");
+        Mourad.getStyleClass().add("menu-item");
+        Perrot.getStyleClass().add("menu-item");
+        Pater.getStyleClass().add("menu-item");
+        Salom.getStyleClass().add("menu-item");
+        Viezzi.getStyleClass().add("menu-item");
         opponents.getItems().addAll(Mourad, Perrot, Pater, Salom, Viezzi);
 
         // AIDE
@@ -69,6 +80,14 @@ public class MasterMindView extends View {
         help2.getItems().addAll(help3);
         help3.getItems().addAll(help4);
         help4.getItems().addAll(help5);
+        help.getStyleClass().add("menu");
+        hello.getStyleClass().add("menu-item");
+        rule.getStyleClass().add("menu-item");
+        help1.getStyleClass().add("menu-item");
+        help2.getStyleClass().add("menu-item");
+        help3.getStyleClass().add("menu-item");
+        help4.getStyleClass().add("menu-item");
+        help5.getStyleClass().add("menu-item");
 
         // MENUBAR
         menuBar = new MenuBar();
