@@ -104,6 +104,8 @@ public class RootPane extends Pane {
             // add the group to the pane
             getChildren().clear();
             getChildren().add(group);
+            group.getStyleClass().add("group");
+            group.getStylesheets().add("stylesheet.css");
         }
     }
 

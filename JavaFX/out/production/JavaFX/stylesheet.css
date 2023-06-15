@@ -10,16 +10,16 @@
 }
 
 
-/*.button {*/
-/*    -fx-font-size: 15px;*/
-/*    -fx-text-fill: #ffffff;*/
-/*    -fx-pref-width: 100px;*/
-/*    -fx-alignment: center;*/
-/*    -fx-font-family: "Arial", sans-serif;*/
-/*    -fx-background-color: #4e9af1;*/
-/*    -fx-background-radius: 5;*/
-/*    -fx-cursor: hand;*/
-/*}*/
+#button {
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 100px;
+    -fx-alignment: center;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-background-color: #4e9af1;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
 
 .button:hover {
     -fx-background-color: #3c83c6;
@@ -118,4 +118,6 @@
 .menu .menu-item {
     -fx-text-fill: white;
 }
-
+.group{
+    -fx-background-color: #3c83c6;
+}

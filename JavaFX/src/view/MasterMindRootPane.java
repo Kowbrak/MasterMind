@@ -107,7 +107,7 @@ public class MasterMindRootPane extends RootPane {
 
         VBox vbox5 = new VBox();
         btnStart = new Button("Start");
-        btnStart.getStyleClass().add("button");
+        btnStart.setId("button");
         btnStart.setFont(new Font(15));
         btnStart.setTextFill(Color.BLACK);
         btnStart.setAlignment(Pos.CENTER);
