@@ -72,7 +72,10 @@ public class MasterMindView extends View {
 
         // MENUBAR
         menuBar = new MenuBar();
+        menuBar.getStyleClass().add("menu-bar");
+
         menuBar.getMenus().addAll(menu, option, help);
+
     }
 
     public MenuItem getMenuStart() {

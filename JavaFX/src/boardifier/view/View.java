@@ -56,6 +56,7 @@ public class View {
         this.rootPane = rootPane;
         // create the vbox that will be the root node of the scene
         vbox = new VBox();
+        
 
         // create the menu bar if needed
         createMenuBar();
