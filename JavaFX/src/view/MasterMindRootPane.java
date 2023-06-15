@@ -72,11 +72,11 @@ public class MasterMindRootPane extends RootPane {
         text3.getStyleClass().add("text3");
         text3.setFont(new Font(20));
         text3.setFill(Color.BLACK);
-        rbPlayer = new RadioButton("Player");
+        rbPlayer = new RadioButton("PvP");
         rbPlayer.setSelected(true);
-        rbIARand = new RadioButton("AI_Random");
-        rbIA2 = new RadioButton("AI_2");
-        rbIA3 = new RadioButton("AI_3");
+        rbIARand = new RadioButton("Random AI");
+        rbIA2 = new RadioButton("AI 2");
+        rbIA3 = new RadioButton("Ai 3");
         tgIA = new ToggleGroup();
         tgIA.getToggles().addAll(rbPlayer,rbIARand,rbIA2,rbIA3);
         hbox3_1.getChildren().add(text3);
