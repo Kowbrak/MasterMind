@@ -11,7 +11,7 @@
 
 .text1 {
     -fx-font-size: 36px;
-    -fx-fill: #333333;
+    -fx-fill: #000000;
     -fx-font-family: "Arial", sans-serif;
     -fx-font-weight: bold;
     -fx-text-alignment: center;
@@ -20,7 +20,7 @@
 
 .text2, .text3 {
     -fx-font-size: 20px;
-    -fx-fill: #555555;
+    -fx-fill: #000000;
     -fx-font-family: "Arial", sans-serif;
 }
 
