@@ -722,7 +722,7 @@ public abstract class Controller {
                 }
             } else {
                 if(this.opponent == 1){
-                    message =  "You lost "+ model.getPlayers().get(0).getName() +" ! You will have to review your analysis lessons if you want to beat me.";
+                    message =  "You lost "+ model.getPlayers().get(0).getName() +" ! therefore, you will have to review my courses on analysis to win next time.";
                 }else if(this.opponent == 2){
                     message = "You lost "+ model.getPlayers().get(0).getName() +" ! I master the rights to this game, you've lost.";
                 }else if(this.opponent == 3){
