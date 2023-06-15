@@ -22,6 +22,9 @@ public class HoleView extends View {
         super(model, stage, rootPane);
     }
 
+    /**
+     * Create the menu bar, nav bar
+     */
     @Override
     protected void createMenuBar() {
         /* menuBar = new MenuBar();

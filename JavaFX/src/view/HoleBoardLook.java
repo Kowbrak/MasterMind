@@ -12,6 +12,11 @@ public class HoleBoardLook extends GridLook {
     // the array of rectangle composing the grid
     private Rectangle[][] cells;
 
+    /**
+     * Visual of the board
+     * @param size the size of the board
+     * @param element the element to be displayed
+     */
     public HoleBoardLook(int size, GameElement element) {
         // NB: To have more liberty in the design, GridLook does not compute the cell size from the dimension of the element parameter.
         // If we create the 3x3 board by adding a border of 10 pixels, with cells occupying all the available surface,
@@ -36,6 +41,9 @@ public class HoleBoardLook extends GridLook {
         }
     }
 
+    /**
+     * Update the look of the board
+     */
     @Override
     public void onChange() {
         // in a pawn is selected, reachableCells changes. Thus, the look of the board must also changes.

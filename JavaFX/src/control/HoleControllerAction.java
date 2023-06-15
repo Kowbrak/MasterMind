@@ -42,6 +42,9 @@ public class HoleControllerAction extends ControllerAction implements EventHandl
 
     }
 
+    /**
+     * Set the event handlers on the menu items
+     */
     private void setMenuHandlers() {
 
         // set event handler on the MenuStart item

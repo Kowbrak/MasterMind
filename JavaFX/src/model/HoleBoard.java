@@ -19,6 +19,10 @@ public class HoleBoard extends GridElement {
 
     }
 
+    /**
+     * Set the valid cells for the next turn
+     * @param number
+     */
     public void setValidCells(int number) {
         resetReachableCells(false);
         List<Point> valid = computeValidCells(number);
@@ -29,6 +33,12 @@ public class HoleBoard extends GridElement {
         }
         lookChanged = true;
     }
+
+    /**
+     * Compute the valid cells for the next turn
+     * @param number
+     * @return
+     */
     public List<Point> computeValidCells(int number) {
         List<Point> lst = new ArrayList<>();
         Pawn p = null;

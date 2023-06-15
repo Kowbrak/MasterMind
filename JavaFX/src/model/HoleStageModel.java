@@ -48,6 +48,8 @@ public class HoleStageModel extends GameStageModel {
         setupCallbacks();
     }
 
+    //-----------------------------------------------------------------------------------\\
+    //-------------------------------Getters and setters---------------------------------\\
     public HoleBoard getBoard() {
         return board;
     }
@@ -212,7 +214,11 @@ public class HoleStageModel extends GameStageModel {
             }
         });
     }
+    //-----------------------------------------------------------------------------------\\
 
+    /**
+     * Compute the result of the party
+     */
     private void computePartyResult() {
         int idWinner = -1;
         // get the empty cell, which should be in 2D at [0,0], [0,2], [1,1], [2,0] or [2,2]
@@ -357,6 +363,10 @@ public class HoleStageModel extends GameStageModel {
         whitePawn.setNumber(tmpWhite);
     }
 
+    /**
+     * Check if the player won
+     * @return
+     */
     public int verifWin(){
         Pawn p = (Pawn) (redPot.getElement(11, 0));
         return p.getNumber();

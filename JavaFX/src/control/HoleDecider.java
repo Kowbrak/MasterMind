@@ -34,6 +34,10 @@ public class HoleDecider extends Decider {
         this.row = row;
     }
 
+    /**
+     * Decide what to do
+     * @return
+     */
     @Override
     public ActionList decide() {
         char[] lineChar = line.toCharArray();

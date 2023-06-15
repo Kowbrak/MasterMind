@@ -13,6 +13,9 @@ public class HoleStageView extends GameStageView {
         height = 550;
     }
 
+    /**
+     * Create the looks of the stage
+     */
     @Override
     public void createLooks() {
         HoleStageModel model = (HoleStageModel)gameStageModel;

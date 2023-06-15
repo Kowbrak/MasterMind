@@ -14,6 +14,13 @@ public class PawnLook extends ElementLook {
     private Circle circle;
     private boolean numberVisible;
     private Text text;
+
+    /**
+     * Visual of the pawn
+     * @param radius
+     * @param element
+     * @param numberVisible
+     */
     public PawnLook(int radius, GameElement element,boolean numberVisible) {
         super(element);
         this.numberVisible=numberVisible;

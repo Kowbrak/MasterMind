@@ -9,6 +9,10 @@ public class HoleStageFactory extends StageElementsFactory {
         stageModel = (HoleStageModel) gameStageModel;
     }
 
+    /**
+     * Setup the stage
+     * @param comb
+     */
     @Override
     public void setup(String comb) {
         // create the board
@@ -99,6 +103,11 @@ public class HoleStageFactory extends StageElementsFactory {
         stageModel.setButtonElementClear(buttonElementClear);
     }
 
+    /**
+     * Find the color of the pawn
+     * @param c
+     * @return
+     */
     public int findColor(char c) {
         switch(c){
             case 'N':

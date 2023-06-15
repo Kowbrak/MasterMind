@@ -19,6 +19,9 @@ public class HoleRootPane extends RootPane {
         super();
     }
 
+    /**
+     * Create the page of the game, initialization of the components
+     */
     @Override
     public void createDefaultGroup() {
         VBox vbox = new VBox();
