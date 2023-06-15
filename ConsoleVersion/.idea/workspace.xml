@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnLook.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnLook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnPotLook.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/PawnPotLook.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/PawnLook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/PawnPotLook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/PawnPotLook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

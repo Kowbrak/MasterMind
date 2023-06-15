@@ -24,7 +24,7 @@ public class PawnPotLook extends GridLook {
         cells = new Rectangle[nbPanws];
         // create the rectangles.
         for(int i=0;i<nbPanws;i++) {
-            cells[i] = new Rectangle(cellWidth, cellHeight, Color.WHITE);
+            cells[i] = new Rectangle(cellWidth, cellHeight, Color.ANTIQUEWHITE);
             cells[i].setStrokeWidth(3);
             cells[i].setStrokeMiterLimit(10);
             cells[i].setStrokeType(StrokeType.CENTERED);
