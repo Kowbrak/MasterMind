@@ -1,0 +1,50 @@
+.vbox {
+    -fx-background-color: #f5f5f5;
+    -fx-background-image: url('img/index.jpeg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-opacity: 0.8;
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+.text1 {
+    -fx-font-size: 36px;
+    -fx-fill: #333333;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-padding: 10 0;
+}
+
+.text2, .text3 {
+    -fx-font-size: 20px;
+    -fx-fill: #555555;
+    -fx-font-family: "Arial", sans-serif;
+}
+
+.hbox2_1, .hbox2_2, .hbox3_1, .hbox3_2, .hbox4_1, .hbox4_2, .vbox2, .vbox3, .vbox4 {
+    -fx-alignment: center;
+}
+
+.radio-button {
+    -fx-font-size: 16px;
+    -fx-padding: 5;
+    -fx-font-family: "Arial", sans-serif;
+}
+
+.button {
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 100px;
+    -fx-alignment: center;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-background-color: #4e9af1;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3c83c6;
+}
