@@ -71,7 +71,7 @@ public class MasterMindConsoleLoop {
             time += clock.getMilliSec();
         }
         percentage_win = (double) gameWin / (double) loop * 100;
-        System.out.println(percentage_win+ "winning %");
+        System.out.println(percentage_win+ "% winning");
         System.out.println("Average number of moves played : "+average/loop);
         System.out.println("Number of victory : "+gameWin);
         System.out.println("Number of losses : "+gameLose);

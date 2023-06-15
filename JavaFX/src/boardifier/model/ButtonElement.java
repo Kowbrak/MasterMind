@@ -11,7 +11,7 @@ public class ButtonElement extends GameElement{
     }
 
     public Button getButton() {
-        System.out.println(button);
+        //System.out.println(button);
         return button;
     }
 

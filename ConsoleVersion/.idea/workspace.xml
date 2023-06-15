@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2023_21_58__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2023_21_58__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MasterMindConsoleLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MasterMindConsoleLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/JavaFX.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/JavaFX.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/ButtonElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/ButtonElement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/MasterMindRootPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/view/MasterMindRootPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/ButtonElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/ButtonElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaFX/src/view/MasterMindRootPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/view/MasterMindRootPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,22 +32,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/ConsoleVersion",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/ConsoleVersion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="MasterMindConsoleLoop" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MasterMindConsoleLoop" />
+      <module name="Boardifier" />
+      <option name="PROGRAM_PARAMETERS" value="3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -58,6 +80,7 @@
       <workItem from="1686576981017" duration="1093000" />
       <workItem from="1686664054003" duration="1828000" />
       <workItem from="1686856734813" duration="13000" />
+      <workItem from="1686858904648" duration="1493000" />
     </task>
     <servers />
   </component>

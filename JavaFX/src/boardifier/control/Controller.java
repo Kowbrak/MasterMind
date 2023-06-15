@@ -132,11 +132,11 @@ public abstract class Controller {
         switch (tmp) {
             case "Player":
                 return 1;
-            case "IA_Random":
+            case "AI_Random":
                 return 2;
-            case "IA_2":
+            case "AI_2":
                 return 3;
-            case "IA_3":
+            case "AI_3":
                 return 4;
             default:
                 return 0;

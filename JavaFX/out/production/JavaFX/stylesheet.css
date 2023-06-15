@@ -23,14 +23,14 @@
 .button {
     -fx-font-size: 10px;
     -fx-text-fill: #ffffff;
-    -fx-pref-width: 80px;
-    -fx-pref-height: 20px;
+    /*-fx-pref-width: 80px;*/
+    /*-fx-pref-height: 20px;*/
     -fx-alignment: center;
     -fx-font-family: "Arial", sans-serif;
     -fx-background-color: #4e9af1;
     -fx-background-radius: 5;
     -fx-cursor: hand;
-    -fx-padding: 0 5px 0 0; /* Ajouter une marge de 5 pixels à droite */
+    -fx-padding: 0 5px 0 0;
 }
 
 
