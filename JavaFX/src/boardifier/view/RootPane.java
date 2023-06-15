@@ -33,6 +33,8 @@ public class RootPane extends Pane {
         //setBackground(Background.EMPTY);
         resetToDefault();
         addListernerControlButton();
+        this.getStyleClass().add("rootPane");
+        this.getStylesheets().add("stylesheet.css");
     }
 
     public void setController(Controller control){
