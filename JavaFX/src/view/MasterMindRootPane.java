@@ -44,7 +44,6 @@ public class MasterMindRootPane extends RootPane {
         Text text2 = new Text("Select the opponent : ");
         text2.setFont(new Font(20));
         text2.getStyleClass().add("text2");
-        text2.setFill(Color.BLACK);
         rbPater = new RadioButton("Mme.Paterlini");
         rbPater.setSelected(true);
         rbViez = new RadioButton("M.Viezzi");
