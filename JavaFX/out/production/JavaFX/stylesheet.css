@@ -4,7 +4,7 @@
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-opacity: 0.8;
+    /*-fx-opacity: 0.8;*/
     -fx-padding: 20;
     -fx-spacing: 20;
 }
@@ -136,5 +136,5 @@
 }
 
 .rootPane{
-    -fx-background-color: #4ccae0;
+    /*-fx-background-color: #4ccae0;*/
 }
