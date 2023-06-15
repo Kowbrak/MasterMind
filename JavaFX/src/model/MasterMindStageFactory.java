@@ -24,7 +24,7 @@ public class MasterMindStageFactory extends StageElementsFactory {
         stageModel.setRedPot(redPot);
         MasterMindPawnPot testPot = new MasterMindPawnPot((140-85)+10,670 + 20, stageModel,1,4, "testPawnPot");
         stageModel.setTestPot(testPot);
-        MasterMindPawnPot invisiblePot = new MasterMindPawnPot(20, 20, stageModel, 48, 1, "invisiblePawnPot");
+        MasterMindPawnPot invisiblePot = new MasterMindPawnPot(1000, 20, stageModel, 48, 1, "invisiblePawnPot");
         stageModel.setInvisiblePot(invisiblePot);
         invisiblePot.setVisible(false);
         MasterMindPawnPot colorPot = new MasterMindPawnPot((140-85)+(670/3)+(140-85)+10*3,20, stageModel,8,1, "colorPawnPot");
