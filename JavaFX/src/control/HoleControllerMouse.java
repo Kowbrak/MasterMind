@@ -11,14 +11,12 @@ import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GridLook;
 import boardifier.view.View;
 import javafx.event.*;
-import javafx.geometry.Point2D;
 import javafx.scene.input.*;
 import model.HoleBoard;
 import model.HolePawnPot;
 import model.HoleStageModel;
 import model.Pawn;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,7 +56,11 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             }*/
 
             if((list.size() == 1) && (list.get(0).getClass() == ButtonElement.class)){
-                actionButton(clic, stageModel, event);
+                if(((ButtonElement)list.get(0)).getText().equals("Confirm")){
+                    actionButtonConfirm(clic, stageModel, event);
+                }else{
+                    actionButtonClear(stageModel);
+                }
             }else{
                 actionPawn(clic, list, stageModel, event);
             }
@@ -161,7 +163,7 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
         }
     }
 
-    public void actionButton(Coord2D clic, HoleStageModel stageModel,MouseEvent event){
+    public void actionButtonConfirm(Coord2D clic, HoleStageModel stageModel, MouseEvent event){
         HolePawnPot pawnPotTest = stageModel.getTestPot();
         List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
         for(int i = 0; i<listTestPot[0].length;i++){
@@ -212,6 +214,31 @@ public class HoleControllerMouse extends ControllerMouse implements EventHandler
             model.setEnd(2);
         }
         System.out.println("---------------------------------------------------------------------");
+    }
+
+    public void actionButtonClear(HoleStageModel stageModel){
+        System.out.println("actionBUTTON CLEAR");
+        HolePawnPot pawnPotTest = stageModel.getTestPot();
+        List<GameElement>[][] listTestPot = pawnPotTest.getgrid();
+
+        HolePawnPot invisiblePot = stageModel.getInvisiblePot();
+        List<GameElement> InvisiblePotPawn = invisiblePot.getElements(0, 0);
+
+        ActionList actions = new ActionList(false);
+        actions.addActionPack();
+
+        for(int i = 0; i<listTestPot[0].length; i++){
+            if(listTestPot[0][i].isEmpty()) continue;
+            GameElement element = listTestPot[0][i].get(0);
+            System.out.println("Element : "+element.toString());
+            Coord2D center = ((GridLook)control.getElementLook(invisiblePot)).getRootPaneLocationForCellCenter(0, 0);
+            GameAction move = new MoveAction(model,element,"invisiblePawnPot",0,0, AnimationTypes.MOVE_TELEPORT, center.getX(), center.getY(), 10);
+            actions.addPackAction(move);
+            pawnPotTest.setCellReachable(0,i,true);
+            element.setVisible(false);
+        }
+        ActionPlayer play = new ActionPlayer(model, control, actions);
+        play.start();
     }
 
     public boolean checkListFull(List<GameElement>[][] list){

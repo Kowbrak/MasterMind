@@ -1,7 +1,6 @@
 package model;
 
 import boardifier.model.*;
-import javafx.scene.shape.Rectangle;
 
 public class HoleStageFactory extends StageElementsFactory {
     private HoleStageModel stageModel;
@@ -89,10 +88,15 @@ public class HoleStageFactory extends StageElementsFactory {
         text.setLocationType(GameElement.LOCATION_TOPLEFT);
         stageModel.setPlayerName(text);
 
-        ButtonElement buttonElement = new ButtonElement("Confirm", stageModel);
-        buttonElement.setLocation((140-85)*5+30, 670 + 20 + (double) (140 - 85) /4);
-        buttonElement.setLocationType(GameElement.LOCATION_TOPLEFT);
-        stageModel.setButtonElement(buttonElement);
+        ButtonElement buttonElementConfirm = new ButtonElement("Confirm", stageModel);
+        buttonElementConfirm.setLocation((140-85)*5+30, 670 + 20 + (double) (140 - 85) /4);
+        buttonElementConfirm.setLocationType(GameElement.LOCATION_TOPLEFT);
+        stageModel.setButtonElementConfirm(buttonElementConfirm);
+
+        ButtonElement buttonElementClear = new ButtonElement("Clear", stageModel);
+        buttonElementClear.setLocation(0, 670 + 14 + (double) (140 - 85) /4);
+        buttonElementClear.setLocationType(GameElement.LOCATION_TOPLEFT);
+        stageModel.setButtonElementClear(buttonElementClear);
     }
 
     public int findColor(char c) {

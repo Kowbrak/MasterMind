@@ -37,7 +37,8 @@ public class HoleStageModel extends GameStageModel {
     private int blackPawnsToPlay;
     private int redPawnsToPlay;
     private TextElement playerName;
-    private ButtonElement ButtonElement;
+    private ButtonElement ButtonElementConfirm;
+    private ButtonElement ButtonElementClear;
 
     public HoleStageModel(String name, Model model) {
         super(name, model);
@@ -168,13 +169,22 @@ public class HoleStageModel extends GameStageModel {
         addElement(playerName);
     }
 
-    public ButtonElement getButtonElement() {
-        return ButtonElement;
+    public ButtonElement getButtonElementConfirm() {
+        return ButtonElementConfirm;
     }
-    public void setButtonElement(ButtonElement ButtonElement) {
-        this.ButtonElement = ButtonElement;
+    public void setButtonElementConfirm(ButtonElement ButtonElement) {
+        this.ButtonElementConfirm = ButtonElement;
         addElement(ButtonElement);
     }
+
+    public ButtonElement getButtonElementClear() {
+        return ButtonElementClear;
+    }
+    public void setButtonElementClear(ButtonElement ButtonElement) {
+        this.ButtonElementClear = ButtonElement;
+        addElement(ButtonElement);
+    }
+
 
     private void setupCallbacks() {
         onSelectionChange( () -> {
@@ -274,6 +284,7 @@ public class HoleStageModel extends GameStageModel {
                 find = true;
                 for(int j= 0; j<list2[i].length; j++){
                     GameElement element = list2[i+1][j].get(0);
+                    //System.out.println("element : "+element);
                     Coord2D center = lookBoard.getRootPaneLocationForCellCenter(i, j);
                     GameAction move = new MoveAction(model,element,"MasterMindboard",i,j, AnimationTypes.MOVE_LINEARPROP, center.getX(), center.getY(), 10);
                     actions.addPackAction(move);

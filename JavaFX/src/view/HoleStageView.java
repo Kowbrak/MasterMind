@@ -4,9 +4,7 @@ import boardifier.model.GameStageModel;
 import boardifier.view.ButtonLook;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
-import control.MasterMindControllerButton;
 import model.HoleStageModel;
-import model.Rect;
 
 public class HoleStageView extends GameStageView {
     public HoleStageView(String name, GameStageModel gameStageModel) {
@@ -46,6 +44,7 @@ public class HoleStageView extends GameStageView {
         }
 
         addLook(new TextLook(12, "0x000000", model.getPlayerName()));
-        addLook(new ButtonLook(12, "0x000000", 100, 20, model.getButtonElement()));
+        addLook(new ButtonLook(12, "0x000000", 100, 20, model.getButtonElementConfirm()));
+        addLook(new ButtonLook(12, "0x000000", 55, 40, model.getButtonElementClear()));
     }
 }
