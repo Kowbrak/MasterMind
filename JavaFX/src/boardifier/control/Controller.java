@@ -698,9 +698,33 @@ public abstract class Controller {
 
             String message = "";
             if (model.getIdWinner() == 1) {
-                message = model.getPlayers().get(0).getName() + " wins";
+                if(this.opponent == 1){
+                    message =  "Congratulation "+ model.getPlayers().get(0).getName() +", you won, your level of analysis is superior to mine. I will have to review my lessons.";
+                }else if(this.opponent == 2){
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Viezzi";
+                }else if(this.opponent == 3){
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Hakem";
+                }else if(this.opponent == 4) {
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Perrot";
+                }else if(this.opponent == 5) {
+                    message = "Congratulation "+ model.getPlayers().get(0).getName() +", message de victoire contre M. Salomon";
+                }else{
+                    message = model.getPlayers().get(0).getName() + " wins";
+                }
             } else {
-                message = "You loose";
+                if(this.opponent == 1){
+                    message =  "You lost "+ model.getPlayers().get(0).getName() +"! You will have to review your analysis lessons if you want to beat me.";
+                }else if(this.opponent == 2){
+                    message = "message de defaite contre M. Viezzi";
+                }else if(this.opponent == 3){
+                    message = "message de defaite contre M. Hakem";
+                }else if(this.opponent == 4) {
+                    message = "message de defaite contre M. Perrot";
+                }else if(this.opponent == 5) {
+                    message = "message de defaite contre M. Salomon";
+                }else{
+                    message = "You loose";
+                }
             }
             // disable all events
             model.setCaptureEvents(false);
