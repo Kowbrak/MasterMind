@@ -130,13 +130,13 @@ public abstract class Controller {
     public int getTheGameMode(RootPane rootPane) {
         String tmp = ((RadioButton) (rootPane.getGroupIa().getSelectedToggle())).getText();
         switch (tmp) {
-            case "Player":
+            case "PvP":
                 return 1;
-            case "IA_Random":
+            case "Random AI":
                 return 2;
-            case "IA_2":
+            case "AI 2":
                 return 3;
-            case "IA_3":
+            case "AI 3":
                 return 4;
             default:
                 return 0;
