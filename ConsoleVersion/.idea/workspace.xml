@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d660310d-1a17-48c2-a3c8-938214455c2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Decider.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/control/Decider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/action/MoveAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/boardifier/model/action/MoveAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleControllerMouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleDecider.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/out/production/JavaFX/control/HoleDecider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/Hole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/Hole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Decider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/control/Decider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/action/MoveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/boardifier/model/action/MoveAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/control/HoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/control/HoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/control/HoleControllerMouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFX/src/control/HoleDecider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFX/src/control/HoleDecider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +25,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/Boardifier",
+    "last_opened_file_path": "/home/leitao/Documents/S2/SAÉ/SAE-126/MasterMind_SAE126/ConsoleVersion",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,6 +57,7 @@
       <workItem from="1686397959769" duration="1892000" />
       <workItem from="1686576981017" duration="1093000" />
       <workItem from="1686664054003" duration="1828000" />
+      <workItem from="1686856734813" duration="13000" />
     </task>
     <servers />
   </component>
