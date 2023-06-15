@@ -25,11 +25,14 @@ public class MasterMindRootPane extends RootPane {
     public void createDefaultGroup() {
         VBox vbox = new VBox();
         vbox.setStyle("-fx-background-color: lightgrey;");
+        vbox.getStyleClass().add("vbox");
+        vbox.getStylesheets().add("stylesheet.css");
         //Rectangle frame = new Rectangle(600, 100, Color.LIGHTGREY);
+
         HBox hbox1 = new HBox();
         Text text1 = new Text("Welcome to our MasterMind game !");
+        text1.getStyleClass().add("text1");
         text1.setFont(new Font(30));
-        text1.setFill(Color.BLACK);
         hbox1.getChildren().add(text1);
         hbox1.setPadding(new Insets(10,10,0,10));
 
@@ -40,6 +43,7 @@ public class MasterMindRootPane extends RootPane {
         hbox2_2.setAlignment(Pos.CENTER);
         Text text2 = new Text("Select the opponent : ");
         text2.setFont(new Font(20));
+        text2.getStyleClass().add("text2");
         text2.setFill(Color.BLACK);
         rbPater = new RadioButton("Mme.Paterlini");
         rbPater.setSelected(true);
@@ -47,6 +51,11 @@ public class MasterMindRootPane extends RootPane {
         rbMour = new RadioButton("M.Hakem");
         rbPerr = new RadioButton("M.Perrot");
         rbsalom = new RadioButton("M.Salomon");
+        rbPater.getStyleClass().add("radio-button");
+        rbViez.getStyleClass().add("radio-button");
+        rbMour.getStyleClass().add("radio-button");
+        rbPerr.getStyleClass().add("radio-button");
+        rbsalom.getStyleClass().add("radio-button");
         tgOpponent = new ToggleGroup();
         tgOpponent.getToggles().addAll(rbPater,rbViez,rbMour,rbPerr,rbsalom);
         hbox2_1.getChildren().add(text2);
@@ -97,12 +106,14 @@ public class MasterMindRootPane extends RootPane {
 
         VBox vbox5 = new VBox();
         btnStart = new Button("Start");
+        btnStart.getStyleClass().add("button");
         btnStart.setFont(new Font(15));
         btnStart.setTextFill(Color.BLACK);
         btnStart.setAlignment(Pos.CENTER);
         vbox5.getChildren().add(btnStart);
         vbox5.setAlignment(Pos.CENTER);
         vbox5.setPadding(new Insets(0,0,20,0));
+
 
         vbox.getChildren().addAll(hbox1,vbox2,vbox3,vbox4,vbox5);
         vbox.setSpacing(40);
